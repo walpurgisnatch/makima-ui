@@ -1,0 +1,34 @@
+{
+  "english": {
+    "code": "en-US",
+    "default": false,
+    "defaultCurrencySymbol": "$",
+    "sortSymbols": {
+      "number": {
+        "first": "1",
+        "last": "9"
+      },
+      "string": {
+        "first": "a",
+        "last": "z"
+      }
+    },
+    "title": "English"
+  },
+  "russian": {
+    "code": "ru-RU",
+    "default": true,
+    "defaultCurrencySymbol": "$",
+    "sortSymbols": {
+      "number": {
+        "first": "1",
+        "last": "9"
+      },
+      "string": {
+        "first": "а",
+        "last": "я"
+      }
+    },
+    "title": "Русский"
+  }
+}

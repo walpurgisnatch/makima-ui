@@ -1,0 +1,15 @@
+@mixin dark-theme {
+  --color-primary: #{$primary};
+  --color-primary-active: #{$primary};
+  --color-btn-default-text: #{$primary};
+  --color-btn-default-border: #{$primary};
+  --color-primary-hover: #{$secondary};
+  --color-field-shadow: #{$additional};
+  --color-input-focus: #{$additional};
+  --dark-theme-secondary-bg: #{$darkSecondaryBg};
+  
+  --color-bg: #{$darkPrimaryBg};
+
+  --header-background: #{$darkSecondaryBg};
+  --header-border-color: #{$darkSecondaryBg};
+}

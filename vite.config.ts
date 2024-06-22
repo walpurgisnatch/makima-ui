@@ -8,6 +8,7 @@ export default defineConfig({
       '@app': '/src/app',
       '@pages': '/src/pages',
       '@layouts': '/src/layouts',
+      '@widgets': '/src/widgets',
       '@components': '/src/components',
       '@shared': '/src/shared',
       '@store': '/src/store',

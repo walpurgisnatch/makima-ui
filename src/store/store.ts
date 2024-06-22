@@ -1,8 +1,9 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import { localesReducer } from './locales';
 
 const rootReduser = combineReducers({
-  
+  locales: localesReducer,  
 });
 
 export const store = configureStore({
