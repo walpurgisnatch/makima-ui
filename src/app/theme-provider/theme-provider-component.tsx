@@ -26,7 +26,6 @@ export const ThemeProvider: FC<IThemeProviderProps> = ({ children }) => {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    document.documentElement.dataset.tkgTheme = theme;
     localStorage.setItem(LOCAL_STORAGE_KEYS.theme, theme);
     setPrefersColorScheme(() => getPrefersColorScheme(theme));
   }, [theme]);

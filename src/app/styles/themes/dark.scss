@@ -1,6 +1,9 @@
 @mixin dark-theme {
   --color-primary: #{$primary};
   --color-primary-active: #{$primary};
+
+  --color-text: #{white};
+
   --color-btn-default-text: #{$primary};
   --color-btn-default-border: #{$primary};
   --color-primary-hover: #{$secondary};

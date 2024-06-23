@@ -10,3 +10,8 @@ export const THEMES = {
   light: 'light',
   system: 'system',
 }
+
+export enum DATE_FORMATS {
+  short = 'short',
+  standard = 'standard',
+}

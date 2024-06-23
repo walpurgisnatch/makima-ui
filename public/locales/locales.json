@@ -1,7 +1,7 @@
 {
   "english": {
     "code": "en-US",
-    "default": false,
+    "default": true,
     "defaultCurrencySymbol": "$",
     "sortSymbols": {
       "number": {
@@ -17,8 +17,8 @@
   },
   "russian": {
     "code": "ru-RU",
-    "default": true,
-    "defaultCurrencySymbol": "$",
+    "default": false,
+    "defaultCurrencySymbol": "Р",
     "sortSymbols": {
       "number": {
         "first": "1",

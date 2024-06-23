@@ -1,0 +1,13 @@
+{
+  "general": {
+    "PLEASE_WAIT": "Please wait",
+    "DARK": "Dark",
+    "LIGHT": "Light",
+    "DEFAULT": "Default"
+  },
+  "pages": {
+    "dashboard": {
+      "TITLE": "Dashboard"
+    }
+  }
+}

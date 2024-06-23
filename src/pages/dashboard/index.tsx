@@ -1,7 +1,1 @@
-import React from 'react';
-
-export const Dashboard = () => (
-  <div>
-    Hello
-  </div>
-);
+export { Dashboard } from './ui/dashboard-component'

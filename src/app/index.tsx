@@ -5,6 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 
 import { router } from '@pages';
 import { ThemeProvider } from './theme-provider';
+import { LocaleProvider } from './locale-provider';
 import { store } from '@store/store';
 
 import './index.scss';
@@ -12,7 +13,9 @@ import './index.scss';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <LocaleProvider>
+        <RouterProvider router={router} />
+      </LocaleProvider>
     </ThemeProvider>
   </Provider>
 );

@@ -1,0 +1,17 @@
+.loader {
+  color: #505776;
+  font-size: 24px;
+  font-weight: 400;
+  height: 100%;
+  line-height: 64px;
+  white-space: nowrap;
+
+  .icon {
+    background-image: url(../../icons/loader.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 56px;
+    width: 56px;
+  }
+}
