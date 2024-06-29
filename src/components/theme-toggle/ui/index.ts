@@ -1,1 +1,1 @@
-export { ThemeToggle } from './theme-toggle-component'
+export { ThemeToggle } from './theme-toggle-component';

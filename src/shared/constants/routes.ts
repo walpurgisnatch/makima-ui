@@ -6,5 +6,5 @@ export const ROUTES = {
   dashboard: {
     title: 'Обзор',
     url: URLS.dashboard,
-  }
+  },
 };

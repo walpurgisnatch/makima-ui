@@ -10,16 +10,8 @@ export const router = createBrowserRouter(
     <Route>
       <Route index element={<Navigate to={ROUTES.dashboard.url} />} />
 
-      <Route
-        element={
-            <ContentLayout />
-        }
-      >
-        <Route
-          path={ROUTES.dashboard.url}
-          Component={Dashboard}
-        />
-
+      <Route element={<ContentLayout />}>
+        <Route path={ROUTES.dashboard.url} Component={Dashboard} />
       </Route>
     </Route>
   )

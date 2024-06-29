@@ -1,1 +1,1 @@
-export { Dashboard } from './ui/dashboard-component'
+export { Dashboard } from './ui/dashboard-component';

@@ -3,11 +3,11 @@ import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/t
 import { localesReducer } from './locales';
 
 const rootReduser = combineReducers({
-  locales: localesReducer,  
+  locales: localesReducer,
 });
 
 export const store = configureStore({
-  reducer: rootReduser
+  reducer: rootReduser,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

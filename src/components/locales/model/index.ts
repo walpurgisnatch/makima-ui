@@ -1,2 +1,2 @@
-export * from './locales-selector'
-export * from './locales-thunk'
+export * from './locales-selector';
+export * from './locales-thunk';

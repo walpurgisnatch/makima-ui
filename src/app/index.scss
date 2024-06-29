@@ -1,11 +1,12 @@
 @import './styles/colors.scss';
 @import './styles/themes/theme.scss';
-
+@import 'bootstrap/dist/css/bootstrap.min.css';
 
 html,
 body,
 #root {
   background-color: var(--color-bg);
+  color: var(--color-text);
   height: 100%;
 }
 
