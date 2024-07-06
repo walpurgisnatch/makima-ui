@@ -4,11 +4,23 @@
     "SYSTEM": "Системная",
     "DARK": "Темная",
     "LIGHT": "Светлая",
-    "DEFAULT": "Стандартная"
+    "DEFAULT": "Стандартная",
+    "NAME": "Имя",
+    "VALUE": "Значение",
+    "WATCHER": "Watcher",
+    "WATCHERS": "Watcher",
+    "RECORDS": "Записи",
+    "RECORD": "Запись"
+  },
+  "watchers": {
+    "RECORDS_COUNT": "Количество записей",
+    "LAST_PARSED": "Получено"
   },
   "pages": {
     "dashboard": {
-      "TITLE": "Дашборд"
+      "TITLE": "Дашборд",
+      "SENTRY": "Сентри",
+      "LAST_PARSED": "Получено"
     }
   }
 }

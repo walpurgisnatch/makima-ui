@@ -8,11 +8,19 @@
   --color-btn-default-border: #{$primary};
   --color-primary-hover: #{$secondary};
   --color-field-shadow: #{$additional};
-  --color-input-focus: #{$additional};
+  --color-input-focus: #{$blue4};
   --dark-theme-secondary-bg: #{$darkSecondaryBg};
+
+  --table-divider: #{$darkTableDivider};
+  --table-head-border: #{$blue4};
 
   --color-bg: #{$darkPrimaryBg};
 
-  --header-background: #{$darkSecondaryBg};
+  --shadow-color: #{$blue4};
+  --panel-background: #{$darkSecondaryBg};
+
+  --header-background: #{$blue4};
+
+  --header-background: #{$blue4};
   --header-border-color: #{$darkSecondaryBg};
 }

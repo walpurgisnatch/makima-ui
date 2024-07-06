@@ -4,11 +4,23 @@
     "SYSTEM": "System",
     "DARK": "Dark",
     "LIGHT": "Light",
-    "DEFAULT": "Default"
+    "DEFAULT": "Default",
+    "NAME": "Name",
+    "VALUE": "Value",
+    "WATCHER": "Watcher",
+    "WATCHERS": "Watchers",
+    "RECORDS": "Records",
+    "RECORD": "Record"
+  },
+  "watchers": {
+    "RECORDS_COUNT": "Records count",
+    "LAST_PARSED": "Parsed"
   },
   "pages": {
     "dashboard": {
-      "TITLE": "Dashboard"
+      "TITLE": "Dashboard",
+      "SENTRY": "Sentry",
+      "LAST_PARSED": "Parsed"
     }
   }
 }
