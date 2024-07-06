@@ -1,0 +1,80 @@
+.ant-table-wrapper {
+  .ant-table {
+    background: transparent;
+    color: var(--color-text);
+  }
+
+  .ant-table-row-expand-icon {
+    &:hover,
+    &:focus {
+      color: var(--color-primary);
+    }
+  }
+
+  .ant-table-tbody {
+    & > tr.ant-table-row {
+      &:hover {
+        & > td {
+          background: var(--color-input-focus);
+        }
+      }
+      &-selected {
+        & > td {
+          background: var(--color-input-focus) !important;
+        }
+      }
+    }
+
+    & > tr > td {
+      background: transparent;
+      border-color: var(--table-divider);
+      max-width: 100px;
+      overflow: hidden;
+      padding: 7px 10px;
+      text-overflow: ellipsis;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+  }
+
+  tr.ant-table-expanded-row {
+    & > td.ant-table-cell {
+      padding-left: 44px;
+      padding-right: 0;
+
+      td {
+        border: none;
+      }
+    }
+
+    tr.ant-table-row:hover {
+      & > td.ant-table-cell {
+        background: inherit;
+      }
+    }
+  }
+
+  .ant-table-thead > tr > th {
+    background: transparent;
+    color: var(--color-text);
+    // border-color: var(--table-divider) !important;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 9px 10px;
+    vertical-align: middle;
+    border-bottom: 2px solid var(--table-head-border);
+  }
+
+  .ant-table table > thead > tr > th::before {
+    content: none !important;
+  }
+
+  .ant-table-thead > tr > td {
+    background: transparent;
+    border-color: var(--table-divider);
+  }
+
+  .ant-table.ant-table-small .ant-table-tbody > tr > td {
+    padding: 12px 10px;
+  }
+}
