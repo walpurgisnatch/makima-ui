@@ -20,10 +20,10 @@ export const COLUMNS = () => {
       render: (text: TWatcher['value']) => text,
     },
     {
-      dataIndex: 'records',
-      key: 'records',
+      dataIndex: 'recordsCount',
+      key: 'recordsCount',
       title: messages.watchers[RECORDS_COUNT],
-      render: (text: TWatcher['records']) => text,
+      render: (text: TWatcher['recordsCount']) => text,
     },
     {
       dataIndex: 'parsed',

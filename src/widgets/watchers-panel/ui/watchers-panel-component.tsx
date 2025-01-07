@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Table } from 'antd';
 
 import { SENTRY } from '@shared/constants';
@@ -12,6 +13,7 @@ import { resetWatchers } from '@store/watchers';
 export const WatchersPanel = () => {
   const { messages } = useLocale();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isLoading = useAppSelector(getWatchersLoadingSelector);
   const dataSource = useAppSelector(getWatchersSelector);
 
@@ -29,7 +31,11 @@ export const WatchersPanel = () => {
     <Panel>
       <h2>{messages.pages.dashboard[SENTRY]}</h2>
 
-      <Table loading={isLoading} columns={COLUMNS()} dataSource={dataSource} rowKey={(watcher) => watcher.name} />
+      <Table loading={isLoading} columns={COLUMNS()} dataSource={dataSource} rowKey={(watcher) => watcher.name} onRow={(watcher, rowIndex) => {
+        return { 
+          onClick: (event) => navigate(`../${watcher.name}`)
+          }
+      }}/>
     </Panel>
   );
 };

@@ -5,6 +5,8 @@
     "DARK": "Темная",
     "LIGHT": "Светлая",
     "DEFAULT": "Стандартная",
+    "PARSED": "Получено",
+    "ID": "ID",
     "NAME": "Имя",
     "VALUE": "Значение",
     "WATCHER": "Watcher",

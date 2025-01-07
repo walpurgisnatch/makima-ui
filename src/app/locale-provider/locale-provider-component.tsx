@@ -65,6 +65,11 @@ export const LocaleProvider: FC<PropsWithChildren> = ({ children }) => {
     if (!date) {
       return defaultValue;
     }
+    
+    if (typeof date === 'string' || typeof date === 'number') {
+      // @ts-ignore
+      date *= 1000;
+    }
 
     switch (format) {
       case DATE_FORMATS.short:

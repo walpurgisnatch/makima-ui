@@ -5,7 +5,9 @@ export const DARK = 'dark';
 export const LIGHT = 'light';
 export const DEFAULT = 'default';
 export const TITLE = 'title';
+export const PARSED = 'parsed';
 
+export const ID = 'id';
 export const NAME = 'name';
 export const VALUE = 'value';
 export const WATCHER = 'watcher';
@@ -28,6 +30,8 @@ export const getMessages = (messages?: any) => ({
     [DARK]: messages?.general.DARK,
     [LIGHT]: messages?.general.LIGHT,
     [DEFAULT]: messages?.general.DEFAULT,
+    [PARSED]: messages?.general.PARSED,
+    [ID]: messages?.general.ID,
     [NAME]: messages?.general.NAME,
     [VALUE]: messages?.general.VALUE,
     [WATCHER]: messages?.general.WATCHER,

@@ -1,0 +1,1 @@
+export { WatcherDetails } from './ui/watcher-component';

@@ -5,6 +5,8 @@
     "DARK": "Dark",
     "LIGHT": "Light",
     "DEFAULT": "Default",
+    "PARSED": "Parsed",
+    "ID": "ID",
     "NAME": "Name",
     "VALUE": "Value",
     "WATCHER": "Watcher",
