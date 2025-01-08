@@ -21,7 +21,7 @@ export const getWatcher = (name?: string): AppThunk => async (dispatch) => {
     dispatch(setCurrentLoading(true));
     const response = await watchersApi.getWatcher(name);
     if (response.status === 200) {
-      dispatch(setCurrentWatcher(response.data[0]));
+      dispatch(setCurrentWatcher(response.data));
     }
   } catch (error) {
     console.error('error', error);

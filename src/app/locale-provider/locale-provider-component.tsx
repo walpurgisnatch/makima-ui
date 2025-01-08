@@ -67,8 +67,7 @@ export const LocaleProvider: FC<PropsWithChildren> = ({ children }) => {
     }
     
     if (typeof date === 'string' || typeof date === 'number') {
-      // @ts-ignore
-      date *= 1000;
+      date = (+date - 2208988800) * 1000; // universal-time to unix timestamp and * 1000 for milis
     }
 
     switch (format) {

@@ -23,7 +23,7 @@ export const COLUMNS = () => {
       dataIndex: 'timestamp',
       key: 'timestamp',
       title: messages.general[PARSED],
-      render: (text: TWatcher['parsed']) => text,
+      render: (text: TWatcher['parsed']) => toLocaleDate(text),
     },
   ];
 };
