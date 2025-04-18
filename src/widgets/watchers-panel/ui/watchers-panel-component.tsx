@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
 import { Panel } from '@shared/ui';
 import { usePolling } from '@shared/hooks/usePolling';
 import { COLUMNS } from './watchers-panel-constants';
-import { getWatchers, getWatchersLoadingSelector, getWatchersSelector } from '@components/watchers';
+import { getWatchers, getWatchersLoadingSelector, getWatchersSelector } from '@entities/watchers';
 import { resetWatchers } from '@store/watchers';
 
 export const WatchersPanel = () => {
@@ -31,11 +31,17 @@ export const WatchersPanel = () => {
     <Panel>
       <h2>{messages.pages.dashboard[SENTRY]}</h2>
 
-      <Table loading={isLoading} columns={COLUMNS()} dataSource={dataSource} rowKey={(watcher) => watcher.name} onRow={(watcher, rowIndex) => {
-        return { 
-          onClick: (event) => navigate(`../${watcher.name}`)
-          }
-      }}/>
+      <Table
+        loading={isLoading}
+        columns={COLUMNS()}
+        dataSource={dataSource}
+        rowKey={(watcher) => watcher.name}
+        onRow={(watcher, rowIndex) => {
+          return {
+            onClick: (event) => navigate(`../${watcher.name}`),
+          };
+        }}
+      />
     </Panel>
   );
 };

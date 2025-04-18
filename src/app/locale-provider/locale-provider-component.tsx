@@ -3,7 +3,7 @@ import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { Loader } from '@shared/ui';
 import { DATE_FORMATS, LOCAL_STORAGE_KEYS, getMessages } from '@shared/constants';
 import { sortSymbolsInitial } from './locale-provider-constants';
-import { getLocales, getLocalesSelector, getMessagesByLocaleCode, getMessagesSelector } from '@components/locales';
+import { getLocales, getLocalesSelector, getMessagesByLocaleCode, getMessagesSelector } from '@features/locales';
 import { LocaleContext, useAppDispatch, useAppSelector } from '@shared/hooks';
 import { TLocaleMessages, TSortSymbols } from '@store/locales';
 
@@ -65,7 +65,7 @@ export const LocaleProvider: FC<PropsWithChildren> = ({ children }) => {
     if (!date) {
       return defaultValue;
     }
-    
+
     if (typeof date === 'string' || typeof date === 'number') {
       date = (+date - 2208988800) * 1000; // universal-time to unix timestamp and * 1000 for milis
     }

@@ -18,4 +18,4 @@ export type TRecord = {
   watcher: string;
   value: string | number;
   timestamp: string;
-}
+};

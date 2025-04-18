@@ -1,4 +1,4 @@
-import { TRecord } from "@store/watchers";
+import { TRecord } from '@store/watchers';
 
 export interface IRecordsPanelProps {
   records: TRecord[];

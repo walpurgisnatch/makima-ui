@@ -11,8 +11,8 @@ const initialState: IInitialState = {
     value: '',
     parsed: '',
     recordsCount: 0,
-    records: []
-  }
+    records: [],
+  },
 };
 
 const watchersSlice = createSlice({
@@ -48,6 +48,14 @@ const watchersSlice = createSlice({
   },
 });
 
-export const { setWatchers, setWatchersLoading, resetWatchers, setCurrentLoading, setCurrentWatcher, resetCurrentWatcher, setCurrentWatcherRecords } = watchersSlice.actions;
+export const {
+  setWatchers,
+  setWatchersLoading,
+  resetWatchers,
+  setCurrentLoading,
+  setCurrentWatcher,
+  resetCurrentWatcher,
+  setCurrentWatcherRecords,
+} = watchersSlice.actions;
 
 export const watchersReducer = watchersSlice.reducer;

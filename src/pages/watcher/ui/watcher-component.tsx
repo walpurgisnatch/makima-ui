@@ -4,7 +4,13 @@ import { useParams } from 'react-router-dom';
 import { TITLE } from '@shared/constants';
 import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
 import { usePolling } from '@shared/hooks/usePolling';
-import { getCurrentLoadingSelector, getCurrentWatcherRecordsSelector, getCurrentWatcherSelector, getWatcher, getWatcherRecords } from '@components/watchers';
+import {
+  getCurrentLoadingSelector,
+  getCurrentWatcherRecordsSelector,
+  getCurrentWatcherSelector,
+  getWatcher,
+  getWatcherRecords,
+} from '@entities/watchers';
 import { resetCurrentWatcher } from '@store/watchers';
 import { RecordsPanel } from '@widgets';
 
@@ -20,13 +26,12 @@ export const WatcherDetails = () => {
 
   useEffect(() => {
     dispatch(getWatcher(watcherName));
-    dispatch(getWatcherRecords(watcherName))
+    dispatch(getWatcherRecords(watcherName));
 
     return () => {
       dispatch(resetCurrentWatcher());
     };
   }, [dispatch, watcherName]);
-
 
   return (
     <div>

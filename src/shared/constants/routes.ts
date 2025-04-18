@@ -3,7 +3,7 @@ export enum URLS {
 }
 
 export enum ROUTE_IDS {
-  watcherDetails = 'watcherDetails'
+  watcherDetails = 'watcherDetails',
 }
 
 export const ROUTES = {

@@ -13,4 +13,7 @@ export const getCurrentLoadingSelector = createSelector(getWatchersState, (state
 
 export const getCurrentWatcherSelector = createSelector(getWatchersState, (state) => state.currentWatcher);
 
-export const getCurrentWatcherRecordsSelector = createSelector(getWatchersState, (state) => state.currentWatcher.records)
+export const getCurrentWatcherRecordsSelector = createSelector(
+  getWatchersState,
+  (state) => state.currentWatcher.records
+);
