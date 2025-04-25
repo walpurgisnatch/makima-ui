@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { PLEASE_WAIT } from '@shared/constants';
 import { useLocale } from '@shared/hooks';
 
-import styles from './loader.module.scss';
+import styles from './styles.module.scss';
 
 export const Loader = () => {
   const { messages } = useLocale();

@@ -1,1 +1,1 @@
-export * from './ui';
+export { RecordsPanel } from './ui';

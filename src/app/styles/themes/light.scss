@@ -1,14 +1,14 @@
 @mixin light-theme {
   --color-primary: #{$primary};
-  --color-primary-active: #{$primary};
+  --color-primary-active: #{$secondary};
 
-  --color-text: #{black};
+  --color-text: #{$black};
 
   --color-btn-default-text: #{$primary};
   --color-btn-default-border: #{$primary};
   --color-primary-hover: #{$secondary};
   --color-field-shadow: #{$additional};
-  --color-input-focus: #{$blue1};
+  --color-input-focus: #{$primary};
   --dark-theme-secondary-bg: #{$darkSecondaryBg};
 
   --table-divider: #{$gray4};
@@ -21,5 +21,5 @@
 
   --header-background: #{$blue4};
   --header-border-color: #{$primary};
-  --header-color: #{white};
+  --header-color: #{$white};
 }

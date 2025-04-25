@@ -16,10 +16,11 @@
   },
   "watchers": {
     "RECORDS_COUNT": "Количество записей",
-    "LAST_PARSED": "Получено"
+    "LAST_PARSED": "Получено",
+    "CURRENT_VALUE": "Текущее значение"
   },
   "pages": {
-    "dashboard": {
+    "home": {
       "TITLE": "Дашборд",
       "SENTRY": "Сентри",
       "LAST_PARSED": "Получено"

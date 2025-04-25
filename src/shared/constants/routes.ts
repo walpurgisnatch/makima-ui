@@ -1,5 +1,5 @@
 export enum URLS {
-  dashboard = 'dashboard',
+  Home = 'Home',
 }
 
 export enum ROUTE_IDS {
@@ -7,8 +7,8 @@ export enum ROUTE_IDS {
 }
 
 export const ROUTES = {
-  dashboard: {
+  Home: {
     title: 'Обзор',
-    url: URLS.dashboard,
+    url: URLS.Home,
   },
 };

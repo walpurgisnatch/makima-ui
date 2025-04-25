@@ -36,7 +36,7 @@ const watchersSlice = createSlice({
       if (state.currentWatcher.records.length) {
         records = state.currentWatcher.records;
       }
-      state.currentWatcher = action.payload;
+      state.currentWatcher = Array.isArray(action.payload) ? action.payload[0] : action.payload;
       state.currentWatcher.records = records || [];
     },
     setCurrentWatcherRecords: (state, action: PayloadAction<TRecord[]>) => {

@@ -17,10 +17,11 @@ export const RECORDS = 'records';
 
 // watchers
 export const RECORDS_COUNT = 'records_count';
-
-// dashboard
-export const SENTRY = 'sentry';
+export const CURRENT_VALUE = 'current_value';
 export const LAST_PARSED = 'last_parsed';
+
+// Home
+export const SENTRY = 'sentry';
 
 // eslint-disable-next-line
 export const getMessages = (messages?: any) => ({
@@ -41,13 +42,14 @@ export const getMessages = (messages?: any) => ({
   },
   watchers: {
     [RECORDS_COUNT]: messages?.watchers.RECORDS_COUNT,
+    [CURRENT_VALUE]: messages?.watchers.CURRENT_VALUE,
     [LAST_PARSED]: messages?.watchers.LAST_PARSED,
   },
   pages: {
-    dashboard: {
-      [TITLE]: messages?.pages.dashboard.TITLE,
-      [SENTRY]: messages?.general.SENTRY,
-      [LAST_PARSED]: messages?.general.LAST_PARSED,
+    home: {
+      [TITLE]: messages?.pages.home.TITLE,
+      [SENTRY]: messages?.pages.home.SENTRY,
+      [LAST_PARSED]: messages?.pages.home.LAST_PARSED,
     },
   },
 });

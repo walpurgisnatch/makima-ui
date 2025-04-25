@@ -1,1 +1,0 @@
-export { RecordsPanel } from './records-panel-component';

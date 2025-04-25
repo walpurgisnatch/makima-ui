@@ -6,7 +6,7 @@ import { ThemeToggleOptions } from './theme-toggle-constants';
 import { useTheme } from '@shared/hooks';
 import { IThemeToggle } from './theme-toggle-types';
 
-import styles from './theme-toggle.module.scss';
+import styles from './styles.module.scss';
 
 export const ThemeToggle: FC<IThemeToggle> = ({ className }) => {
   const { theme, switchTheme } = useTheme();

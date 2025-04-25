@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { useLocale } from '@shared/hooks';
 import { ISelectLanguage } from './select-language-types';
 
-import styles from './select-language.module.scss';
+import styles from './styles.module.scss';
 
 export const SelectLanguage: FC<ISelectLanguage> = ({ className }) => {
   const { currentLocale, locales, switchLocale } = useLocale();

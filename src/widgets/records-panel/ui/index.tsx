@@ -12,7 +12,7 @@ export const RecordsPanel = ({ records }: IRecordsPanelProps) => {
 
   return (
     <Panel>
-      <h2>{messages.pages.dashboard[SENTRY]}</h2>
+      <h2>{messages.pages.home[SENTRY]}</h2>
 
       <Table loading={false} columns={COLUMNS()} dataSource={records} rowKey={(record) => record.id} />
     </Panel>

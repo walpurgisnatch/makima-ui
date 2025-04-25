@@ -29,16 +29,16 @@ export const WatchersPanel = () => {
 
   return (
     <Panel>
-      <h2>{messages.pages.dashboard[SENTRY]}</h2>
+      <h2>{messages.pages.home[SENTRY]}</h2>
 
       <Table
         loading={isLoading}
         columns={COLUMNS()}
         dataSource={dataSource}
         rowKey={(watcher) => watcher.name}
-        onRow={(watcher, rowIndex) => {
+        onRow={(watcher) => {
           return {
-            onClick: (event) => navigate(`../${watcher.name}`),
+            onClick: () => navigate(`../${watcher.name}`),
           };
         }}
       />

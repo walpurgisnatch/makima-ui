@@ -16,11 +16,12 @@
   },
   "watchers": {
     "RECORDS_COUNT": "Records count",
-    "LAST_PARSED": "Parsed"
+    "LAST_PARSED": "Parsed",
+    "CURRENT_VALUE": "Current value"
   },
   "pages": {
-    "dashboard": {
-      "TITLE": "Dashboard",
+    "home": {
+      "TITLE": "Home",
       "SENTRY": "Sentry",
       "LAST_PARSED": "Parsed"
     }
