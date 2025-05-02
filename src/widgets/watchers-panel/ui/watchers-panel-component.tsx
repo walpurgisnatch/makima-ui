@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Table } from 'antd';
 
-import { SENTRY } from '@shared/constants';
 import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
 import { Panel } from '@shared/ui';
 import { usePolling } from '@shared/hooks/usePolling';
 import { COLUMNS } from './watchers-panel-constants';
-import { getWatchers, getWatchersLoadingSelector, getWatchersSelector } from '@components/watchers';
+import { getWatchers, selectWatchersStatus, selectWatchers } from '@entities/watchers';
+import { isLoading } from '@shared/lib';
 import { resetWatchers } from '@store/watchers';
 
 export const WatchersPanel = () => {
-  const { messages } = useLocale();
+  const { t } = useLocale();
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(getWatchersLoadingSelector);
-  const dataSource = useAppSelector(getWatchersSelector);
+  const navigate = useNavigate();
+  const loading = isLoading(useAppSelector(selectWatchersStatus));
+  const dataSource = useAppSelector(selectWatchers);
 
   usePolling(() => dispatch(getWatchers()));
 
@@ -21,15 +23,25 @@ export const WatchersPanel = () => {
     dispatch(getWatchers());
 
     return () => {
-      dispatch(resetWatchers());
+      dispatch(resetWatchers);
     };
   }, [dispatch]);
 
   return (
     <Panel>
-      <h2>{messages.pages.dashboard[SENTRY]}</h2>
+      <h2>{t('pages.home.sentry')}</h2>
 
-      <Table loading={isLoading} columns={COLUMNS()} dataSource={dataSource} rowKey={(watcher) => watcher.name} />
+      <Table
+        loading={loading}
+        columns={COLUMNS()}
+        dataSource={dataSource}
+        rowKey={(watcher) => watcher.name}
+        onRow={(watcher) => {
+          return {
+            onClick: () => navigate(`../${watcher.name}`),
+          };
+        }}
+      />
     </Panel>
   );
 };

@@ -1,2 +1,3 @@
-export * from './watchers-reducer';
-export * from './watchers-types';
+export * from './watchers-list';
+export * from './watcher';
+export * from './watcher-types';

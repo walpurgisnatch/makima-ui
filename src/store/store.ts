@@ -1,11 +1,10 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import { localesReducer } from './locales';
-import { watchersReducer } from './watchers';
+import { watcherReducer, watchersListReducer } from './watchers';
 
 const rootReduser = combineReducers({
-  locales: localesReducer,
-  watchers: watchersReducer,
+  watchersList: watchersListReducer,
+  watcher: watcherReducer,
 });
 
 export const store = configureStore({
