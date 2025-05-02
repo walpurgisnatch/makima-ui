@@ -1,21 +1,21 @@
-import { DARK, LIGHT, SYSTEM, THEMES } from '@shared/constants';
+import { THEMES } from '@shared/constants';
 import { useLocale } from '@shared/hooks';
 
 export const ThemeToggleOptions = () => {
-  const { messages } = useLocale();
+  const { t } = useLocale();
 
   return [
     {
       value: THEMES.light,
-      label: messages.general[LIGHT],
+      label: t('general.light'),
     },
     {
       value: THEMES.dark,
-      label: messages.general[DARK],
+      label: t('general.dark'),
     },
     {
       value: THEMES.system,
-      label: messages.general[SYSTEM],
+      label: t('general.system'),
     },
   ];
 };

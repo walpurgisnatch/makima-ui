@@ -1,0 +1,33 @@
+{
+  "general": {
+    "please_wait": "Пожалуйста подождите",
+    "system": "Системная",
+    "dark": "Темная",
+    "light": "Светлая",
+    "default": "Стандартная",
+    "parsed": "Получено",
+    "id": "id",
+    "name": "Имя",
+    "value": "Значение",
+    "watcher": "watcher",
+    "watchers": "watcher",
+    "records": "Записи",
+    "record": "Запись",
+    "languages": {
+      "ru-RU": "Русский",
+      "en-GB": "English"
+    }
+  },
+  "watchers": {
+    "records_count": "Количество записей",
+    "last_parsed": "Получено",
+    "current_value": "Текущее значение"
+  },
+  "pages": {
+    "home": {
+      "title": "Дашборд",
+      "sentry": "Сентри",
+      "last_parsed": "Получено"
+    }
+  }
+}

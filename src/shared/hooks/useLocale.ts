@@ -1,32 +1,15 @@
-import { createContext, useContext } from 'react';
-
-import { ILocaleContext } from '../types';
-
-const initialLocaleContext = {
-  currentCurrency: '',
-  currentLocale: '',
-  locales: {},
-  messages: {},
-  sortSymbols: {
-    number: {
-      first: '1',
-      last: '9',
-    },
-    string: {
-      first: 'a',
-      last: 'z',
-    },
-  },
-  switchLocale: () => {
-    return;
-  },
-  toLocaleDate: () => {
-    return '';
-  },
-};
-
-export const LocaleContext = createContext<ILocaleContext>(initialLocaleContext);
+import { useTranslation } from 'react-i18next';
+import { locales } from '@shared/locale';
 
 export const useLocale = () => {
-  return useContext(LocaleContext);
+  const { t, i18n } = useTranslation();
+  const { enGB, ruRU } = locales;
+
+  const locale = new Map();
+  locale.set('ru-RU', ruRU);
+  locale.set('en-GB', enGB);
+
+  const _t = (value: string | undefined, args?: any): string => t(value ?? '', { ...args }) as string;
+
+  return { locale: locale.get(i18n.language), t: _t, i18n, currentLng: i18n.language };
 };

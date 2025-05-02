@@ -1,0 +1,33 @@
+{
+  "general": {
+    "please_wait": "Please wait",
+    "system": "System",
+    "dark": "Dark",
+    "light": "Light",
+    "default": "Default",
+    "parsed": "Parsed",
+    "id": "id",
+    "name": "Name",
+    "value": "Value",
+    "watcher": "Watcher",
+    "watchers": "Watchers",
+    "records": "Records",
+    "record": "Record",
+    "languages": {
+      "ru-RU": "Russian",
+      "en-GB": "English"
+    }
+  },
+  "watchers": {
+    "records_count": "Records count",
+    "last_parsed": "Parsed",
+    "current_value": "Current value"
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "sentry": "Sentry",
+      "last_parsed": "Parsed"
+    }
+  }
+}

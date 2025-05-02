@@ -2,18 +2,15 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { RootState } from '@store/store';
 
-export const getWatchersState = (state: RootState) => state.watchers;
+export const getWatchersListState = (state: RootState) => state.watchersList;
 
-export const getWatchersLoadingSelector = createSelector(getWatchersState, (state) => state.isLoading);
-
-export const getWatchersSelector = createSelector(getWatchersState, (state) => state.watchers);
+export const selectWatchersStatus = createSelector(getWatchersListState, (state) => state.status);
+export const selectWatchers = createSelector(getWatchersListState, (state) => state.value);
 
 // Current watcher
-export const getCurrentLoadingSelector = createSelector(getWatchersState, (state) => state.currentLoading);
+export const getWatcherState = (state: RootState) => state.watcher;
 
-export const getCurrentWatcherSelector = createSelector(getWatchersState, (state) => state.currentWatcher);
+export const selectWatcherStatus = createSelector(getWatcherState, (state) => state.status);
+export const selectWatcher = createSelector(getWatcherState, (state) => state.value);
 
-export const getCurrentWatcherRecordsSelector = createSelector(
-  getWatchersState,
-  (state) => state.currentWatcher.records
-);
+export const selectWatcherRecords = createSelector(getWatcherState, (state) => state.value?.records);
