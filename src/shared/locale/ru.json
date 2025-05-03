@@ -6,13 +6,22 @@
     "light": "Светлая",
     "default": "Стандартная",
     "parsed": "Получено",
-    "id": "id",
+    "id": "ID",
     "name": "Имя",
     "value": "Значение",
-    "watcher": "watcher",
-    "watchers": "watcher",
+    "watcher": "Наблюдатель",
+    "watchers": "Наблюдатели",
     "records": "Записи",
     "record": "Запись",
+    "save": "Сохранить",
+    "add": "Добавить",
+    "actions": "Действия",
+    "delete": "Удалить",
+    "sentry_types": {
+      "common": "стандарный",
+      "html": "html",
+      "api": "api"
+    },
     "languages": {
       "ru-RU": "Русский",
       "en-GB": "English"
@@ -23,11 +32,22 @@
     "last_parsed": "Получено",
     "current_value": "Текущее значение"
   },
-  "pages": {
-    "home": {
-      "title": "Дашборд",
-      "sentry": "Сентри",
-      "last_parsed": "Получено"
+  "home": {
+    "title": "Дашборд",
+    "sentry": "Сентри",
+    "last_parsed": "Получено"
+  },
+  "create_watcher": {
+    "title": "Создать наблюдателя",
+    "fields": {
+      "name": "Имя",
+      "type": "Тип",
+      "target": "Цель",
+      "parser": "Парсер",
+      "interval": "Интервал",
+      "handlers": "Обработчики",
+      "page": "Страница",
+      "url": "URL"
     }
   }
 }

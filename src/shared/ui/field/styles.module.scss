@@ -1,0 +1,39 @@
+.error {
+  color: red;
+}
+
+.label {
+  &.empty {
+    position: relative;
+
+    .error {
+      display: none;
+    }
+
+    .text {
+      left: -3px;
+      position: absolute;
+      transform: translateX(-100%);
+    }
+  }
+
+  .description {
+    color: var(--color-icon);
+  }
+}
+
+.field {
+  position: relative;
+
+  .input {
+    padding-right: 26px;
+  }
+
+  .togglePassword {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

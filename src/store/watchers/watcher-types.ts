@@ -13,6 +13,18 @@ export type TWatcher = {
   records: TRecord[];
 };
 
+export interface IWatcher {
+  id?: number;
+  name: string;
+  type: string;
+  target: string;
+  parser: string;
+  interval: number | string;
+  handlers: string[];
+  page: string;
+  url: string;
+}
+
 export type TRecord = {
   id: number;
   watcher: string;

@@ -15,3 +15,18 @@ export enum DATE_FORMATS {
   short = 'short',
   standard = 'standard',
 }
+
+export const SENTRY_TYPES = [
+  {
+    value: 'common',
+    label: 'general.sentry_types.common',
+  },
+  {
+    value: 'html',
+    label: 'general.sentry_types.html',
+  },
+  {
+    value: 'api',
+    label: 'general.sentry_types.api',
+  },
+];

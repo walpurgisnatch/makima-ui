@@ -27,7 +27,7 @@ export const apiBaseQuery = async (
       status,
       data: null,
       // @ts-ignore
-      error: response?.data?.message || message || i18next.t('shared.oops_smth_wrong'),
+      error: response?.data?.message || message || i18next.t('general.smth_wrong'),
       isLogoutNeeded: false,
     };
 

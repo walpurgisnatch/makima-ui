@@ -8,7 +8,7 @@ export const Home = () => {
 
   return (
     <div>
-      <h1>{t('pages.home.title')}</h1>
+      <h1>{t('home.title')}</h1>
 
       <WatchersPanel />
     </div>

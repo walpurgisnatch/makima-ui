@@ -11,7 +11,7 @@ export const RecordsPanel = ({ records }: IRecordsPanelProps) => {
 
   return (
     <Panel>
-      <h2>{t('pages.home.sentry')}</h2>
+      <h2>{t('home.sentry')}</h2>
 
       <Table loading={false} columns={COLUMNS()} dataSource={records} rowKey={(record) => record.id} />
     </Panel>

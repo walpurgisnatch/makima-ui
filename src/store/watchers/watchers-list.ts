@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { defaultFulfilled, defaultPending, defaultRejected, LoadingStatuses } from '@shared/api';
-import { getWatchers } from '@entities/watchers';
+import { deleteWatcher, getWatchers } from '@entities/watchers';
 import { TWatcher } from './watcher-types';
 import type { State } from '@shared/types';
 
@@ -23,6 +23,13 @@ const watchersListSlice = createSlice({
     builder.addCase(getWatchers.fulfilled, defaultFulfilled);
     builder.addCase(getWatchers.pending, defaultPending);
     builder.addCase(getWatchers.rejected, defaultRejected);
+
+    builder.addCase(deleteWatcher.fulfilled, (state, { payload }) => {
+      state.value = state.value.filter((watcher) => watcher.name !== payload);
+      state.status = LoadingStatuses.Succeeded;
+    });
+    builder.addCase(deleteWatcher.pending, defaultPending);
+    builder.addCase(deleteWatcher.rejected, defaultRejected);
   },
 });
 

@@ -6,13 +6,22 @@
     "light": "Light",
     "default": "Default",
     "parsed": "Parsed",
-    "id": "id",
+    "id": "ID",
     "name": "Name",
     "value": "Value",
     "watcher": "Watcher",
     "watchers": "Watchers",
     "records": "Records",
     "record": "Record",
+    "save": "Save",
+    "add": "Add",
+    "actions": "Actions",
+    "delete": "Delete",
+    "sentry_types": {
+      "common": "common",
+      "html": "html",
+      "api": "api"
+    },
     "languages": {
       "ru-RU": "Russian",
       "en-GB": "English"
@@ -23,11 +32,22 @@
     "last_parsed": "Parsed",
     "current_value": "Current value"
   },
-  "pages": {
-    "home": {
-      "title": "Home",
-      "sentry": "Sentry",
-      "last_parsed": "Parsed"
+  "home": {
+    "title": "Home",
+    "sentry": "Sentry",
+    "last_parsed": "Parsed"
+  },
+  "create_watcher": {
+    "title": "Create watcher",
+    "fields": {
+      "name": "Name",
+      "type": "Type",
+      "target": "Target",
+      "parser": "Parser",
+      "interval": "Interval",
+      "handlers": "Handlers",
+      "page": "Page",
+      "url": "URL"
     }
   }
 }
