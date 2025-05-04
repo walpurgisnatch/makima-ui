@@ -1,10 +1,13 @@
 export enum URLS {
-  Home = 'Home',
+  Home = 'home',
   CreateWatcher = 'create-watcher',
+  Watchers = 'watchers',
+  Dashboards = 'dashboards',
 }
 
 export enum ROUTE_IDS {
   watcherDetails = 'watcherDetails',
+  dashboard = 'dashboard',
 }
 
 export const ROUTES = {
@@ -15,5 +18,9 @@ export const ROUTES = {
   CreateWatcher: {
     title: 'CreateWatcher',
     url: URLS.CreateWatcher,
+  },
+  Dashboards: {
+    title: 'Dashboards',
+    url: URLS.Dashboards,
   },
 };

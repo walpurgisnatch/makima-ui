@@ -6,8 +6,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
 import { Panel } from '@shared/ui';
 import { usePolling } from '@shared/hooks/usePolling';
-import { COLUMNS } from './watchers-panel-constants';
-import { getWatchers, selectWatchersStatus, selectWatchers, deleteWatcher } from '@entities/watchers';
+import { COLUMNS } from './constants';
+import { watchersThunk, selectWatchers, selectWatchersStatus } from '@entities/watchers';
 import { isLoading } from '@shared/lib';
 import { resetWatchers } from '@store/watchers';
 
@@ -17,10 +17,10 @@ export const WatchersPanel = () => {
   const loading = isLoading(useAppSelector(selectWatchersStatus));
   const dataSource = useAppSelector(selectWatchers);
 
-  usePolling(() => dispatch(getWatchers()));
+  usePolling(() => dispatch(watchersThunk.select()));
 
   useEffect(() => {
-    dispatch(getWatchers());
+    dispatch(watchersThunk.select());
 
     return () => {
       dispatch(resetWatchers);
@@ -28,7 +28,7 @@ export const WatchersPanel = () => {
   }, [dispatch]);
 
   const deleteWatcherHandler = (name: string) => {
-    dispatch(deleteWatcher(name));
+    dispatch(watchersThunk.delete(name));
   };
 
   return (

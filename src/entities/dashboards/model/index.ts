@@ -1,3 +1,3 @@
 export * from './api';
-export * from './selector';
+export * from './selectors';
 export * from './thunk';

@@ -8,8 +8,8 @@ import cn from 'classnames';
 import { useAppDispatch, useLocale } from '@shared/hooks';
 import { Panel, Field, TextType } from '@shared/ui';
 import { initialValues } from './constants';
-import { SENTRY_TYPES } from '@shared/constants';
-import { createWatcher } from '@entities/watchers';
+import { SENTRY_TYPES, URLS } from '@shared/constants';
+import { watchersThunk } from '@entities/watchers';
 import { IWatcher } from '@store/watchers';
 
 import styles from './styles.module.scss';
@@ -48,8 +48,8 @@ export const CreateWatcher = () => {
       // @ts-ignore
       handlers: data.handlers.map((handler) => handler.value),
     };
-    dispatch(createWatcher(result));
-    navigate(`/watchers/${data.name}`);
+    dispatch(watchersThunk.create(result));
+    navigate(`/${URLS.Watchers}/${data.name}`);
   };
 
   return (

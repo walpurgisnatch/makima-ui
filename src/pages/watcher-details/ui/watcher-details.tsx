@@ -3,13 +3,7 @@ import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useAppDispatch, useAppSelector, useLocale, usePolling } from '@shared/hooks';
-import {
-  selectWatcherRecords,
-  selectWatcher,
-  getWatcher,
-  getWatcherRecords,
-  selectWatcherStatus,
-} from '@entities/watchers';
+import { selectWatcherRecords, selectWatcher, watchersThunk, selectWatcherStatus } from '@entities/watchers';
 import { RecordsPanel } from '@widgets';
 import { Loader, Panel } from '@shared/ui';
 import { isLoading } from '@shared/lib';
@@ -30,12 +24,12 @@ export const WatcherDetails = () => {
     { key: 'watchers.last_parsed', value: watcher.parsed },
   ];
 
-  usePolling(() => watcherName && dispatch(getWatcherRecords(watcherName)));
+  usePolling(() => watcherName && dispatch(watchersThunk.selectRecords(watcherName)));
 
   useEffect(() => {
     if (watcherName) {
-      dispatch(getWatcher(watcherName));
-      dispatch(getWatcherRecords(watcherName));
+      dispatch(watchersThunk.get(watcherName));
+      dispatch(watchersThunk.selectRecords(watcherName));
     }
   }, [dispatch, watcherName]);
 

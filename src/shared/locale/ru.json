@@ -17,6 +17,7 @@
     "add": "Добавить",
     "actions": "Действия",
     "delete": "Удалить",
+    "edit": "Редактировать",
     "sentry_types": {
       "common": "стандарный",
       "html": "html",
@@ -27,15 +28,26 @@
       "en-GB": "English"
     }
   },
-  "watchers": {
-    "records_count": "Количество записей",
-    "last_parsed": "Получено",
-    "current_value": "Текущее значение"
-  },
   "home": {
     "title": "Дашборд",
     "sentry": "Сентри",
     "last_parsed": "Получено"
+  },
+  "dashboards": {
+    "title": "Дашборды",
+    "list": {
+      "editTitle": "Редактировать",
+      "createTitle": "Создать",
+      "fields": {
+        "name": "Имя",
+        "description": "Описание"
+      }
+    }
+  },
+  "watchers": {
+    "records_count": "Количество записей",
+    "last_parsed": "Получено",
+    "current_value": "Текущее значение"
   },
   "create_watcher": {
     "title": "Создать наблюдателя",

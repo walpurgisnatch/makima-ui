@@ -1,1 +1,1 @@
-export { CreateWatcher } from './ui/create-watcher';
+export { CreateWatcher } from './ui';

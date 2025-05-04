@@ -1,10 +1,13 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { watcherReducer, watchersListReducer } from './watchers';
+import { dashboardReducer, dashboardsListReducer } from './dashboards';
 
 const rootReduser = combineReducers({
   watchersList: watchersListReducer,
   watcher: watcherReducer,
+  dashboardsList: dashboardsListReducer,
+  dashboard: dashboardReducer,
 });
 
 export const store = configureStore({

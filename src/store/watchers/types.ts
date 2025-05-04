@@ -1,10 +1,3 @@
-export interface IInitialState {
-  isLoading: boolean;
-  watchers: TWatcher[];
-  currentLoading: boolean;
-  currentWatcher: TWatcher;
-}
-
 export type TWatcher = {
   name: string;
   value: string | number;

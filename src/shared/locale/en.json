@@ -17,6 +17,7 @@
     "add": "Add",
     "actions": "Actions",
     "delete": "Delete",
+    "edit": "Edit",
     "sentry_types": {
       "common": "common",
       "html": "html",
@@ -27,15 +28,26 @@
       "en-GB": "English"
     }
   },
-  "watchers": {
-    "records_count": "Records count",
-    "last_parsed": "Parsed",
-    "current_value": "Current value"
-  },
   "home": {
     "title": "Home",
     "sentry": "Sentry",
     "last_parsed": "Parsed"
+  },
+  "dashboards": {
+    "title": "Dashboards",
+    "list": {
+      "editTitle": "Edit dashboard",
+      "createTitle": "Create dashboard",
+      "fields": {
+        "name": "Name",
+        "description": "Description"
+      }
+    }
+  },
+  "watchers": {
+    "records_count": "Records count",
+    "last_parsed": "Parsed",
+    "current_value": "Current value"
   },
   "create_watcher": {
     "title": "Create watcher",
