@@ -8,7 +8,7 @@ export interface IError {
 export type LoadingStatuses = 'Idle' | 'Pending' | 'Loading' | 'Succeeded' | 'Failed';
 
 export type State<T> = {
-  value: T;
+  data: T;
   status: LoadingStatuses;
   error: IError | null;
 };

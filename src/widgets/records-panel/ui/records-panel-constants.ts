@@ -1,5 +1,5 @@
 import { useLocale } from '@shared/hooks';
-import { TWatcher } from '@store/watchers';
+import { TWatcher } from '@entities/watchers/store';
 import { formatDate } from '@shared/lib';
 
 export const COLUMNS = () => {

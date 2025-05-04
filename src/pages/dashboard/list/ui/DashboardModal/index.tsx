@@ -4,7 +4,7 @@ import { Modal, Space } from 'antd';
 import cn from 'classnames';
 
 import { useLocale } from '@shared/hooks';
-import { TDashboard } from '@store/dashboards';
+import { TDashboard } from '@entities/dashboards/store';
 import { initialValues } from './constants';
 import { Field, TextType } from '@shared/ui';
 

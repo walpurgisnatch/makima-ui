@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { defaultFulfilled, defaultPending, defaultRejected, LoadingStatuses } from '@shared/api';
 import { watchersThunk } from '@entities/watchers';
-import { TWatcher } from './types';
+import { TWatcher } from '../model/types';
 import type { State } from '@shared/types';
 
 const initialState: State<TWatcher[]> = {
-  value: [],
+  data: [],
   status: LoadingStatuses.Idle,
   error: null,
 };
@@ -16,7 +16,7 @@ const watchersListSlice = createSlice({
   initialState,
   reducers: {
     resetWatchers: (state) => {
-      state.value = initialState.value;
+      state.data = initialState.data;
     },
   },
   extraReducers: (builder) => {
@@ -25,7 +25,7 @@ const watchersListSlice = createSlice({
     builder.addCase(watchersThunk.select.rejected, defaultRejected);
 
     builder.addCase(watchersThunk.delete.fulfilled, (state, { payload }) => {
-      state.value = state.value.filter((watcher) => watcher.name !== payload);
+      state.data = state.data.filter((watcher) => watcher.name !== payload);
       state.status = LoadingStatuses.Succeeded;
     });
     builder.addCase(watchersThunk.delete.pending, defaultPending);
@@ -36,3 +36,5 @@ const watchersListSlice = createSlice({
 export const { resetWatchers } = watchersListSlice.actions;
 
 export const watchersListReducer = watchersListSlice.reducer;
+
+export type WatcherListState = State<TWatcher[]>;

@@ -4,7 +4,7 @@ import { Button, Tooltip } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 
 import { useLocale } from '@shared/hooks';
-import { TWatcher } from '@store/watchers';
+import { TWatcher } from '@entities/watchers/store';
 
 import styles from './styles.module.scss';
 

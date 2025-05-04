@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { State } from '@shared/types';
-import { TDashboard } from './types';
+import { TDashboard } from '../model/types';
 import { defaultFulfilled, defaultPending, defaultRejected, LoadingStatuses } from '@shared/api';
 import { dashboardsThunk } from '@entities/dashboards';
 
 const initialState: State<TDashboard> = {
-  value: {
+  data: {
     name: '',
     description: '',
   },
@@ -26,3 +26,5 @@ const dashboardSlice = createSlice({
 });
 
 export const dashboardReducer = dashboardSlice.reducer;
+
+export type DashboardState = State<TDashboard>;

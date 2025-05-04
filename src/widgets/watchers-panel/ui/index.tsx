@@ -9,7 +9,7 @@ import { usePolling } from '@shared/hooks/usePolling';
 import { COLUMNS } from './constants';
 import { watchersThunk, selectWatchers, selectWatchersStatus } from '@entities/watchers';
 import { isLoading } from '@shared/lib';
-import { resetWatchers } from '@store/watchers';
+import { resetWatchers } from '@entities/watchers/store';
 
 export const WatchersPanel = () => {
   const { t } = useLocale();

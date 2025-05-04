@@ -4,7 +4,7 @@ import { Button, Tooltip } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 import { useLocale } from '@shared/hooks';
-import { TDashboard } from '@store/dashboards';
+import { TDashboard } from '@entities/dashboards/store';
 
 import styles from './styles.module.scss';
 

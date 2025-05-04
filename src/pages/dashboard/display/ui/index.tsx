@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { Loader } from '@shared/ui';
 import { isLoading } from '@shared/lib';
 import { dashboardsThunk, selectDashboardStatus } from '@entities/dashboards';
-import { resetDashboards } from '@store/dashboards';
+import { resetDashboards } from '@entities/dashboards/store';
 import { useParams } from 'react-router-dom';
 
 export const DashboardDisplay = () => {

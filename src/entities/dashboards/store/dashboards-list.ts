@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { defaultFulfilled, defaultPending, defaultRejected, LoadingStatuses } from '@shared/api';
 import { dashboardsThunk } from '@entities/dashboards';
-import { TDashboard } from './types';
+import { TDashboard } from '../model/types';
 import type { State } from '@shared/types';
 
 const initialState: State<TDashboard[]> = {
-  value: [],
+  data: [],
   status: LoadingStatuses.Idle,
   error: null,
 };
@@ -16,7 +16,7 @@ const dashboardsListSlice = createSlice({
   initialState,
   reducers: {
     resetDashboards: (state) => {
-      state.value = initialState.value;
+      state.data = initialState.data;
     },
   },
   extraReducers: (builder) => {
@@ -25,7 +25,7 @@ const dashboardsListSlice = createSlice({
     builder.addCase(dashboardsThunk.getAll.rejected, defaultRejected);
 
     builder.addCase(dashboardsThunk.delete.fulfilled, (state, { payload }) => {
-      state.value = state.value.filter((dashboard) => dashboard.name !== payload);
+      state.data = state.data.filter((dashboard) => dashboard.name !== payload);
       state.status = LoadingStatuses.Succeeded;
     });
     builder.addCase(dashboardsThunk.delete.pending, defaultPending);
@@ -36,3 +36,5 @@ const dashboardsListSlice = createSlice({
 export const { resetDashboards } = dashboardsListSlice.actions;
 
 export const dashboardsListReducer = dashboardsListSlice.reducer;
+
+export type DashboardListState = State<TDashboard[]>;

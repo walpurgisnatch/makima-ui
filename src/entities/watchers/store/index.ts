@@ -1,3 +1,3 @@
 export * from './watchers-list';
 export * from './watcher';
-export * from './types';
+export * from '../model/types';

@@ -10,7 +10,7 @@ import { Panel, Field, TextType } from '@shared/ui';
 import { initialValues } from './constants';
 import { SENTRY_TYPES, URLS } from '@shared/constants';
 import { watchersThunk } from '@entities/watchers';
-import { IWatcher } from '@store/watchers';
+import { IWatcher } from '@entities/watchers/store';
 
 import styles from './styles.module.scss';
 

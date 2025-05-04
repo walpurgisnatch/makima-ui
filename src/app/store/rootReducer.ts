@@ -1,0 +1,13 @@
+import { combineReducers } from '@reduxjs/toolkit';
+
+import { dashboardReducer, dashboardsListReducer } from '@entities/dashboards';
+import { watcherReducer, watchersListReducer } from '@entities/watchers';
+
+const rootReducer = combineReducers({
+  watchersList: watchersListReducer,
+  watcher: watcherReducer,
+  dashboardsList: dashboardsListReducer,
+  dashboard: dashboardReducer,
+});
+
+export default rootReducer;

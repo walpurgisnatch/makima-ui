@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 
 import { router } from '@pages';
 import { ThemeProvider } from './theme-provider';
-import { store } from '@store/store';
+import { store } from './store';
 
 import './index.scss';
 

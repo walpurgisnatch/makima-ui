@@ -1,4 +1,4 @@
-import { TDashboard } from '@store/dashboards';
+import { TDashboard } from '@entities/dashboards/store';
 
 export const dashboardsApi = {
   getDashboards: () => ({ url: '/dashboards' }),

@@ -1,3 +1,3 @@
 export * from './dashboards-list';
 export * from './dashboard';
-export * from './types';
+export * from '../model/types';

@@ -7,7 +7,7 @@ import { Panel } from '@shared/ui';
 import { COLUMNS } from './constants';
 import { isLoading } from '@shared/lib';
 import { dashboardsThunk, selectDashboards, selectDashboardsStatus } from '@entities/dashboards';
-import { resetDashboards, TDashboard } from '@store/dashboards';
+import { resetDashboards, TDashboard } from '@entities/dashboards';
 import CreateDashboard from './DashboardModal';
 
 export const DashboardList = () => {

@@ -58,7 +58,7 @@ export const provideError = (
 // @ts-ignore
 export const defaultFulfilled = (state, { payload }) => {
   state.status = LoadingStatuses.Succeeded;
-  state.value = payload;
+  state.data = payload;
 };
 
 // @ts-ignore
