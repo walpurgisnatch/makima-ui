@@ -36,5 +36,3 @@ const watchersListSlice = createSlice({
 export const { resetWatchers } = watchersListSlice.actions;
 
 export const watchersListReducer = watchersListSlice.reducer;
-
-export type WatcherListState = State<TWatcher[]>;

@@ -36,5 +36,3 @@ const dashboardsListSlice = createSlice({
 export const { resetDashboards } = dashboardsListSlice.actions;
 
 export const dashboardsListReducer = dashboardsListSlice.reducer;
-
-export type DashboardListState = State<TDashboard[]>;

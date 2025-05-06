@@ -1,4 +1,4 @@
-import { IWatcher } from '@entities/watchers/store';
+import { IWatcher } from './types';
 
 export const watchersApi = {
   getWatchers: () => ({ url: '/watchers' }),

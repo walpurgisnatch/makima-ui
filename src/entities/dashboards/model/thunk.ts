@@ -27,13 +27,16 @@ export const dashboardsThunk = {
       return error;
     }
   }),
-  update: createAsyncThunk('dashboard/put', async (data: TDashboard, { rejectWithValue }) => {
-    try {
-      return await apiBaseQuery(dashboardsApi.updateDashboard(data), rejectWithValue);
-    } catch (error) {
-      return error;
+  update: createAsyncThunk(
+    'dashboard/put',
+    async ({ name, data }: { name: string; data: TDashboard }, { rejectWithValue }) => {
+      try {
+        return await apiBaseQuery(dashboardsApi.updateDashboard(name, data), rejectWithValue);
+      } catch (error) {
+        return error;
+      }
     }
-  }),
+  ),
   delete: createAsyncThunk('dashboard/delete', async (name: string, { rejectWithValue }) => {
     try {
       await apiBaseQuery(dashboardsApi.deleteDashboard(name), rejectWithValue);

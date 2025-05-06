@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { watchersApi } from './api';
 import { apiBaseQuery } from '@shared/api';
-import { IWatcher } from '@entities/watchers/store';
+import { IWatcher } from './types';
 
 export const watchersThunk = {
   select: createAsyncThunk('watchers/get', async (_, { rejectWithValue }) => {

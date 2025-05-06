@@ -25,10 +25,6 @@ export const DashboardList = () => {
     };
   }, [dispatch]);
 
-  const deleteDashboardHandler = (name: string) => {
-    dispatch(dashboardsThunk.delete(name));
-  };
-
   const openData = useMemo(
     () => (openId ? dataSource.find((item: TDashboard) => item.name === openId) : undefined),
     [dataSource, openId]
@@ -38,12 +34,18 @@ export const DashboardList = () => {
     setOpenId(name);
   };
 
+  const deleteDashboardHandler = (name: string) => {
+    dispatch(dashboardsThunk.delete(name));
+  };
+
   const modalChangeHandler = async (data: TDashboard) => {
     if (openId) {
-      dispatch(dashboardsThunk.update(data));
+      await dispatch(dashboardsThunk.update({ name: openId, data }));
     } else {
-      dispatch(dashboardsThunk.create(data));
+      await dispatch(dashboardsThunk.create(data));
     }
+    dispatch(dashboardsThunk.getAll());
+    setOpenId(undefined);
   };
 
   return (

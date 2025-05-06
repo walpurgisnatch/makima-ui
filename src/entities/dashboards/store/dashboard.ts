@@ -7,6 +7,7 @@ import { dashboardsThunk } from '@entities/dashboards';
 
 const initialState: State<TDashboard> = {
   data: {
+    id: 0,
     name: '',
     description: '',
   },
@@ -26,5 +27,3 @@ const dashboardSlice = createSlice({
 });
 
 export const dashboardReducer = dashboardSlice.reducer;
-
-export type DashboardState = State<TDashboard>;

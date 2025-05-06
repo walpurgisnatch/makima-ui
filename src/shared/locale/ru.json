@@ -9,6 +9,7 @@
     "id": "ID",
     "name": "Имя",
     "value": "Значение",
+    "description": "Описание",
     "watcher": "Наблюдатель",
     "watchers": "Наблюдатели",
     "records": "Записи",

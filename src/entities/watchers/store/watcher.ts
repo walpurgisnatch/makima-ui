@@ -40,5 +40,3 @@ const watcherSlice = createSlice({
 });
 
 export const watcherReducer = watcherSlice.reducer;
-
-export type WatcherState = State<TWatcher>;

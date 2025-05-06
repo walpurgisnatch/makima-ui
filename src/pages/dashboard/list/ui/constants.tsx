@@ -29,7 +29,7 @@ export const COLUMNS = (
     {
       dataIndex: 'description',
       key: 'description',
-      title: t('general.value'),
+      title: t('general.description'),
       render: (text: TDashboard['description']) => text,
     },
     {
