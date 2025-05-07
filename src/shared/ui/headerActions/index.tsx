@@ -1,15 +1,15 @@
-import React, { FC } from 'react';
+import React from 'react';
 import cn from 'classnames';
 
 import { IHeaderActions } from './types';
 
 import styles from './styles.module.scss';
 
-export const HeaderActions: FC<IHeaderActions> = ({ title, className, children }) => {
+export const HeaderActions = ({ title, className, children }: IHeaderActions) => {
   return (
-    <div className={cn(className, 'd-inline-flex justify-content-between p-2')}>
-      <h4 className={styles.title}>{title}</h4>
-      <div className={'d-flex justify-content-between align-self-end align-items-center gap-2'}>{children}</div>
+    <div className={cn(className, 'd-flex justify-content-between align-items-center  p-2')}>
+      <div className={styles.title}>{title}</div>
+      <div className={'d-flex justify-content-between align-items-center gap-2'}>{children}</div>
     </div>
   );
 };

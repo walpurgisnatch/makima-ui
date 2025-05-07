@@ -6,7 +6,7 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
 import { useAppDispatch, useLocale } from '@shared/hooks';
-import { Panel, Field, TextType } from '@shared/ui';
+import { Panel, Field, TextType, HeaderActions } from '@shared/ui';
 import { initialValues } from './constants';
 import { SENTRY_TYPES, URLS } from '@shared/constants';
 import { watchersThunk } from '@entities/watchers';
@@ -55,10 +55,12 @@ export const CreateWatcher = () => {
   return (
     <>
       <Panel>
-        <h1>{t('create_watcher.title')}</h1>
-        <Button type='primary' disabled={submitDisabled} onClick={handleSubmit(submit)}>
-          {t('general.save')}
-        </Button>
+        <HeaderActions title={t('create_watcher.title')}>
+          <Button type='primary' disabled={submitDisabled} onClick={handleSubmit(submit)}>
+            {t('general.save')}
+          </Button>
+        </HeaderActions>
+        {/* <h1>{t('create_watcher.title')}</h1> */}
 
         <FormProvider {...formMethods}>
           <div className='d-flex flex-row'>
