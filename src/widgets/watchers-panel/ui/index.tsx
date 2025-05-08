@@ -4,7 +4,7 @@ import { Table } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
-import { Panel } from '@shared/ui';
+import { Panel, HeaderActions } from '@shared/ui';
 import { usePolling } from '@shared/hooks/usePolling';
 import { COLUMNS } from './constants';
 import { watchersThunk, selectWatchers, selectWatchersStatus } from '@entities/watchers';
@@ -33,10 +33,11 @@ export const WatchersPanel = () => {
 
   return (
     <Panel>
-      <h2>{t('home.sentry')}</h2>
-      <Link to={'/create-watcher'}>
-        <PlusOutlined />
-      </Link>
+      <HeaderActions title={t('home.sentry')}>
+        <Link to={'/create-watcher'}>
+          <PlusOutlined />
+        </Link>
+      </HeaderActions>
 
       <Table
         loading={loading}

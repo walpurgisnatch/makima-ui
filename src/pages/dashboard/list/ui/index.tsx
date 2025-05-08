@@ -3,7 +3,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Table } from 'antd';
 
 import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
-import { Panel } from '@shared/ui';
+import { Panel, HeaderActions } from '@shared/ui';
 import { COLUMNS } from './constants';
 import { isLoading } from '@shared/lib';
 import { dashboardsThunk, selectDashboards, selectDashboardsStatus } from '@entities/dashboards';
@@ -50,8 +50,10 @@ export const DashboardList = () => {
 
   return (
     <>
-      <h2>{t('dashboards.title')}</h2>
-      <Button type='primary' icon={<PlusOutlined />} onClick={() => setOpenId(null)} />
+      <HeaderActions title={t('dashboards.title')}>
+        <Button type='primary' icon={<PlusOutlined />} onClick={() => setOpenId(null)} />
+      </HeaderActions>
+
       <Panel>
         <Table
           loading={loading}
