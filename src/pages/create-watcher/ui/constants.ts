@@ -1,5 +1,5 @@
 export const initialValues = {
-  type: 'common',
+  type: 'general',
   name: '',
   target: '',
   parser: '',

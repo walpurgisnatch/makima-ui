@@ -60,7 +60,6 @@ export const CreateWatcher = () => {
             {t('general.save')}
           </Button>
         </HeaderActions>
-        {/* <h1>{t('create_watcher.title')}</h1> */}
 
         <FormProvider {...formMethods}>
           <div className='d-flex flex-row'>
