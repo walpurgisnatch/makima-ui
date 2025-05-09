@@ -12,3 +12,8 @@ export const selectWatcherStatus = createSelector(getWatcherState, (state) => st
 export const selectWatcher = createSelector(getWatcherState, (state) => state.data);
 
 export const selectWatcherRecords = createSelector(getWatcherState, (state) => state.data?.records);
+
+// Field Parsers
+export const getWatcherParser = (state: RootState) => state.parser;
+
+export const selectWatcherParser = createSelector(getWatcherParser, (state) => state.data);

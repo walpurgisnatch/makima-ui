@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button, Space } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { useAppDispatch, useLocale } from '@shared/hooks';
+import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
 import { Panel, Field, TextType, HeaderActions } from '@shared/ui';
 import { initialValues } from './constants';
 import { SENTRY_TYPES, URLS } from '@shared/constants';
-import { watchersThunk } from '@entities/watchers';
-import { IWatcher } from '@entities/watchers/store';
+import { selectWatcherParser, watchersThunk } from '@entities/watchers';
+import { IWatcher, TParser } from '@entities/watchers/store';
 
 import styles from './styles.module.scss';
 
 export const CreateWatcher = () => {
   const { t } = useLocale();
   const dispatch = useAppDispatch();
+  const parserValues: TParser[] = useAppSelector(selectWatcherParser);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(watchersThunk.getParsers('general'));
+  }, [dispatch]);
 
   const formMethods = useForm<any>({
     mode: 'onChange',
@@ -52,6 +57,10 @@ export const CreateWatcher = () => {
     navigate(`/${URLS.Watchers}/${data.name}`);
   };
 
+  const handlerChangeParserValues = (type: string) => {
+    dispatch(watchersThunk.getParsers(type));
+  };
+
   return (
     <>
       <Panel>
@@ -74,6 +83,7 @@ export const CreateWatcher = () => {
                 name='type'
                 label={t('create_watcher.fields.type')}
                 type='select'
+                onChange={handlerChangeParserValues}
                 options={SENTRY_TYPES.map((item) => ({ value: item.value, label: t(item.label) }))}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
@@ -113,7 +123,9 @@ export const CreateWatcher = () => {
               <Field
                 name='parser'
                 label={t('create_watcher.fields.parser')}
-                type={TextType.text}
+                type='select'
+                value={parserValues[0]?.name || 'NONE'}
+                options={parserValues.map((parserValue: TParser) => ({ value: parserValue.name }))}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 

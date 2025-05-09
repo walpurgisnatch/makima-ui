@@ -24,3 +24,10 @@ export type TRecord = {
   value: string | number;
   timestamp: string;
 };
+
+export type TParser = {
+  args: string[];
+  doc: string;
+  name: string;
+  type: string;
+};
