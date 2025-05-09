@@ -20,7 +20,7 @@
     "delete": "Delete",
     "edit": "Edit",
     "sentry_types": {
-      "common": "common",
+      "general": "general",
       "html": "html",
       "api": "api"
     },

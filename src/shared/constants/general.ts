@@ -18,8 +18,8 @@ export enum DATE_FORMATS {
 
 export const SENTRY_TYPES = [
   {
-    value: 'common',
-    label: 'general.sentry_types.common',
+    value: 'general',
+    label: 'general.sentry_types.general',
   },
   {
     value: 'html',

@@ -20,7 +20,7 @@
     "delete": "Удалить",
     "edit": "Редактировать",
     "sentry_types": {
-      "common": "стандарный",
+      "general": "стандарный",
       "html": "html",
       "api": "api"
     },
