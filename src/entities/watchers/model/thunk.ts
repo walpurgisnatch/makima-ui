@@ -42,4 +42,11 @@ export const watchersThunk = {
       return error;
     }
   }),
+  getParsers: createAsyncThunk('watcher-parsers/get', async (type: string, { rejectWithValue }) => {
+    try {
+      return await apiBaseQuery(watchersApi.getParsers(type), rejectWithValue);
+    } catch (error) {
+      return error;
+    }
+  }),
 };
