@@ -12,4 +12,5 @@ export const watchersApi = {
       offset: offset,
     },
   }),
+  getParsers: (type: string) => ({ url: `/watcher-parsers?type=${type}` }),
 };
