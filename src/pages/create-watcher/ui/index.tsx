@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button, Space } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { useAppDispatch, useLocale } from '@shared/hooks';
+import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
 import { Panel, Field, TextType, HeaderActions } from '@shared/ui';
 import { initialValues } from './constants';
 import { SENTRY_TYPES, URLS } from '@shared/constants';
-import { watchersThunk } from '@entities/watchers';
-import { IWatcher } from '@entities/watchers/store';
+import { selectWatcherParser, watchersThunk } from '@entities/watchers';
+import { IWatcher, TParser } from '@entities/watchers/store';
 
 import styles from './styles.module.scss';
 
 export const CreateWatcher = () => {
   const { t } = useLocale();
   const dispatch = useAppDispatch();
+  const parserValues = useAppSelector(selectWatcherParser);
   const navigate = useNavigate();
 
   const formMethods = useForm<any>({
@@ -32,6 +33,10 @@ export const CreateWatcher = () => {
 
   const type = watch('type');
   const submitDisabled = !isValid;
+
+  useEffect(() => {
+    dispatch(watchersThunk.getParsers(type));
+  }, [type, dispatch]);
 
   const {
     fields: handlers,
@@ -113,7 +118,9 @@ export const CreateWatcher = () => {
               <Field
                 name='parser'
                 label={t('create_watcher.fields.parser')}
-                type={TextType.text}
+                type='select'
+                value={parserValues[0]?.name || 'NONE'}
+                options={parserValues.map((parserValue: TParser) => ({ value: parserValue.name }))}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 
