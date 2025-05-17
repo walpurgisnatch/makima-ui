@@ -1,0 +1,20 @@
+.tooltip_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  font-size: 12px;
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    .example {
+      position: relative;
+      width: 16px;
+      height: 4px;
+      border-radius: 2px;
+    }
+  }
+}

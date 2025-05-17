@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button } from 'antd';
 
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
-import { Loader } from '@shared/ui';
+import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
+import { HeaderActions, Loader } from '@shared/ui';
 import { isLoading } from '@shared/lib';
-import { dashboardsThunk, selectDashboardStatus } from '@entities/dashboards';
-import { resetDashboards } from '@entities/dashboards/store';
-import { useParams } from 'react-router-dom';
+import { dashboardsThunk, selectDashboard, selectDashboardStatus, resetDashboards } from '@entities/dashboards';
+import { EditOutlined } from '@ant-design/icons';
 
 export const DashboardDisplay = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { t } = useLocale();
   const { dashboardName } = useParams();
+  const dashboard = useAppSelector(selectDashboard);
   const loading = isLoading(useAppSelector(selectDashboardStatus));
 
   useEffect(() => {
@@ -20,9 +24,16 @@ export const DashboardDisplay = () => {
     };
   }, [dashboardName, dispatch]);
 
+  const editMode = () => {
+    console.log('edit');
+  };
+
   return (
     <>
-      <h2>{dashboardName}</h2>
+      <HeaderActions title={dashboard.name}>
+        <Button title={t('general.add')} onClick={() => navigate('/widgets/create')}>{t('general.add')}</Button>
+        <Button title={t('general.edit')} icon={<EditOutlined />} onClick={editMode} />
+      </HeaderActions>
 
       {loading ? <Loader /> : <div></div>}
     </>
