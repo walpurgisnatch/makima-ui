@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { watchersApi } from './api';
 import { apiBaseQuery } from '@shared/api';
-import { IWatcher } from './types';
+import { IWatcher, THandlers } from './types';
 
 export const watchersThunk = {
   select: createAsyncThunk('watchers/get', async (_, { rejectWithValue }) => {
@@ -47,6 +47,18 @@ export const watchersThunk = {
       return await apiBaseQuery(watchersApi.getParsers(type), rejectWithValue);
     } catch (error) {
       return error;
+    }
+  }),
+  getHandlersData: createAsyncThunk<THandlers>('watcherHandlers/get', async (_, { rejectWithValue }) => {
+    try {
+      const [predicates, actions] = await Promise.all([
+        apiBaseQuery(watchersApi.getPredicates(), rejectWithValue),
+        apiBaseQuery(watchersApi.getActions(), rejectWithValue),
+      ]);
+
+      return { predicates, actions };
+    } catch (error) {
+      return rejectWithValue(error);
     }
   }),
 };

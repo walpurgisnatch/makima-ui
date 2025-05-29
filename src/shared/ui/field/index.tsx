@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Controller, ControllerRenderProps, FieldValues, useFormContext } from 'react-hook-form';
-import { Checkbox, DatePicker, Select, Input, Tooltip } from 'antd';
+import { Checkbox, DatePicker, Select, Input, Tooltip, TreeSelect, ConfigProvider } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
@@ -27,6 +27,7 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
       type = TextType.text,
       value,
       description,
+      multiple,
       onChange,
       validate,
       ...props
@@ -54,6 +55,7 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
         placeholder,
         step,
         type,
+        multiple,
         // @ts-ignore
         onChange: (event) => {
           field.onChange(event);
@@ -79,11 +81,27 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
           }
 
         case 'checkbox':
-          return <Checkbox {...generalProps} />;
+          return <Checkbox {...generalProps} checked={generalProps.value} />;
 
         case 'date': {
           return <DatePicker {...generalProps} />;
         }
+
+        case 'treeSelect':
+          return (
+            <ConfigProvider
+              theme={{
+                components: {
+                  TreeSelect: {
+                    indentSize: 0,
+                    titleHeight: 22,
+                  },
+                },
+              }}
+            >
+              <TreeSelect {...generalProps} treeData={options} virtual={false} />
+            </ConfigProvider>
+          );
 
         default:
           return <></>;

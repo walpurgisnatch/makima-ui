@@ -17,7 +17,8 @@ export interface IFieldProps {
   type?: string;
   value?: string | boolean;
   description?: string;
-  onChange?: (value: string) => void;
+  multiple?: boolean;
+  onChange?: (value: string | string[]) => void;
   validate?: (value: unknown, fields: FieldValues) => ValidateResult | Promise<ValidateResult>;
 }
 
