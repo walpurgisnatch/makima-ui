@@ -58,7 +58,13 @@
       "target": "Цель",
       "parser": "Парсер",
       "interval": "Интервал",
-      "handlers": "Обработчики",
+      "handlers": {
+        "name": "Обработчики",
+        "once": "Единожды",
+        "recordp": "Запись",
+        "predicate": "Предикат",
+        "actions": "Действия"
+      },
       "page": "Страница",
       "url": "URL"
     }

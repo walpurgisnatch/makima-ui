@@ -13,4 +13,6 @@ export const watchersApi = {
     },
   }),
   getParsers: (type: string) => ({ url: `/watcher-parsers?type=${type}` }),
+  getActions: () => ({ url: '/watcher-actions' }),
+  getPredicates: () => ({ url: '/watcher-predicates' }),
 };

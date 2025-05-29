@@ -6,6 +6,16 @@ export type TWatcher = {
   records: TRecord[];
 };
 
+export type THandler = {
+  recordp: boolean;
+  once: boolean;
+  predicate: {
+    name: string;
+    args: string[];
+  };
+  actions: { name: string; args: string[] }[];
+};
+
 export interface IWatcher {
   id?: number;
   name: string;
@@ -13,10 +23,12 @@ export interface IWatcher {
   target: string;
   parser: string;
   interval: number | string;
-  handlers: string[];
+  handlers: { recordp: boolean; once: boolean; predicate: string; actions: string[] }[];
   page: string;
   url: string;
 }
+
+export type TWatcherFormData = Omit<IWatcher, 'handlers'> & { handlers: THandler[] };
 
 export type TRecord = {
   id: number;
@@ -25,13 +37,21 @@ export type TRecord = {
   timestamp: string;
 };
 
-export type TParser = {
+export type TFieldData = {
   args: string[];
   doc: string;
   name: string;
   type: string;
 };
 
-export type TFields = {
-  parser: TParser[];
+export type TParser = TFieldData[];
+
+export type THandlers = {
+  actions: TFieldData[];
+  predicates: TFieldData[];
+};
+
+export type TWatcherFields = {
+  parser: TParser;
+  handlers: THandlers;
 };
