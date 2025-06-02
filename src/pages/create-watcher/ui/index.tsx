@@ -9,18 +9,31 @@ import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
 import { Panel, Field, TextType, HeaderActions } from '@shared/ui';
 import { initialValues } from './constants';
 import { SENTRY_TYPES, URLS } from '@shared/constants';
-import { selectWatcherParser, watchersThunk } from '@entities/watchers';
-import { IWatcher, TParser } from '@entities/watchers/store';
+import {
+  selectWatcherHandlersActions,
+  selectWatcherHandlersPredicates,
+  selectWatcherParser,
+  watchersThunk,
+} from '@entities/watchers';
+import { TWatcherFormData, TFieldData } from '@entities/watchers/store';
+import { useBuildTreeData } from '../../../entities/watchers/lib/useBuildTreeData';
+import { GenerateFields } from './GenerateFields';
 
 import styles from './styles.module.scss';
 
 export const CreateWatcher = () => {
   const { t } = useLocale();
   const dispatch = useAppDispatch();
-  const parserValues = useAppSelector(selectWatcherParser);
   const navigate = useNavigate();
+  const parserValues = useAppSelector(selectWatcherParser);
 
-  const formMethods = useForm<any>({
+  const handlersActions = useAppSelector(selectWatcherHandlersActions);
+  const handlerPredicates = useAppSelector(selectWatcherHandlersPredicates);
+
+  const treeDataOfHandlerPredicates = useBuildTreeData(handlerPredicates);
+  const treeDataOfHandlerActions = useBuildTreeData(handlersActions);
+
+  const formMethods = useForm<TWatcherFormData>({
     mode: 'onChange',
     defaultValues: initialValues,
   });
@@ -28,14 +41,18 @@ export const CreateWatcher = () => {
     control,
     handleSubmit,
     watch,
+    setValue,
+    reset,
     formState: { isValid },
   } = formMethods;
 
   const type = watch('type');
+  const handlersWatch = watch('handlers');
   const submitDisabled = !isValid;
 
   useEffect(() => {
     dispatch(watchersThunk.getParsers(type));
+    dispatch(watchersThunk.getHandlersData());
   }, [type, dispatch]);
 
   const {
@@ -47,14 +64,20 @@ export const CreateWatcher = () => {
     name: 'handlers',
   });
 
-  const submit = (data: IWatcher) => {
+  const submit = (data: TWatcherFormData) => {
+    console.log(data);
     const result = {
       ...data,
-      // @ts-ignore
-      handlers: data.handlers.map((handler) => handler.value),
+      handlers: data.handlers.map((handler) => {
+        const predicate = `${handler.predicate.name} ${handler.predicate.args.join(' ')}`.trim();
+        const actions = handler.actions.map((action) => `${action.name} ${action.args.join(' ')}`.trim());
+        return { ...handler, predicate, actions };
+      }),
     };
+
     dispatch(watchersThunk.create(result));
     navigate(`/${URLS.Watchers}/${data.name}`);
+    reset();
   };
 
   return (
@@ -120,27 +143,91 @@ export const CreateWatcher = () => {
                 label={t('create_watcher.fields.parser')}
                 type='select'
                 value={parserValues[0]?.name || 'NONE'}
-                options={parserValues.map((parserValue: TParser) => ({ value: parserValue.name }))}
+                options={parserValues.map((parserValue: TFieldData) => ({ value: parserValue.name }))}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 
               <Space direction='vertical' style={{ width: '100%' }}>
-                {handlers.map((_, index) => (
-                  <Space key={index} style={{ display: 'flex', marginBottom: 8 }}>
-                    <Field
-                      name={`handlers.${index}.value`}
-                      label={t('create_watcher.fields.handlers')}
-                      type={TextType.text}
-                      className={cn(styles.handlersField, 'd-flex flex-column mb-2')}
-                    />
-                    {handlers.length > 1 && (
-                      <Button danger icon={<MinusOutlined />} onClick={() => removeHandler(index)} />
-                    )}
-                  </Space>
-                ))}
+                <div>{t('create_watcher.fields.handlers.name')}</div>
+                <div className={cn(styles.handlersWrapper, 'overflow-y-auto')}>
+                  {handlers.map((_, index) => (
+                    <div key={_.id}>
+                      <Space size={30}>
+                        <Field
+                          type='checkbox'
+                          name={`handlers.${index}.recordp`}
+                          label={t('create_watcher.fields.handlers.recordp')}
+                        />
+                        <Field
+                          type='checkbox'
+                          name={`handlers.${index}.once`}
+                          label={t('create_watcher.fields.handlers.once')}
+                        />
+
+                        {handlers.length > 1 && (
+                          <Button danger icon={<MinusOutlined />} onClick={() => removeHandler(index)} />
+                        )}
+                      </Space>
+
+                      <Space.Compact direction='vertical' block>
+                        <Field
+                          type='treeSelect'
+                          name={`handlers.${index}.predicate.name`}
+                          options={treeDataOfHandlerPredicates}
+                          className={cn(styles.field, 'd-flex flex-column mb-2')}
+                          placeholder='Choose predicate'
+                          label={t('create_watcher.fields.handlers.predicate')}
+                        />
+                        <Space.Compact>
+                          <GenerateFields
+                            data={handlerPredicates}
+                            handlerItem={handlersWatch[index]}
+                            watchField='predicate'
+                            handlerIndex={index}
+                          />
+                        </Space.Compact>
+                      </Space.Compact>
+
+                      <Space.Compact direction='vertical'>
+                        <Field
+                          type='treeSelect'
+                          options={treeDataOfHandlerActions}
+                          multiple
+                          placeholder='Choose actions'
+                          label={t('create_watcher.fields.handlers.actions')}
+                          className={cn(styles.field, 'd-flex flex-column mb-2')}
+                          name={`handlers.${index}.actions._`}
+                          onChange={(selectedActions) => {
+                            if (Array.isArray(selectedActions)) {
+                              const newActions = selectedActions.map((name) => ({ name, args: [] }));
+                              setValue(`handlers.${index}.actions`, newActions);
+                            }
+                          }}
+                        />
+
+                        <Space.Compact direction='vertical'>
+                          <GenerateFields
+                            data={handlersActions}
+                            handlerItem={handlersWatch[index]}
+                            watchField='actions'
+                            handlerIndex={index}
+                          />
+                        </Space.Compact>
+                      </Space.Compact>
+                      {index !== handlers.length - 1 && <hr className={styles.line} />}
+                    </div>
+                  ))}
+                </div>
               </Space>
 
-              <Button type='dashed' onClick={addHandler} icon={<PlusOutlined />} style={{ marginTop: 8 }}>
+              <Button
+                type='dashed'
+                onClick={() => {
+                  addHandler(initialValues.handlers);
+                }}
+                icon={<PlusOutlined />}
+                style={{ marginTop: 8, width: 200 }}
+              >
                 {t('general.add')}
               </Button>
             </div>

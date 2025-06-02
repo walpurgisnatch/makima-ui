@@ -58,7 +58,13 @@
       "target": "Target",
       "parser": "Parser",
       "interval": "Interval",
-      "handlers": "Handlers",
+      "handlers": {
+        "name": "Handlers",
+        "once": "Once",
+        "recordp": "Record pointer",
+        "predicate": "Predicate",
+        "actions": "Actions"
+      },
       "page": "Page",
       "url": "URL"
     }
