@@ -1,1 +1,1 @@
-export { WatcherDetails } from './ui/watcher-details';
+export { WatcherDetails } from './ui';

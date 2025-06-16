@@ -22,6 +22,7 @@ export const router = createBrowserRouter(
 
         <Route path={ROUTES.Dashboards.url} Component={DashboardList} />
         <Route path={'/dashboards/:dashboardName'} Component={DashboardDisplay} id={ROUTE_IDS.dashboard} />
+        <Route path={'/dashboards/:dashboardName/widgets/create'} Component={CreateWidget} />        
         <Route path={'/widgets/create'} Component={CreateWidget} />
       </Route>
     </Route>

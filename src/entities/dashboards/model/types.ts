@@ -1,5 +1,5 @@
 export type TDashboard = {
-  id: number;
+  id?: number;
   name: string;
   description: string;
 };

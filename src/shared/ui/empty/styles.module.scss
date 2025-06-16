@@ -5,9 +5,10 @@
   height: 100%;
   line-height: 64px;
   white-space: nowrap;
+  gap: 20px;
 
   .icon {
-    background-image: url(../../icons/loading.gif);
+    background-image: url(../../icons/empty.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

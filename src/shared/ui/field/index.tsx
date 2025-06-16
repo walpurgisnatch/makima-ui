@@ -4,11 +4,12 @@ import { Checkbox, DatePicker, Select, Input, Tooltip, TreeSelect, ConfigProvide
 import { InfoCircleOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { IFieldProps, TextType } from './types';
+import { useLocale } from '@shared/hooks';
+import { IField, TextType } from '@shared/types';
 
 import styles from './styles.module.scss';
 
-export const Field = forwardRef<HTMLInputElement, IFieldProps>(
+export const Field = forwardRef<HTMLInputElement, IField>(
   (
     {
       name,
@@ -34,6 +35,7 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
     },
     ref
   ) => {
+    const { t } = useLocale();
     const {
       control,
       formState: { errors },
@@ -75,7 +77,8 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
       switch (type) {
         case 'select':
           if (options) {
-            return <Select {...generalProps} options={options} />;
+            const _options = options.map((option) => ({ ...option, label: t(option.label) }))
+            return <Select {...generalProps} options={_options} mode={multiple ? "multiple" : undefined} />;
           } else {
             return <></>;
           }
@@ -93,6 +96,7 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
               theme={{
                 components: {
                   TreeSelect: {
+                    // @ts-ignore
                     indentSize: 0,
                     titleHeight: 22,
                   },
@@ -141,7 +145,7 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
           return (
             <label className={cn(className, styles.label, { [styles.empty]: !label })}>
               <span className={cn(styles.text, 'd-flex', { ['mb-2']: type !== 'checkbox' })}>
-                {label}{' '}
+                {t(label)}{' '}
                 {required && (
                   <span className={styles.error}>
                     <Tooltip title='Поле обязательно для заполнения'>*</Tooltip>
@@ -164,5 +168,3 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
     );
   }
 );
-
-export * from './types';

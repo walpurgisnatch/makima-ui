@@ -19,6 +19,7 @@
     "actions": "Actions",
     "delete": "Delete",
     "edit": "Edit",
+    "empty": "Empty",
     "sentry_types": {
       "general": "general",
       "html": "html",
@@ -67,6 +68,72 @@
       },
       "page": "Page",
       "url": "URL"
+    }
+  },
+  "widgets": {
+    "create_widget_title": "Create widget",
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "watchers": "Watchers",
+      "duration": "Duration",
+      "refresh": "Refresh",
+      "chart_type": {
+        "name": "Chart type",
+        "line": "Line"
+      },
+      "widget_type": {
+        "name": "Widget type",
+        "graph": "Graph"
+      },
+      "standard": {
+        "calculation": {
+          "name": "Calculations",
+          "help": "Help",
+          "options": {
+            "last": "last",
+            "max": "max",
+            "min": "min",
+            "average": "average"
+          }
+        },
+        "scale": {
+          "min": "Min",
+          "max": "Max"
+        },
+        "legend": {
+          "name": "Legend",
+          "options": {
+            "no": "no",
+            "top": "top",
+            "bottom": "bottom",
+            "left": "left",
+            "right": "right"
+          }
+        }
+      },
+      "styles": {
+        "graph": {
+          "line": {
+            "name": "Line style",
+            "solid": "solid",
+            "dash": "dash"
+          },
+          "points": {
+            "name": "Show points",
+            "yes": "yes",
+            "no": "no"
+          },
+          "interpolation": {
+            "name": "Interpolation",
+            "linear": "linear",
+            "monotone": "monotone",
+            "step": "step",
+            "step_after": "step after",
+            "step_before": "step before"
+          }
+        }
+      }
     }
   }
 }

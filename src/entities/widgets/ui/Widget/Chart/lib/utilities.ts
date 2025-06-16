@@ -1,14 +1,5 @@
-import { Transformation } from '../../../../model/types';
 import { gridScales } from './constants';
 import dayjs from 'dayjs';
-
-export const toMS = (ms: number) => {
-  return ms < 1 ? `${ms * 1000} ms` : `${ms} s`;
-};
-
-export const getChartDataTransformed = (transformations: Transformation[]) => {
-  return new Map(transformations.map((item) => [item.from, item.to]));
-};
 
 const getGridScaleOption = (period: number) => {
   const entry = gridScales.find((pair) => period === pair.period);

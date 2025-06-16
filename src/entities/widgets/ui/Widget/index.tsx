@@ -1,22 +1,21 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { NavigateFunction } from 'react-router-dom';
 
 import { Panel } from '@shared/ui';
-import { useAppSelector, useHover, useLocale } from '@shared/hooks';
-
+import { useAppDispatch, useAppSelector, useHover, usePolling } from '@shared/hooks';
 import { Chart } from './Chart';
 import { Actions } from './Actions';
 import { ResizableHandle } from './ResizableHandle';
-import { selectChartData, selectWidget } from '@entities/widgets/model';
+import { selectChartData, widgetsThunk } from '@entities/widgets/model';
 
 import {
   ChartStyles,
   ChartTypes,
   WidgetTypes,
 } from '../../model/types';
+import { useChartDataTransform } from '@entities/widgets/lib/useChartDataTransform';
 
 import styles from './styles.module.scss';
-import { useChartDataTransform } from '@entities/widgets/lib/useChartDataTransform';
 
 interface WidgetProps {
   id: string;
@@ -33,9 +32,7 @@ interface WidgetProps {
   chartStyles: ChartStyles;
   duration: number;
   refreshTime: number | null;
-  overrideRefreshTime?: boolean;
-  overrideDuration?: boolean;
-  watchers: string[];
+  watchers?: string[];
   isEditable?: boolean;
   onEdit?: () => void;
   onWidthChange?: (value: number) => void;
@@ -46,7 +43,6 @@ interface WidgetProps {
 }
 
 export const Widget = (props: WidgetProps) => {
-  const { t } = useLocale();
   const {
     id,
     className,
@@ -54,13 +50,14 @@ export const Widget = (props: WidgetProps) => {
     description,
     order = 0,
     length = 1,
-    width = 450,
+    width = 650,
     height = 450,
     isWidgetEdit = false,
     chartType,
     widgetType,
     chartStyles,
     duration,
+    watchers,
     isEditable = true,
     onOrderChange,
     onEdit,
@@ -68,22 +65,32 @@ export const Widget = (props: WidgetProps) => {
     navigate,
   } = props;
 
+  const dispatch = useAppDispatch();
   const [widgetRef, isHover] = useHover<HTMLDivElement | null>();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [isActionsOpen, setIsActionsOpen] = useState(false);
   const [_width, setWidth] = useState(width);
   const [_height, setHeight] = useState(height);
-  const widgetData = useAppSelector(selectChartData);
+  const widgetData = useAppSelector(selectChartData) || [];
   const showHeader = useMemo(() => !!(title?.trim().length || description?.trim().length), [title, description]);
 
   const navigateToEdit = () => {
     navigate && navigate("/edit");
   };
 
+  usePolling(() => id && dispatch(widgetsThunk.fetchWidgetData(id)));
+
+  useEffect(() => {
+    if (id) {
+      dispatch(widgetsThunk.fetchWidgetData(id));
+    } else if (watchers && watchers.length) {
+      dispatch(widgetsThunk.fetchData(watchers));
+    }
+  }, [dispatch, id, watchers]);
+
   const {
     options,
     values,
-    dataType,
   } = useChartDataTransform(widgetData);
 
   return (
@@ -96,7 +103,7 @@ export const Widget = (props: WidgetProps) => {
       data-order={order}
       ref={widgetRef}
     >
-      <Panel className={chartStyles.standard?.transparentBackground ? styles.transparentBackground : ''}>
+      <Panel>
         <div data-actions={isActionsOpen} className={styles.wrapper}>
           {!isWidgetEdit && onEdit && (
             <ResizableHandle

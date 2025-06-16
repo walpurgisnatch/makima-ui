@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from 'antd';
 import cn from 'classnames';
 
-import { useLocale } from '@shared/hooks';
-import { Panel, HeaderActions, Field, TextType } from '@shared/ui';
+import { selectWatchers, TWatcher, watchersThunk } from '@entities/watchers';
+import { Widget, WidgetTypes, selectWidget, useChartType, widgetsThunk } from '@entities/widgets';
+import { useAppDispatch, useLocale } from '@shared/hooks';
+import { Panel, HeaderActions, Field } from '@shared/ui';
+import { ISelect, TextType } from '@shared/types';
 import { initialValues } from './constants';
+import StandardOptions from './StandardOptions';
+import StyleOptions from './StyleOptions';
 
 import styles from './styles.module.scss';
-import { Widget } from '@entities/widgets';
-import { useSelector } from 'react-redux';
-import { WidgetTypes, selectWidget } from '@entities/widgets/model';
-import { ISelect } from '@shared/types';
 
 export const CreateWidget = () => {
   const { t } = useLocale();
+  const dispatch = useAppDispatch();
   const isCreate = true;
   const widget = useSelector(selectWidget);
+  const watchersList = useSelector(selectWatchers);
+  const { dashboardName } = useParams();
 
   const formMethods = useForm<any>({
     mode: 'onChange',
@@ -24,24 +30,43 @@ export const CreateWidget = () => {
   });
   const {
     handleSubmit,
+    watch,
     formState: { isValid },
   } = formMethods;
 
+  const [watchers, chartType, widgetType, widgetStyles, title, description] = watch([
+    'watchers',
+    'chartType',
+    'widgetType',
+    'styles',
+    'title',
+    'description',
+  ]);
+  const type = useChartType(widgetType, chartType);
   const submitDisabled = !isValid;
 
+  useEffect(() => {
+    dispatch(watchersThunk.select());
+  }, [dispatch])
+
   const submit = (data: any) => {
-    console.log(data);
+    const result = {
+      ...data,
+      dashboard: dashboardName,
+      styles: JSON.stringify(data.styles)
+    }
+    dispatch(widgetsThunk.create(result));
   };
 
   const widgetTypeOptions: ISelect[] = Object.values(WidgetTypes).map((item) => ({
-    label: `pages.widget.widgetType.${item.toLowerCase()}`,
+    label: `widgets.fields.widget_type.${item.toLowerCase()}`,
     value: item,
   }));
 
   return (
     <>
       <FormProvider {...formMethods}>
-        <HeaderActions title={t('create-widget.title')}>
+        <HeaderActions title={t('widgets.create_widget_title')}>
           <Button type='primary' disabled={submitDisabled} onClick={handleSubmit(submit)}>
             {t('general.save')}
           </Button>
@@ -52,31 +77,33 @@ export const CreateWidget = () => {
               <Panel>
                 <Field
                   name='name'
-                  label={t('create_widget.fields.name')}
+                  label='widgets.fields.name'
                   type={TextType.text}
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
                 <Field
                   name='description'
-                  label={t('create_widget.fields.description')}
+                  label='widgets.fields.description'
                   type={TextType.text}
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
                 <Field
                   name='watchers'
-                  label={t('create_widget.fields.watchers')}
-                  type={TextType.text}
+                  label='widgets.fields.watchers'                  
+                  type='select'
+                  options={watchersList.map((watcher: TWatcher) => ({ value: watcher.name, label: watcher.name }))}
+                  multiple
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
                 <Field
                   name='duration'
-                  label={t('create_widget.fields.duration')}
+                  label='widgets.fields.duration'
                   type={TextType.text}
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
                 <Field
                   name='refresh'
-                  label={t('create_widget.fields.refresh')}
+                  label='widgets.fields.refresh'
                   type={TextType.text}
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
@@ -87,10 +114,10 @@ export const CreateWidget = () => {
               className={styles.widget}
               id={null!}
               isWidgetEdit
-              chartType={!isCreate ? widget?.chartType : initialValues.chartType}
-              widgetType={!isCreate ? widget?.widgetType : initialValues.widgetType}
-              chartStyles={!isCreate ? widget?.styles : initialValues.styles}
-              watchers={[]}
+              chartType={!isCreate ? widget?.chartType : chartType}
+              widgetType={!isCreate ? widget?.widgetType : widgetType}
+              chartStyles={!isCreate ? widget?.styles : widgetStyles}
+              watchers={watchers}
               duration={widget?.duration}
               refreshTime={widget?.refreshTime}
             />
@@ -99,16 +126,18 @@ export const CreateWidget = () => {
           <div className={styles.controllersZone}>
             <Panel className={styles.type}>
               <Field
-                name='parser'
-                label={t('create_watcher.fields.parser')}
+                name='widgetType'
+                label='widgets.fields.widget_type.name'
                 type='select'
-                value={widgetTypeOptions[0]?.value || 'NONE'}
+                value={widgetTypeOptions[0]?.value}
                 options={widgetTypeOptions}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
             </Panel>
             <Panel className={styles.blocks}>
               <div className={styles.scrollable}>
+                <StandardOptions widgetType={type} />
+                <StyleOptions widgetType={type} />
               </div>
             </Panel>
           </div>

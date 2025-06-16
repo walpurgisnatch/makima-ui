@@ -19,6 +19,7 @@
     "actions": "Действия",
     "delete": "Удалить",
     "edit": "Редактировать",
+    "empty": "Тут пусто",
     "sentry_types": {
       "general": "стандарный",
       "html": "html",
@@ -67,6 +68,66 @@
       },
       "page": "Страница",
       "url": "URL"
+    }
+  },
+  "widgets": {
+    "create_widget_title": "Create widget",
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "watchers": "Watchers",
+      "duration": "Duration",
+      "refresh": "Refresh",
+      "chart_type": {
+        "name": "Chart type",
+        "lint": "Line"
+      },
+      "widget_type": {
+        "name": "Widget type",
+        "graph": "Graph"
+      },
+      "standard": {
+        "calculation": {
+          "name": "Calculations",
+          "help": "Help"
+        },
+        "scale": {
+          "min": "Min",
+          "max": "Max"
+        },
+        "legend": {
+          "name": "Legend",
+          "options": {
+            "no": "no",
+            "top": "top",
+            "bottom": "bottom",
+            "left": "left",
+            "right": "right"
+          }
+        }
+      },
+      "styles": {
+        "graph": {
+          "line": {
+            "name": "name",
+            "solid": "solid",
+            "dash": "dash"
+          },
+          "points": {
+            "name": "name",
+            "yes": "yes",
+            "no": "no"
+          },
+          "interpolation": {
+            "name": "Interpolation",
+            "linear": "linear",
+            "monotone": "monotone",
+            "step": "step",
+            "step_after": "step after",
+            "step_before": "step before"
+          }
+        }
+      }
     }
   }
 }

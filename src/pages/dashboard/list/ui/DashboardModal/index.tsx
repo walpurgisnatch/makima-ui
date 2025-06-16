@@ -3,10 +3,11 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { Modal, Space } from 'antd';
 import cn from 'classnames';
 
-import { useLocale } from '@shared/hooks';
 import { TDashboard } from '@entities/dashboards/store';
 import { initialValues } from './constants';
-import { Field, TextType } from '@shared/ui';
+import { useLocale } from '@shared/hooks';
+import { Field } from '@shared/ui';
+import { TextType } from '@shared/types';
 
 import styles from './styles.module.scss';
 
@@ -64,13 +65,13 @@ export const DashboardModal: React.FC<DashboardModalProps> = ({ openId, data, is
           <Space>
             <Field
               name='name'
-              label={t('dashboards.list.fields.name')}
+              label='dashboards.list.fields.name'
               type={TextType.text}
               className={cn(styles.field, 'd-flex flex-column mb-2')}
             />
             <Field
               name='description'
-              label={t('dashboards.list.fields.description')}
+              label='dashboards.list.fields.description'
               type={TextType.text}
               className={cn(styles.field, 'd-flex flex-column mb-2')}
             />

@@ -3,8 +3,8 @@ import { Table } from 'antd';
 
 import { useLocale } from '@shared/hooks';
 import { Panel } from '@shared/ui';
-import { COLUMNS } from './records-panel-constants';
-import { IRecordsPanelProps } from './records-panel-types';
+import { COLUMNS } from './constants';
+import { IRecordsPanelProps } from './types';
 
 export const RecordsPanel = ({ records }: IRecordsPanelProps) => {
   const { t } = useLocale();

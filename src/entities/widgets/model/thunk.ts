@@ -2,17 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { widgetsApi } from './api';
 import { apiBaseQuery } from '@shared/api';
-import { IWidget } from './types';
+import { IWidgetData } from './types';
 
 export const widgetsThunk = {
-  select: createAsyncThunk('widgets/get', async (_, { rejectWithValue }) => {
+  select: createAsyncThunk('widgets/get', async (dashboard: string, { rejectWithValue }) => {
     try {
-      return await apiBaseQuery(widgetsApi.getWidgets(), rejectWithValue);
+      return await apiBaseQuery(widgetsApi.getWidgets(dashboard), rejectWithValue);
     } catch (error) {
       return error;
     }
   }),
-  create: createAsyncThunk('widgets/post', async (data: IWidget, { rejectWithValue }) => {
+  create: createAsyncThunk('widgets/post', async (data: IWidgetData, { rejectWithValue }) => {
     try {
       return await apiBaseQuery(widgetsApi.createWidget(data), rejectWithValue);
     } catch (error) {
@@ -35,9 +35,16 @@ export const widgetsThunk = {
       return error;
     }
   }),
-  fetchData: createAsyncThunk('widget/fetchData', async (widget: string, { rejectWithValue }) => {
+  fetchWidgetData: createAsyncThunk('widget/fetchWidgetData', async (widget: string, { rejectWithValue }) => {
     try {
-      return await apiBaseQuery(widgetsApi.fetchData(widget), rejectWithValue);
+      return await apiBaseQuery(widgetsApi.fetchWidgetData(widget), rejectWithValue);
+    } catch (error) {
+      return error;
+    }
+  }),
+  fetchData: createAsyncThunk('widget/fetchData', async (watchers: string[], { rejectWithValue }) => {
+    try {
+      return await apiBaseQuery(widgetsApi.fetchData(watchers), rejectWithValue);
     } catch (error) {
       return error;
     }

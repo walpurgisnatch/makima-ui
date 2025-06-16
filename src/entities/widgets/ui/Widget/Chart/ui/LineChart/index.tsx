@@ -22,7 +22,7 @@ interface LineChartProps {
   chartOptions: IChartOptions[];
   duration: number;
   graph: { [key: string]: any };
-  yAxisMin: number;
+  yAxisMin: number | string;
   yAxisMax: number | string;
   yAxisWidth: number;
   tickFormatter: (val: any) => string;
@@ -46,13 +46,9 @@ export const LineChart = ({
 }: LineChartProps) => {
   const [activeDataNames, setActiveDataNames] = useState<Array<string>>(dataKeyNames);
   const [gridData, setGridData] = useState(generateGridData(duration));
-  const [firstPoint, setFirstPoint] = useState(chartData[0].x);
 
   useEffect(() => {
-    if (firstPoint !== chartData[0].x) {
-      setGridData(generateGridData(duration));
-      setFirstPoint(chartData[0].x);
-    }
+    setGridData(generateGridData(duration));
   }, [chartData, duration]);
 
   useEffect(() => {
@@ -89,28 +85,20 @@ export const LineChart = ({
         {chartOptions?.map((options, inx) => {
           const color = options.color;
           return (
-            <>
-              <defs key={`def-line-${dataKeyNames}-${options.id}`}>
-                <linearGradient id={`line-${options.id}`} x1='0' y1='0' x2='0' y2='1'>
-                  <stop offset='5%' stopColor={color} />
-                  <stop offset='95%' stopColor={color} />
-                </linearGradient>
-              </defs>
-              <Line
-                key={`line-${dataKeyNames}-${options.id}`}
-                dataKey={`y[${inx}].converted`}
-                name={options.title}
-                type={graph?.interpolation}
-                strokeWidth={graph?.stroke}
-                stroke={color}
-                strokeDasharray={graph?.line === LineStyle.Dash ? '3 3' : ''}
-                fill={graph?.gradient ? `url(#line-${options.id})` : color}
-                fillOpacity={graph?.opacity}
-                hide={!activeDataNames.includes(options.title)}
-                dot={graph?.points === ShowPoints.Always}
-                connectNulls
-              />
-            </>
+            <Line
+              key={`line-${dataKeyNames}-${options.id}`}
+              dataKey={`y[${inx}]`}
+              name={options.title}
+              type={graph?.interpolation}
+              strokeWidth={graph?.stroke}
+              stroke={color}
+              strokeDasharray={graph?.line === LineStyle.Dash ? '3 3' : ''}
+              fill={graph?.gradient ? `url(#line-${options.id})` : color}
+              fillOpacity={graph?.opacity}
+              hide={!activeDataNames.includes(options.title)}
+              dot={graph?.points === ShowPoints.Always}
+              connectNulls
+            />
           );
         })}
       </ReLineChart>

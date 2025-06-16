@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { widgetsThunk } from '../model/thunk';
 import { defaultFulfilled, defaultPending, defaultRejected, LoadingStatuses } from '@shared/api';
+
 import type { State } from '@shared/types';
 import type { IWidgetData } from '../model/types';
 
@@ -11,26 +12,26 @@ const initialState: State<IWidgetData[]> = {
   error: null,
 };
 
-export const widgetListSlice = createSlice({
-  name: 'widgetList',
+export const widgetsListSlice = createSlice({
+  name: 'widgetsList',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(widgetsThunk.select.fulfilled, defaultFulfilled);
-    builder.addCase(widgetsThunk.select.pending, defaultPending);
-    builder.addCase(widgetsThunk.select.rejected, defaultRejected);
-
-    builder.addCase(widgetsThunk.fetchData.fulfilled, (state, { payload }) => {
-      const newData = { ...state.data }
-      const { id, data } = payload;
-      const widget = state.data.findIndex((widget) => widget.id === id);
-      newData[widget].data = data;
-      state.data = newData;
+    builder.addCase(widgetsThunk.select.fulfilled, (state, { payload }) => {
+      const widgets = payload.map((widget: any) => {
+        return {
+          ...widget,
+          chartType: widget["chart-type"],
+          widgetType: widget["widget-type"],
+          styles: JSON.parse(widget.styles)
+        }
+      })
+      state.data = widgets;
       state.status = LoadingStatuses.Succeeded;
     });
-    builder.addCase(widgetsThunk.fetchData.pending, defaultPending);
-    builder.addCase(widgetsThunk.fetchData.rejected, defaultRejected);
+    builder.addCase(widgetsThunk.select.pending, defaultPending);
+    builder.addCase(widgetsThunk.select.rejected, defaultRejected);
   },
 });
 
-export const WidgetListReducer = widgetListSlice.reducer;
+export const WidgetsListReducer = widgetsListSlice.reducer;

@@ -1,7 +1,6 @@
 import { useLocale } from '@shared/hooks';
 
 import {
-  ColorModes,
   IChartData,
   IChartOptions,
   TextAlign,
@@ -23,7 +22,7 @@ export const useChartDataTransform = (
 const makeValues = (data: TRecord[]) => {
   return data.map(record => {
     return {
-      x: Number(record.timestamp),
+      x: (+record.timestamp - 2208988800) * 1000,
       y: [extractNumber(record.value)]
     }
   });
@@ -41,7 +40,6 @@ const makeOptions = () => {
   options.link = undefined;
   options.parseDateFormat = undefined;
   options.dateFormat = undefined;
-  options.colorMode = ColorModes.Background;
   options.gradient = undefined;
   options.gradientMode = false;
   options.openNewWindow = false;
@@ -58,6 +56,7 @@ const makeOptions = () => {
 
 const extractNumber = (str: string | number) => {
   if (typeof str === 'number') return str;
-  const match = str.match(/\d+(\.\d+)?/);
+  if (!str) return null;
+  const match = str.replace(' ', '').match(/\d+(\.\d+)?/);
   return match ? parseFloat(match[0]) : null;
 };

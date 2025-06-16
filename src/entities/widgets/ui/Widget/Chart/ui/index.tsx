@@ -44,7 +44,7 @@ export const Chart = ({
 
   const [longestTickValue, setLongestTickValue] = useState('');
 
-  const hasData = useMemo(() => data?.length || !!styles?.standard.noValue, [data?.length, styles?.standard.noValue]);
+  const hasData = useMemo(() => data?.length, [data?.length]);
 
   const tickFormatter = (val: string) => {
     const formattedTick = String(val);
@@ -82,7 +82,7 @@ export const Chart = ({
             duration={duration}
             graph={styles?.graph}
             height={height}
-            yAxisMin={styles?.standard.scale.min}
+            yAxisMin={styles?.standard.scale.min || 'auto'}
             yAxisMax={styles?.standard.scale.max || 'auto'}
             yAxisWidth={getYAxisTickLen()}
             tickFormatter={tickFormatter}

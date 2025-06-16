@@ -1,9 +1,10 @@
-import { IWidget } from './types';
+import { IWidgetData } from './types';
 
 export const widgetsApi = {
-  getWidgets: () => ({ url: '/widgets' }),
-  createWidget: (data: IWidget) => ({ url: '/widgets', method: 'post', data }),
+  getWidgets: (dashboard: string) => ({ url: `/dashboards/${dashboard}/widgets` }),
+  createWidget: (data: IWidgetData) => ({ url: '/widgets', method: 'post', data }),
   deleteWidget: (id: string) => ({ url: `/widgets/${id}`, method: 'delete' }),
   getWidget: (id: string) => ({ url: `/widgets/${id}` }),
-  fetchData: (id: string) =>  ({ url: `/widgets/${id}/data` })
+  fetchWidgetData: (id: string) =>  ({ url: `/widgets/${id}/data` }),
+  fetchData: (watchers: string[]) => ({ url: `/widgets/data`, method: 'post', data: { watchers } })
 };

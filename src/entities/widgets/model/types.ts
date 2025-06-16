@@ -1,3 +1,5 @@
+import { TRecord } from "@entities/watchers";
+
 export enum Legend {
   Top = 'top',
   Bottom = 'bottom',
@@ -16,15 +18,15 @@ export interface IWidgetProps {
 
 export interface IWidgetData {
   id: number;
-  dashboardName: string;
-  title: string;
+  dashboard: string;
+  name: string;
   description?: string;
-  refreshTime?: number | string | null;
+  refresh?: number | string | null;
   duration?: number | string | null;
   widgetType: WidgetTypes;
   chartType: ChartTypes;
   styles: ChartStyles;
-  data: WidgetQueryData;
+  data?: TRecord[];
 }
 
 export type WidgetQueryData = {
@@ -45,25 +47,10 @@ export interface IWidgetChartDataProps {
   data: IChartQueryProps;
 }
 
-export type Threshold = {
-  value: string;
-  color: string;
-};
-
-export type Thresholds = {
-  value: number;
-  color: string;
-}[];
-
 export type DataLink = {
   title: string;
   url: string;
   openBlankTab: boolean;
-};
-
-export type Transformation = {
-  from: string;
-  to: string;
 };
 
 export type ChartStyles = {
@@ -82,7 +69,6 @@ export type ChartStyles = {
       max: number;
     };
     noValue?: string;
-    transparentBackground?: boolean;
   };
 };
 
@@ -166,12 +152,6 @@ export interface IChartOptions {
   sort?: boolean;
   fieldType: FieldTypes;
   align: TextAlign;
-  colorMode: ColorModes;
-}
-
-export enum ColorModes {
-  Background = 'background',
-  Value = 'value',
 }
 
 export interface IChartValue {

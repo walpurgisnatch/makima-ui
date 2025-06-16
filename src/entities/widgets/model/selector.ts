@@ -10,6 +10,6 @@ export const getWidgetState = (state: RootState) => state.widget;
 
 export const selectWidgetStatus = createSelector(getWidgetState, (state) => state.status);
 export const selectWidget = createSelector(getWidgetState, (state) => state.data);
-export const selectChartData = createSelector(selectWidget, (widget) => widget.chart)
+export const selectChartData = createSelector(selectWidget, (widget) => widget.data)
 
 export const selectWidgetRecords = createSelector(getWidgetState, (state) => state.data?.records);
