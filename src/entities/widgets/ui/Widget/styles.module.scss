@@ -1,5 +1,3 @@
-@import 'src/app/styles/colors';
-
 .wrongWidgetType {
   align-self: center;
   margin: auto;
@@ -43,6 +41,11 @@
       rgba(250, 173, 20, 0) 50%
     );
   }
+}
+
+.panel { 
+  padding: 0px;
+  height: 100%;
 }
 
 .wrapper {

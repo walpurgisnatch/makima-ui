@@ -65,7 +65,7 @@ export const LineChart = ({
           tick={{ fontSize: 12 }}
           domain={[gridData.from, gridData.to]}
           ticks={gridData.ticks}
-          tickFormatter={(data) => formatDate(data, gridData.timeFormat)}
+          tickFormatter={(data) => formatDate(data, gridData.timeFormat, '-', false)}
         />
         {gridData.ticks.map((tick, inx) => (
           <ReferenceLine key={inx} x={tick} strokeDasharray='3 3' strokeOpacity={graph?.gridOpacity ?? 0.5} />

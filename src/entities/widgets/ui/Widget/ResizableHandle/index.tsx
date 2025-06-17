@@ -8,6 +8,7 @@ interface ResizableHandleProps {
   height: number;
   onSetHeight: (value: number) => void;
   onSetWidth: (value: number) => void;
+  onSizeUpdate: (width: number, height: number) => void;
 }
 
 export const ResizableHandle = ({
@@ -16,6 +17,7 @@ export const ResizableHandle = ({
   height,
   onSetHeight,
   onSetWidth,
+  onSizeUpdate
 }: ResizableHandleProps) => {
   const resizeBgRef = useRef(null);
   const isDragging = useRef(false);
@@ -66,8 +68,10 @@ export const ResizableHandle = ({
     document.removeEventListener('mousemove', xMouseMoveHandler);
     document.removeEventListener('mouseup', xMouseUpHandler);
     const deltaX = e.clientX - initialX.current;
+    const newWidth = (width || initialWidth.current) + Math.round(deltaX / 10) * 10;
     
-    onSetWidth((width || initialWidth.current) + Math.round(deltaX / 10) * 10);
+    onSetWidth(newWidth);
+    onSizeUpdate(newWidth, height);
   };
 
   const yMouseUpHandler = (e: MouseEvent) => {
@@ -76,8 +80,10 @@ export const ResizableHandle = ({
     document.removeEventListener('mousemove', yMouseMoveHandler);
     document.removeEventListener('mouseup', yMouseUpHandler);
     const deltaY = e.clientY - initialY.current;
+    const newHeight = (height || initialHeight.current) + Math.round(deltaY / 10) * 10;
     
-    onSetHeight((height || initialHeight.current) + Math.round(deltaY / 10) * 10);
+    onSetHeight(newHeight);
+    onSizeUpdate(width, newHeight);
   };
 
   return (

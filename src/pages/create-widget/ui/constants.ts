@@ -6,8 +6,8 @@ export const initialValues = {
   description: '',
   widgetType: WidgetTypes.Graph,
   chartType: ChartTypes.Line,
-  refresh: '10s',
-  duration: '24h',
+  refresh: 10000,
+  duration: 86400000,
   watchers: [],
   styles: {
     graph: {

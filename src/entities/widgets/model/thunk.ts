@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { widgetsApi } from './api';
 import { apiBaseQuery } from '@shared/api';
-import { IWidgetData } from './types';
+import { IWidgetData, TWidgetSize } from './types';
 
 export const widgetsThunk = {
   select: createAsyncThunk('widgets/get', async (dashboard: string, { rejectWithValue }) => {
@@ -45,6 +45,13 @@ export const widgetsThunk = {
   fetchData: createAsyncThunk('widget/fetchData', async (watchers: string[], { rejectWithValue }) => {
     try {
       return await apiBaseQuery(widgetsApi.fetchData(watchers), rejectWithValue);
+    } catch (error) {
+      return error;
+    }
+  }),
+  updateSize: createAsyncThunk('widget/updateData', async (data: TWidgetSize, { rejectWithValue }) => {
+    try {
+      return await apiBaseQuery(widgetsApi.updateSize(data), rejectWithValue);
     } catch (error) {
       return error;
     }

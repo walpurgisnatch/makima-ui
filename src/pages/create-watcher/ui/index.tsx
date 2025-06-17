@@ -146,7 +146,7 @@ export const CreateWatcher = () => {
                 name='parser'
                 label='create_watcher.fields.parser'
                 type='select'
-                options={parserValues.map((parserValue: TFieldData) => ({ value: parserValue.name }))}
+                options={parserValues.map((parserValue: TFieldData) => ({ value: parserValue.name, label: parserValue.name }))}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 

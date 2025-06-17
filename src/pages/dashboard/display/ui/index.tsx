@@ -43,7 +43,7 @@ export const DashboardDisplay = () => {
         <Button title={t('general.add')} onClick={() => navigate('./widgets/create')}>
           {t('general.add')}
         </Button>
-        <Button title={t('general.edit')} icon={<EditOutlined />} onClick={editMode} />
+        {/* <Button title={t('general.edit')} icon={<EditOutlined />} onClick={editMode} /> */}
       </HeaderActions>
 
       {loading ? (
@@ -53,14 +53,16 @@ export const DashboardDisplay = () => {
           {widgets.map((widget: IWidgetData) => (
             <Widget
               key={widget.id}
-              className={styles.widgetWrapper}
               id={widget.id}
-              isWidgetEdit
+              className={styles.widgetWrapper}
+              width={widget.width}
+              height={widget.height}
               chartType={widget.chartType}
               widgetType={widget.widgetType}
               chartStyles={widget.styles}
               duration={widget.duration}
               refreshTime={widget.refresh}
+              isEditable
             />
           ))}
         </div>

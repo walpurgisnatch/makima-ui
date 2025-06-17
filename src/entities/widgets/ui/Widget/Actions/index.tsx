@@ -69,7 +69,7 @@ export const Actions: React.FC<ActionsProps> = ({
         break;
       }
       case ActionsMenuOption.delete: {
-        if (onDelete && confirm(t('widgets.chart.delete_tooltip', { name: title }))) {
+        if (onDelete && confirm(t('widgets.delete_tooltip', { name: title }))) {
           onDelete();
         }
         break;
@@ -82,8 +82,7 @@ export const Actions: React.FC<ActionsProps> = ({
       {
         label: (
           <div className={styles.menuItem}>
-            <div>{t('widgets.chart.edit')}</div>
-            <span>E</span>
+            <div>{t('general.edit')}</div>
           </div>
         ),
         key: ActionsMenuOption.edit,
@@ -91,8 +90,7 @@ export const Actions: React.FC<ActionsProps> = ({
       {
         label: (
           <div className={styles.menuItem}>
-            <div>{t('widgets.chart.inspect')}</div>
-            <span>I</span>
+            <div>{t('widgets.inspect')}</div>
           </div>
         ),
         key: ActionsMenuOption.inspect,
@@ -100,41 +98,37 @@ export const Actions: React.FC<ActionsProps> = ({
       {
         label: (
           <div className={styles.menuItem}>
-            <div>{t('widgets.chart.delete')}</div>
+            <div>{t('general.delete')}</div>
           </div>
         ),
         key: ActionsMenuOption.delete,
       },
     ];
-    if (!isEdit) {
-      return res.filter(
-        // @ts-ignore
-        (item) => ![ActionsMenuOption.delete].includes(item.key)
-      );
-    }
+    // if (!isEdit) {
+    //   return res.filter(
+    //     // @ts-ignore
+    //     (item) => ![ActionsMenuOption.delete].includes(item.key)
+    //   );
+    // }
     return res;
   }, [t, isEdit]);
 
   return (
     <div className={className}>
-      {isEdit && (
-        <>
-          <Button
-            type='link'
-            icon={<LeftOutlined />}
-            title={t('widgets.chart.left')}
-            disabled={isLeftDisabled}
-            onClick={leftClickHandler}
-          />
-          <Button
-            type='link'
-            icon={<RightOutlined />}
-            title={t('widgets.chart.right')}
-            disabled={isRightDisabled}
-            onClick={rightClickHandler}
-          />
-        </>
-      )}
+      <Button
+        type='link'
+        icon={<LeftOutlined />}
+        title={t('widgets.chart.left')}
+        disabled={isLeftDisabled}
+        onClick={leftClickHandler}
+      />
+      <Button
+        type='link'
+        icon={<RightOutlined />}
+        title={t('widgets.chart.right')}
+        disabled={isRightDisabled}
+        onClick={rightClickHandler}
+      />
 
       <Dropdown
         menu={{ items, onClick: menuSelectHandler }}

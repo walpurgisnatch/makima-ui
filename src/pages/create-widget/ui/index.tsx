@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import cn from 'classnames';
 
 import { selectWatchers, TWatcher, watchersThunk } from '@entities/watchers';
-import { Widget, WidgetTypes, selectWidget, useChartType, widgetsThunk } from '@entities/widgets';
+import { Widget, WidgetTypes, durationOptions, selectWidget, useChartType, widgetsThunk } from '@entities/widgets';
 import { useAppDispatch, useLocale } from '@shared/hooks';
 import { Panel, HeaderActions, Field } from '@shared/ui';
 import { ISelect, TextType } from '@shared/types';
@@ -34,27 +34,26 @@ export const CreateWidget = () => {
     formState: { isValid },
   } = formMethods;
 
-  const [watchers, chartType, widgetType, widgetStyles, title, description] = watch([
+  const [watchers, chartType, widgetType, widgetStyles, duration] = watch([
     'watchers',
     'chartType',
     'widgetType',
     'styles',
-    'title',
-    'description',
+    'duration',
   ]);
   const type = useChartType(widgetType, chartType);
   const submitDisabled = !isValid;
 
   useEffect(() => {
     dispatch(watchersThunk.select());
-  }, [dispatch])
+  }, [dispatch]);
 
   const submit = (data: any) => {
     const result = {
       ...data,
       dashboard: dashboardName,
-      styles: JSON.stringify(data.styles)
-    }
+      styles: JSON.stringify(data.styles),
+    };
     dispatch(widgetsThunk.create(result));
   };
 
@@ -71,7 +70,7 @@ export const CreateWidget = () => {
             {t('general.save')}
           </Button>
         </HeaderActions>
-        <div className={cn(styles.wrapper, 'd-flex')}>
+        <div className={styles.wrapper}>
           <div className={styles.widgetZone}>
             <div className={styles.general}>
               <Panel>
@@ -89,24 +88,27 @@ export const CreateWidget = () => {
                 />
                 <Field
                   name='watchers'
-                  label='widgets.fields.watchers'                  
+                  label='widgets.fields.watchers'
                   type='select'
                   options={watchersList.map((watcher: TWatcher) => ({ value: watcher.name, label: watcher.name }))}
                   multiple
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
-                <Field
-                  name='duration'
-                  label='widgets.fields.duration'
-                  type={TextType.text}
-                  className={cn(styles.field, 'd-flex flex-column mb-2')}
-                />
-                <Field
-                  name='refresh'
-                  label='widgets.fields.refresh'
-                  type={TextType.text}
-                  className={cn(styles.field, 'd-flex flex-column mb-2')}
-                />
+                <div className={styles.timeSection}>
+                  <Field
+                    name='duration'
+                    label='widgets.fields.duration'
+                    type='select'
+                    options={durationOptions}
+                    className={cn(styles.field, 'd-flex flex-column mb-2')}
+                  />
+                  <Field
+                    name='refresh'
+                    label='widgets.fields.refresh'
+                    type={TextType.text}
+                    className={cn(styles.field, 'd-flex flex-column mb-2')}
+                  />
+                </div>
               </Panel>
             </div>
 
@@ -118,7 +120,7 @@ export const CreateWidget = () => {
               widgetType={!isCreate ? widget?.widgetType : widgetType}
               chartStyles={!isCreate ? widget?.styles : widgetStyles}
               watchers={watchers}
-              duration={widget?.duration}
+              duration={duration}
               refreshTime={widget?.refreshTime}
             />
           </div>

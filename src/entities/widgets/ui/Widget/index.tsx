@@ -30,8 +30,8 @@ interface WidgetProps {
   chartType?: ChartTypes[keyof ChartTypes];
   widgetType: WidgetTypes[keyof WidgetTypes];
   chartStyles: ChartStyles;
-  duration: number;
-  refreshTime: number | null;
+  duration?: number;
+  refreshTime?: number;
   watchers?: string[];
   isEditable?: boolean;
   onEdit?: () => void;
@@ -56,7 +56,8 @@ export const Widget = (props: WidgetProps) => {
     chartType,
     widgetType,
     chartStyles,
-    duration,
+    duration = 86400000,
+    refreshTime = 10000,
     watchers,
     isEditable = true,
     onOrderChange,
@@ -78,7 +79,7 @@ export const Widget = (props: WidgetProps) => {
     navigate && navigate("/edit");
   };
 
-  usePolling(() => id && dispatch(widgetsThunk.fetchWidgetData(id)));
+  usePolling(() => id && dispatch(widgetsThunk.fetchWidgetData(id)), refreshTime);
 
   useEffect(() => {
     if (id) {
@@ -93,25 +94,30 @@ export const Widget = (props: WidgetProps) => {
     values,
   } = useChartDataTransform(widgetData);
 
+  const onSizeUpdate = (width: number, height: number) => {
+    dispatch(widgetsThunk.updateSize({ widget: id, width, height }))
+  }
+
   return (
     <div
       className={`${styles.panelWrapper} ${className}`}
       style={{
-        width: _width,
+        width: isWidgetEdit ? 'auto' : _width,
         height: _height,
       }}
       data-order={order}
       ref={widgetRef}
     >
-      <Panel>
+      <Panel className={styles.panel}>
         <div data-actions={isActionsOpen} className={styles.wrapper}>
-          {!isWidgetEdit && onEdit && (
+          {!isWidgetEdit && isEditable && (
             <ResizableHandle
               className={styles.resizer}
-              width={width}
-              height={height}
+              width={_width}
+              height={_height}
               onSetWidth={setWidth}
               onSetHeight={setHeight}
+              onSizeUpdate={onSizeUpdate}
             />
           )}
           {showHeader && (
@@ -138,8 +144,8 @@ export const Widget = (props: WidgetProps) => {
           <Chart
             chartType={chartType}
             widgetType={widgetType}
-            height={height}
-            width={width}
+            height={_height}
+            width={_width}
             styles={chartStyles}
             chartOptions={options}
             dataXAxisKeyName='x'

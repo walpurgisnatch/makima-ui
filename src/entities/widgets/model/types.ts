@@ -17,12 +17,14 @@ export interface IWidgetProps {
 }
 
 export interface IWidgetData {
-  id: number;
+  id: string;
   dashboard: string;
   name: string;
   description?: string;
-  refresh?: number | string | null;
-  duration?: number | string | null;
+  width: number;
+  height: number;
+  refresh?: number;
+  duration?: number;
   widgetType: WidgetTypes;
   chartType: ChartTypes;
   styles: ChartStyles;
@@ -184,4 +186,10 @@ export interface IChartData {
   options: IChartOptions[];
   values: IChartDataValue[];
   dataType: WidgetDataTypes | null | undefined;
+}
+
+export type TWidgetSize = {
+  widget: string;
+  width: number;
+  height: number;
 }

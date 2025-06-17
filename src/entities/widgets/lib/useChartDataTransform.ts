@@ -1,17 +1,15 @@
-import { useLocale } from '@shared/hooks';
-
+import { TRecord } from '@entities/watchers';
 import {
   IChartData,
   IChartOptions,
   TextAlign,
+  FieldTypes
 } from '../model';
-import { FieldTypes, OrderTypes } from '../model';
-import { TRecord } from '@entities/watchers';
+import { OrderTypes } from '../model';
 
 export const useChartDataTransform = (
   widgetData: TRecord[],
 ): IChartData => {
-  const { t } = useLocale();
   const options: IChartOptions[] = makeOptions();
   const values = makeValues(widgetData);
   const dataType = null;
