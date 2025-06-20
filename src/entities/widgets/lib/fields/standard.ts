@@ -1,6 +1,6 @@
-import { ChartTypes, Legend } from "@entities/widgets/model";
-import { Fields, ISelect } from "@shared/types";
-import { calculationOptions } from "./shared";
+import { ChartTypes, Legend } from '@entities/widgets/model';
+import { Fields, ISelect } from '@shared/types';
+import { calculationOptions } from './shared';
 
 const chartTypeOptions: ISelect[] = Object.values(ChartTypes).map((item) => ({
   label: `widgets.fields.chart_type.${item.toLowerCase()}`,
@@ -34,32 +34,32 @@ export const standardFields: Fields = {
   chartType: {
     label: 'widgets.fields.chart_type.name',
     name: 'chartType',
-    options: chartTypeOptions,
+    props: { options: chartTypeOptions },
     type: 'select',
   },
   calculation: {
     label: 'widgets.fields.standard.calculation.name',
     name: 'styles.calculation',
-    options: calculationOptions,
-    helpText: 'widgets.fields.styles.calculation.help',
+    props: { options: calculationOptions },
+    description: 'widgets.fields.styles.calculation.description',
     type: 'select',
   },
   min: {
     label: 'widgets.fields.standard.scale.min',
     name: 'styles.standard.scale.min',
-    placeholder: 'auto',
+    props: { placeholder: 'auto' },
     type: 'number',
   },
   max: {
     label: 'widgets.fields.standard.scale.max',
     name: 'styles.standard.scale.max',
-    placeholder: 'auto',
+    props: { placeholder: 'auto' },
     type: 'number',
   },
   legend: {
     label: 'widgets.fields.standard.legend.name',
     name: 'styles.standard.legend',
-    options: legendPlacementOptions,
+    props: { options: legendPlacementOptions },
     type: 'select',
-  }
-}
+  },
+};

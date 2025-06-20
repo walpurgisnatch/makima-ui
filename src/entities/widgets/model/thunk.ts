@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { widgetsApi } from './api';
 import { apiBaseQuery } from '@shared/api';
-import { IWidgetData, TWidgetSize } from './types';
+import { IWidget, TWidgetSize } from './types';
 
 export const widgetsThunk = {
   select: createAsyncThunk('widgets/get', async (dashboard: string, { rejectWithValue }) => {
@@ -12,7 +12,7 @@ export const widgetsThunk = {
       return error;
     }
   }),
-  create: createAsyncThunk('widgets/post', async (data: IWidgetData, { rejectWithValue }) => {
+  create: createAsyncThunk('widgets/post', async (data: IWidget, { rejectWithValue }) => {
     try {
       return await apiBaseQuery(widgetsApi.createWidget(data), rejectWithValue);
     } catch (error) {
@@ -35,20 +35,27 @@ export const widgetsThunk = {
       return error;
     }
   }),
-  fetchWidgetData: createAsyncThunk('widget/fetchWidgetData', async (widget: string, { rejectWithValue }) => {
+  fetchChartData: createAsyncThunk('widget/fetchChartData', async (chart: string, { rejectWithValue }) => {
     try {
-      return await apiBaseQuery(widgetsApi.fetchWidgetData(widget), rejectWithValue);
+      const result = await apiBaseQuery(widgetsApi.fetchChartData(chart), rejectWithValue);
+      return {
+        widget: chart,
+        data: result,
+      };
     } catch (error) {
       return error;
     }
   }),
-  fetchData: createAsyncThunk('widget/fetchData', async (watchers: string[], { rejectWithValue }) => {
-    try {
-      return await apiBaseQuery(widgetsApi.fetchData(watchers), rejectWithValue);
-    } catch (error) {
-      return error;
+  fetchData: createAsyncThunk(
+    'widget/fetchData',
+    async ({ watchers, duration }: { watchers: string[]; duration: number }, { rejectWithValue }) => {
+      try {
+        return await apiBaseQuery(widgetsApi.fetchData(watchers, duration), rejectWithValue);
+      } catch (error) {
+        return error;
+      }
     }
-  }),
+  ),
   updateSize: createAsyncThunk('widget/updateData', async (data: TWidgetSize, { rejectWithValue }) => {
     try {
       return await apiBaseQuery(widgetsApi.updateSize(data), rejectWithValue);
@@ -56,4 +63,15 @@ export const widgetsThunk = {
       return error;
     }
   }),
+  updateOrder: createAsyncThunk(
+    'widget/updateOrder',
+    async (widgets: { id: string; order: number }[], { rejectWithValue }) => {
+      try {
+        await apiBaseQuery(widgetsApi.updateWidgetsOrder(widgets), rejectWithValue);
+        return widgets;
+      } catch (error) {
+        return error;
+      }
+    }
+  ),
 };

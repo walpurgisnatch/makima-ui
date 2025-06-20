@@ -32,7 +32,7 @@ export const Actions: React.FC<ActionsProps> = ({
   order = 0,
   length,
   onActionsOpen,
-  isEdit,
+  // isEdit,
   onOrderChange,
   onEdit,
   onInspect,
@@ -42,6 +42,7 @@ export const Actions: React.FC<ActionsProps> = ({
 
   const isLeftDisabled = order === 0;
   const isRightDisabled = order >= length - 1;
+
   const leftClickHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -111,7 +112,7 @@ export const Actions: React.FC<ActionsProps> = ({
     //   );
     // }
     return res;
-  }, [t, isEdit]);
+  }, [t]);
 
   return (
     <div className={className}>

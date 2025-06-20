@@ -1,4 +1,4 @@
-import { TRecord } from "@entities/watchers";
+import { TRecord } from '@entities/watchers';
 
 export enum Legend {
   Top = 'top',
@@ -9,24 +9,17 @@ export enum Legend {
 
 export interface IWidget {
   id: string;
-}
-
-export interface IWidgetProps {
-  id: string;
-  data: WidgetQueryData;
-}
-
-export interface IWidgetData {
-  id: string;
   dashboard: string;
-  name: string;
-  description?: string;
+  widgetType: WidgetTypes;
   width: number;
   height: number;
+  order: number;
+  chartId: string;
+  chartType: ChartTypes;
+  name: string;
+  description?: string;
   refresh?: number;
   duration?: number;
-  widgetType: WidgetTypes;
-  chartType: ChartTypes;
   styles: ChartStyles;
   data?: TRecord[];
 }
@@ -37,7 +30,7 @@ export type WidgetQueryData = {
 };
 
 export interface IChartQueryProps {
-  widgetId: string;
+  id: string;
   from: number;
   to: number;
   maxDataPoints: number;
@@ -192,4 +185,4 @@ export type TWidgetSize = {
   widget: string;
   width: number;
   height: number;
-}
+};

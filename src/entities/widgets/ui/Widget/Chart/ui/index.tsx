@@ -3,13 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useChartType } from '@entities/widgets/lib';
 import { Empty } from '@shared/ui';
 import { LineChart } from './LineChart';
-import {
-  ChartStyles,
-  ChartTypes,
-  WidgetTypes,
-  IChartOptions,
-  IChartDataValue,
-} from '../../../../model/types';
+import { ChartStyles, ChartTypes, WidgetTypes, IChartOptions, IChartDataValue } from '../../../../model/types';
 
 interface ChartProps {
   chartType?: ChartTypes[keyof ChartTypes];
@@ -24,7 +18,7 @@ interface ChartProps {
   dataXAxisKeyName: string;
   label: { x: string; y: string | string[] };
   isLinksRedirectApplicable: boolean;
-  isWidgetEdit: boolean;
+  IsEditing: boolean;
 }
 
 export const Chart = ({
@@ -38,7 +32,7 @@ export const Chart = ({
   dataXAxisKeyName,
   label,
   chartOptions,
-  isWidgetEdit,
+  IsEditing,
 }: ChartProps) => {
   let content = <div></div>;
 
@@ -86,7 +80,7 @@ export const Chart = ({
             yAxisMax={styles?.standard.scale.max || 'auto'}
             yAxisWidth={getYAxisTickLen()}
             tickFormatter={tickFormatter}
-            isWidgetEdit={isWidgetEdit}
+            IsEditing={IsEditing}
           />
         );
         break;

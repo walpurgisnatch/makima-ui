@@ -61,5 +61,6 @@ export const GenerateFields = ({ data, handlerItem, watchField, handlerIndex }: 
       );
     }
     return null;
+    // eslint-disable-next-line
   }, [handlerItem.predicate.name, handlerItem.actions]);
 };

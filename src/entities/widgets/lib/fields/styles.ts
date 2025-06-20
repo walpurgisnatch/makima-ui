@@ -1,5 +1,5 @@
-import { LineInterpolation, LineStyle, ShowPoints, WidgetTypes } from "@entities/widgets/model";
-import { Fields, ISelect, RadioItem } from "@shared/types";
+import { LineInterpolation, LineStyle, ShowPoints, WidgetTypes } from '@entities/widgets/model';
+import { Fields, ISelect, RadioItem } from '@shared/types';
 
 const widgetTypeOptions: ISelect[] = Object.values(WidgetTypes).map((item) => ({
   label: `widgets.fields.widget_type.${item.toLowerCase()}`,
@@ -59,52 +59,46 @@ export const styleFields: Fields = {
   widgetType: {
     label: 'widgets.fields.widget_type.name',
     name: 'widgetType',
-    options: widgetTypeOptions,
+    props: { options: widgetTypeOptions },
     type: 'select',
   },
   interpolation: {
     label: 'widgets.fields.styles.graph.interpolation.name',
     name: 'styles.graph.interpolation',
-    options: interpolationOptions,
+    props: { options: interpolationOptions },
     type: 'select',
   },
   line: {
     label: 'widgets.fields.styles.graph.line.name',
     name: 'styles.graph.line',
-    options: lineStyleOptions,
+    props: { options: lineStyleOptions },
     type: 'select',
   },
   point: {
     label: 'widgets.fields.styles.graph.points.name',
     name: 'styles.graph.points',
-    options: showPointsOptions,
+    props: { options: showPointsOptions },
     type: 'select',
   },
-  // opacity: {
-  //   label: 'widgets.fields.styles.graph.opacity.name',
-  //   name: 'styles.graph.opacity',
-  //   rules: {},
-  //   props: { min: 0, max: 1, step: 0.1, vertical: false },
-  //   type: 'slider',
-  // },
-  // gridOpacity: {
-  //   label: 'widgets.fields.styles.graph.grid_opacity.name',
-  //   name: 'styles.graph.gridOpacity',
-  //   rules: {},
-  //   props: { min: 0, max: 1, step: 0.1, vertical: false },
-  //   type: 'slider',
-  // },
-  // stroke: {
-  //   label: 'widgets.fields.styles.graph.stroke.name',
-  //   name: 'styles.graph.stroke',
-  //   props: { min: 0, max: 1, step: 0.1, vertical: false },
-  //   type: 'slider',
-  // },
-  // fontSize: {
-  //   label: 'widgets.fields.styles.stat.font_size.name',
-  //   name: 'styles.stat.fontSize',
-  //   min: 1,
-  //   max: 500,
-  //   type: 'number',
-  // },
+  gridOpacity: {
+    label: 'widgets.fields.styles.graph.grid_opacity',
+    name: 'styles.graph.gridOpacity',
+    rules: {},
+    props: { min: 0, max: 1, step: 0.1 },
+    defaultValue: 0.3,
+    type: 'slider',
+  },
+  stroke: {
+    label: 'widgets.fields.styles.graph.stroke',
+    name: 'styles.graph.stroke',
+    props: { min: 0, max: 1, step: 0.1 },
+    defaultValue: 1,
+    type: 'slider',
+  },
+  fontSize: {
+    label: 'widgets.fields.styles.stat.font_size',
+    name: 'styles.stat.fontSize',
+    props: { min: 1, max: 500 },
+    type: 'number',
+  },
 };

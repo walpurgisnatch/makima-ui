@@ -1,6 +1,6 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Controller, ControllerRenderProps, FieldValues, useFormContext } from 'react-hook-form';
-import { Checkbox, DatePicker, Select, Input, Tooltip, TreeSelect, ConfigProvider } from 'antd';
+import { Checkbox, DatePicker, Select, Input, Tooltip, TreeSelect, ConfigProvider, Slider } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
@@ -18,17 +18,12 @@ export const Field = forwardRef<HTMLInputElement, IField>(
       defaultValue,
       disabled,
       label,
-      min,
-      minLength,
-      options,
-      pattern,
-      placeholder,
       required = false,
-      step,
       type = TextType.text,
       value,
       description,
-      multiple,
+      rules,
+      icon,
       onChange,
       validate,
       ...props
@@ -49,15 +44,11 @@ export const Field = forwardRef<HTMLInputElement, IField>(
 
     const renderFieldByType = (field: ControllerRenderProps<FieldValues, string>) => {
       const generalProps = {
-        ...field,
-        ...props,
+        ...props.props,
         disabled,
         defaultValue,
-        min,
-        placeholder,
-        step,
         type,
-        multiple,
+
         // @ts-ignore
         onChange: (event) => {
           field.onChange(event);
@@ -76,18 +67,40 @@ export const Field = forwardRef<HTMLInputElement, IField>(
 
       switch (type) {
         case 'select':
-          if (options) {
-            const _options = options.map((option) => ({ ...option, label: t(option.label) }))
-            return <Select {...generalProps} options={_options} mode={multiple ? "multiple" : undefined} />;
+          if (generalProps.options) {
+            const _options = generalProps.options.map((option) => ({ ...option, label: t(option.label) }));
+            return (
+              <Select
+                {...generalProps}
+                options={_options}
+                mode={generalProps.multiple ? 'multiple' : undefined}
+                className={className}
+              />
+            );
           } else {
             return <></>;
           }
 
         case 'checkbox':
-          return <Checkbox {...generalProps} checked={generalProps.value} />;
+          return <Checkbox {...generalProps} checked={!!value} />;
 
         case 'date': {
-          return <DatePicker {...generalProps} />;
+          return (
+            <DatePicker
+              {...generalProps}
+              pattern={typeof generalProps.pattern === 'string' ? generalProps.pattern : undefined}
+            />
+          );
+        }
+
+        case 'slider': {
+          return (
+            <Slider
+              {...generalProps}
+              range={false}
+              defaultValue={typeof defaultValue === 'number' ? defaultValue : 0}
+            />
+          );
         }
 
         case 'treeSelect':
@@ -103,7 +116,7 @@ export const Field = forwardRef<HTMLInputElement, IField>(
                 },
               }}
             >
-              <TreeSelect {...generalProps} treeData={options} virtual={false} />
+              <TreeSelect {...generalProps} treeData={generalProps.options} virtual={false} />
             </ConfigProvider>
           );
 
@@ -119,12 +132,8 @@ export const Field = forwardRef<HTMLInputElement, IField>(
         control={control}
         name={nameField}
         rules={{
-          minLength: minLength && {
-            value: minLength,
-            message: `Значение должно быть не короче ${minLength} символов`,
-          },
-          pattern: pattern && {
-            value: pattern,
+          pattern: rules?.pattern && {
+            value: rules?.pattern,
             message: 'Неправильный формат',
           },
           required: {
@@ -145,7 +154,7 @@ export const Field = forwardRef<HTMLInputElement, IField>(
           return (
             <label className={cn(className, styles.label, { [styles.empty]: !label })}>
               <span className={cn(styles.text, 'd-flex', { ['mb-2']: type !== 'checkbox' })}>
-                {t(label)}{' '}
+                <span>{icon}</span> {t(label)}{' '}
                 {required && (
                   <span className={styles.error}>
                     <Tooltip title='Поле обязательно для заполнения'>*</Tooltip>

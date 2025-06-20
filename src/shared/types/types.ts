@@ -14,28 +14,31 @@ export type RadioItem<T = any> = {
   disabled?: boolean;
 };
 
+export interface IFieldProps {
+  min?: number;
+  max?: number;
+  step?: number;
+  minLength?: number;
+  multiple?: boolean;
+  pattern?: RegExp | string;
+  options?: any[];
+  placeholder?: string;
+}
+
 export interface IField {
   className?: string;
-  defaultValue?: string | boolean;
+  defaultValue?: string | number | boolean;
   disabled?: boolean;
   label?: string;
-  min?: number;
-  minLength?: number;
   name?: string;
-  options?: any[];
-  pattern?: RegExp;
-  placeholder?: string;
   prefix?: string;
   required?: boolean;
-  step?: number;
   type?: string;
   value?: string | boolean;
   description?: string;
-  multiple?: boolean;
-  rules?: object[] | object;
-  Icon?: ReactElement;
-  requiredMark?: boolean;
-  helpText?: string;
+  rules?: any;
+  icon?: ReactElement;
+  props?: IFieldProps;
   onChange?: (value: string | string[]) => void;
   validate?: (value: unknown, fields: FieldValues) => ValidateResult | Promise<ValidateResult>;
 }

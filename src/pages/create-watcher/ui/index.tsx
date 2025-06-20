@@ -106,7 +106,7 @@ export const CreateWatcher = () => {
                 name='type'
                 label='create_watcher.fields.type'
                 type='select'
-                options={SENTRY_TYPES}
+                props={{ options: SENTRY_TYPES }}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 
@@ -146,7 +146,12 @@ export const CreateWatcher = () => {
                 name='parser'
                 label='create_watcher.fields.parser'
                 type='select'
-                options={parserValues.map((parserValue: TFieldData) => ({ value: parserValue.name, label: parserValue.name }))}
+                props={{
+                  options: parserValues.map((parserValue: TFieldData) => ({
+                    value: parserValue.name,
+                    label: parserValue.name,
+                  })),
+                }}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 
@@ -176,9 +181,8 @@ export const CreateWatcher = () => {
                         <Field
                           type='treeSelect'
                           name={`handlers.${index}.predicate.name`}
-                          options={treeDataOfHandlerPredicates}
+                          props={{ options: treeDataOfHandlerPredicates, placeholder: 'Choose predicate' }}
                           className={cn(styles.field, 'd-flex flex-column mb-2')}
-                          placeholder='Choose predicate'
                           label='create_watcher.fields.handlers.predicate'
                         />
                         <Space.Compact>
@@ -194,9 +198,7 @@ export const CreateWatcher = () => {
                       <Space.Compact direction='vertical'>
                         <Field
                           type='treeSelect'
-                          options={treeDataOfHandlerActions}
-                          multiple
-                          placeholder='Choose actions'
+                          props={{ options: treeDataOfHandlerActions, multiple: true, placeholder: 'Choose actions' }}
                           label='create_watcher.fields.handlers.actions'
                           className={cn(styles.field, 'd-flex flex-column mb-2')}
                           name={`handlers.${index}.actions._`}

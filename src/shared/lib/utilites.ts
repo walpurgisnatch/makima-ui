@@ -13,8 +13,12 @@ export const formatDate = (
   defaultValue = '-',
   universal = true
 ): string => {
-  if (typeof date === 'string' || typeof date === 'number' && universal) {
-    date = (+date - 2208988800) * 1000; // universal-time to unix timestamp and * 1000 for milis
+  if (typeof date === 'string' || (typeof date === 'number' && universal)) {
+    date = (+date - 2208988800) * 1000; // universal-time to unix timestamp and
   }
   return date && dayjs(date).isValid() ? dayjs(date).format(formatDate) : defaultValue;
+};
+
+export const timestampToUniversal = (timestamp: number) => {
+  return timestamp / 1000 + 2208988800;
 };

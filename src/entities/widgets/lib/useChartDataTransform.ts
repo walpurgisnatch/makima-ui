@@ -1,30 +1,23 @@
 import { TRecord } from '@entities/watchers';
-import {
-  IChartData,
-  IChartOptions,
-  TextAlign,
-  FieldTypes
-} from '../model';
+import { IChartData, IChartOptions, TextAlign, FieldTypes } from '../model';
 import { OrderTypes } from '../model';
 
-export const useChartDataTransform = (
-  widgetData: TRecord[],
-): IChartData => {
+export const useChartDataTransform = (widgetData: TRecord[]): IChartData => {
   const options: IChartOptions[] = makeOptions();
   const values = makeValues(widgetData);
   const dataType = null;
 
-  return { options, values, dataType }
-}
+  return { options, values, dataType };
+};
 
 const makeValues = (data: TRecord[]) => {
-  return data.map(record => {
+  return data.map((record) => {
     return {
       x: (+record.timestamp - 2208988800) * 1000,
-      y: [extractNumber(record.value)]
-    }
+      y: [extractNumber(record.value)],
+    };
   });
-}
+};
 
 const makeOptions = () => {
   // @ts-ignore
@@ -49,8 +42,8 @@ const makeOptions = () => {
   options.title = 'new';
   options.suffix = '';
 
-  return [options]
-}
+  return [options];
+};
 
 const extractNumber = (str: string | number) => {
   if (typeof str === 'number') return str;

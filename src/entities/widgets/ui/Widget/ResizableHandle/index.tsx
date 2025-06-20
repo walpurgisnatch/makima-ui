@@ -17,7 +17,7 @@ export const ResizableHandle = ({
   height,
   onSetHeight,
   onSetWidth,
-  onSizeUpdate
+  onSizeUpdate,
 }: ResizableHandleProps) => {
   const resizeBgRef = useRef(null);
   const isDragging = useRef(false);
@@ -68,8 +68,8 @@ export const ResizableHandle = ({
     document.removeEventListener('mousemove', xMouseMoveHandler);
     document.removeEventListener('mouseup', xMouseUpHandler);
     const deltaX = e.clientX - initialX.current;
-    const newWidth = (width || initialWidth.current) + Math.round(deltaX / 10) * 10;
-    
+    const newWidth = (width || initialWidth.current) + Math.round(deltaX / 25) * 25;
+
     onSetWidth(newWidth);
     onSizeUpdate(newWidth, height);
   };
@@ -80,8 +80,8 @@ export const ResizableHandle = ({
     document.removeEventListener('mousemove', yMouseMoveHandler);
     document.removeEventListener('mouseup', yMouseUpHandler);
     const deltaY = e.clientY - initialY.current;
-    const newHeight = (height || initialHeight.current) + Math.round(deltaY / 10) * 10;
-    
+    const newHeight = (height || initialHeight.current) + Math.round(deltaY / 25) * 25;
+
     onSetHeight(newHeight);
     onSizeUpdate(width, newHeight);
   };
@@ -89,7 +89,9 @@ export const ResizableHandle = ({
   return (
     <div
       ref={resizeBgRef}
-      className={`${className ?? ''} ${isDragging.current ? styles.resizeBackgroundShow : ''} ${styles.resizeBackground}`}
+      className={`${className ?? ''} ${isDragging.current ? styles.resizeBackgroundShow : ''} ${
+        styles.resizeBackground
+      }`}
     >
       <div className={styles.resizerR} onMouseDown={xMouseDownHandler} />
       <div className={styles.resizerB} onMouseDown={yMouseDownHandler} />

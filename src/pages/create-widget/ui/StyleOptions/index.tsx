@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react';
 
-import {
-  ChartTypes,
-  WidgetTypes,
-} from '@entities/widgets';
+import { ChartTypes, WidgetTypes } from '@entities/widgets';
 import { FieldsGenerator } from '../FieldsGenerator';
 import { lineStyleFields } from '@entities/widgets';
 

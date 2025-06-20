@@ -51,4 +51,4 @@ export const durationOptions = [
     label: 'widgets.fields.durationOptions.5_years',
     value: 157680000000,
   },
-]
+];

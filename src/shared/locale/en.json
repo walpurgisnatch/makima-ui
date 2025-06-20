@@ -115,6 +115,8 @@
       },
       "styles": {
         "graph": {
+          "stroke": "Stroke",
+          "grid_opacity": "Grid opacity",
           "line": {
             "name": "Line style",
             "solid": "solid",

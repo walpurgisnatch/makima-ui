@@ -1,4 +1,12 @@
-import { Calculation, ChartTypes, Legend, LineInterpolation, LineStyle, ShowPoints, WidgetTypes } from "@entities/widgets";
+import {
+  Calculation,
+  ChartTypes,
+  Legend,
+  LineInterpolation,
+  LineStyle,
+  ShowPoints,
+  WidgetTypes,
+} from '@entities/widgets';
 
 export const initialValues = {
   dashboard: '',
@@ -11,9 +19,8 @@ export const initialValues = {
   watchers: [],
   styles: {
     graph: {
-      opacity: 0.5,
-      stroke: 0.5,
-      gridOpacity: 0.5,
+      stroke: 1,
+      gridOpacity: 0.3,
       line: LineStyle.Solid,
       points: ShowPoints.Never,
       interpolation: LineInterpolation.Monotone,
@@ -30,4 +37,4 @@ export const initialValues = {
       legend: Legend.Bottom,
     },
   },
-}
+};

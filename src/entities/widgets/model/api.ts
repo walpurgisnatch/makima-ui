@@ -1,11 +1,16 @@
-import { IWidgetData, TWidgetSize } from './types';
+import { IWidget, TWidgetSize } from './types';
 
 export const widgetsApi = {
   getWidgets: (dashboard: string) => ({ url: `/dashboards/${dashboard}/widgets` }),
-  createWidget: (data: IWidgetData) => ({ url: '/widgets', method: 'post', data }),
+  createWidget: (data: IWidget) => ({ url: '/widgets', method: 'post', data }),
   deleteWidget: (id: string) => ({ url: `/widgets/${id}`, method: 'delete' }),
   getWidget: (id: string) => ({ url: `/widgets/${id}` }),
-  fetchWidgetData: (id: string) =>  ({ url: `/widgets/${id}/data` }),
-  fetchData: (watchers: string[]) => ({ url: `/widgets/data`, method: 'post', data: { watchers } }),
-  updateSize: (data: TWidgetSize) => ({ url: `/widgets/${data.widget}/size`, method: 'post', data: { ...data }})  
+  fetchChartData: (id: string) => ({ url: `/charts/${id}/data` }),
+  fetchData: (watchers: string[], duration: number) => ({
+    url: `/widgets/data`,
+    method: 'post',
+    data: { watchers, duration },
+  }),
+  updateSize: (data: TWidgetSize) => ({ url: `/widgets/${data.widget}/size`, method: 'post', data: { ...data } }),
+  updateWidgetsOrder: (widgets: any) => ({ url: `/widgets/order`, method: 'post', data: { widgets } }),
 };

@@ -26,7 +26,7 @@ interface LineChartProps {
   yAxisMax: number | string;
   yAxisWidth: number;
   tickFormatter: (val: any) => string;
-  isWidgetEdit: boolean;
+  IsEditing: boolean;
   height?: number;
 }
 
@@ -41,7 +41,7 @@ export const LineChart = ({
   yAxisMax,
   yAxisWidth,
   tickFormatter,
-  isWidgetEdit,
+  IsEditing,
   height = 400,
 }: LineChartProps) => {
   const [activeDataNames, setActiveDataNames] = useState<Array<string>>(dataKeyNames);
@@ -52,8 +52,8 @@ export const LineChart = ({
   }, [chartData, duration]);
 
   useEffect(() => {
-    isWidgetEdit && setActiveDataNames(dataKeyNames);
-  }, [isWidgetEdit, dataKeyNames]);
+    IsEditing && setActiveDataNames(dataKeyNames);
+  }, [IsEditing, dataKeyNames]);
 
   return (
     <ResponsiveContainer width='100%' height={height}>

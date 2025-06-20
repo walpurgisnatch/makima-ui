@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from 'antd';
@@ -19,6 +19,7 @@ import styles from './styles.module.scss';
 export const CreateWidget = () => {
   const { t } = useLocale();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isCreate = true;
   const widget = useSelector(selectWidget);
   const watchersList = useSelector(selectWatchers);
@@ -34,12 +35,14 @@ export const CreateWidget = () => {
     formState: { isValid },
   } = formMethods;
 
-  const [watchers, chartType, widgetType, widgetStyles, duration] = watch([
+  const [watchers, chartType, widgetType, widgetStyles, duration, name, description] = watch([
     'watchers',
     'chartType',
     'widgetType',
     'styles',
     'duration',
+    'name',
+    'description',
   ]);
   const type = useChartType(widgetType, chartType);
   const submitDisabled = !isValid;
@@ -55,6 +58,7 @@ export const CreateWidget = () => {
       styles: JSON.stringify(data.styles),
     };
     dispatch(widgetsThunk.create(result));
+    navigate('./../../');
   };
 
   const widgetTypeOptions: ISelect[] = Object.values(WidgetTypes).map((item) => ({
@@ -90,8 +94,10 @@ export const CreateWidget = () => {
                   name='watchers'
                   label='widgets.fields.watchers'
                   type='select'
-                  options={watchersList.map((watcher: TWatcher) => ({ value: watcher.name, label: watcher.name }))}
-                  multiple
+                  props={{
+                    options: watchersList.map((watcher: TWatcher) => ({ value: watcher.name, label: watcher.name })),
+                    multiple: true,
+                  }}
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
                 <div className={styles.timeSection}>
@@ -99,7 +105,7 @@ export const CreateWidget = () => {
                     name='duration'
                     label='widgets.fields.duration'
                     type='select'
-                    options={durationOptions}
+                    props={{ options: durationOptions }}
                     className={cn(styles.field, 'd-flex flex-column mb-2')}
                   />
                   <Field
@@ -115,7 +121,10 @@ export const CreateWidget = () => {
             <Widget
               className={styles.widget}
               id={null!}
-              isWidgetEdit
+              chartId={null!}
+              IsEditing
+              name={name}
+              description={description}
               chartType={!isCreate ? widget?.chartType : chartType}
               widgetType={!isCreate ? widget?.widgetType : widgetType}
               chartStyles={!isCreate ? widget?.styles : widgetStyles}
@@ -132,7 +141,7 @@ export const CreateWidget = () => {
                 label='widgets.fields.widget_type.name'
                 type='select'
                 value={widgetTypeOptions[0]?.value}
-                options={widgetTypeOptions}
+                props={{ options: widgetTypeOptions }}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
             </Panel>

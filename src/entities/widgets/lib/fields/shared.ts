@@ -1,4 +1,4 @@
-import { Calculation } from "@entities/widgets/model";
+import { Calculation } from '@entities/widgets/model';
 
 export const calculationOptions = [
   {

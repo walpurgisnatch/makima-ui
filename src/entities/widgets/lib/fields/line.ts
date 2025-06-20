@@ -13,7 +13,6 @@ export const lineStyleFields: IField[] = [
   styleFields.interpolation,
   styleFields.line,
   styleFields.point,
-  // styleFields.opacity,
-  // styleFields.stroke,
-  // styleFields.gridOpacity,
+  styleFields.stroke,
+  styleFields.gridOpacity,
 ];
