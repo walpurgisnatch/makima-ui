@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, EditOutlined } from '@ant-design/icons';
 
 import { dashboardsThunk, selectDashboard, resetDashboards } from '@entities/dashboards';
 import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
@@ -14,6 +14,7 @@ export const DashboardDisplay = () => {
   const { t } = useLocale();
   const { dashboardName } = useParams();
   const dashboard = useAppSelector(selectDashboard);
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     if (dashboardName) {
@@ -26,7 +27,7 @@ export const DashboardDisplay = () => {
   }, [dashboardName, dispatch]);
 
   const editMode = () => {
-    console.log('edit');
+    setIsEdit(!isEdit);
   };
 
   return (
@@ -35,10 +36,14 @@ export const DashboardDisplay = () => {
         <Button title={t('general.add')} onClick={() => navigate('./widgets/create')}>
           {t('general.add')}
         </Button>
-        <Button title={t('general.edit')} icon={<EditOutlined />} onClick={editMode} />
+        {!isEdit ? (
+          <Button title={t('general.edit')} icon={<EditOutlined />} onClick={editMode} />
+        ) : (
+          <Button title={t('general.exit')} icon={<CloseCircleOutlined />} onClick={editMode} />
+        )}
       </HeaderActions>
 
-      <WidgetsPanel dashboard={dashboardName} />
+      <WidgetsPanel dashboard={dashboardName} isEdit={isEdit} />
     </>
   );
 };

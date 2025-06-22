@@ -15,7 +15,7 @@ export const FieldsGenerator = ({ chartFields }: FieldWrapperProps) => {
     <>
       {chartFields.map((field) => (
         <div key={field.name} className={styles.wrapper}>
-          <Field key={field.name} {...field} className={styles.field} />
+          <Field {...field} className={styles.field} />
         </div>
       ))}
     </>

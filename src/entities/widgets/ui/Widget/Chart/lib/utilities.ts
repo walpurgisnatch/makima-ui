@@ -1,5 +1,6 @@
-import { gridScales } from './constants';
 import dayjs from 'dayjs';
+import { get } from 'lodash';
+import { gridScales } from './constants';
 
 const getGridScaleOption = (period: number) => {
   const entry = gridScales.find((pair) => period === pair.period);
@@ -33,3 +34,13 @@ export const generateGridData = (duration: number) => {
 
   return { from, to, ticks, timeFormat: timeFormat };
 };
+
+export function findLastNonNullByKey(arr: Array<any>, key: string) {
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const val = get(arr[i], key, null);
+    if (val !== null) {
+      return val;
+    }
+  }
+  return null;
+}

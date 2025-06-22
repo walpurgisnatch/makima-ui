@@ -10,10 +10,12 @@ import {
   ReferenceLine,
 } from 'recharts';
 
+import useCalculation from '../../lib/useCalculation';
 import { formatDate } from '@shared/lib';
 import { Tooltip } from '../Tooltip';
 import { generateGridData } from '../../lib/utilities';
-import { LineStyle, ShowPoints, IChartOptions, IChartDataValue } from '../../../../../model/types';
+import { LineStyle, ShowPoints, IChartOptions, IChartDataValue, ILegend } from '../../../../../model/types';
+import { ChartLegend } from '../ChartLegend';
 
 interface LineChartProps {
   dataKeyNames: string[];
@@ -28,6 +30,7 @@ interface LineChartProps {
   tickFormatter: (val: any) => string;
   IsEditing: boolean;
   height?: number;
+  legend?: ILegend;
 }
 
 export const LineChart = ({
@@ -43,6 +46,7 @@ export const LineChart = ({
   tickFormatter,
   IsEditing,
   height = 400,
+  legend
 }: LineChartProps) => {
   const [activeDataNames, setActiveDataNames] = useState<Array<string>>(dataKeyNames);
   const [gridData, setGridData] = useState(generateGridData(duration));
@@ -54,6 +58,18 @@ export const LineChart = ({
   useEffect(() => {
     IsEditing && setActiveDataNames(dataKeyNames);
   }, [IsEditing, dataKeyNames]);
+
+  const handleLegendKeyNameClick = (selectedDataName: string) => {
+    if (activeDataNames.length === dataKeyNames.length) {
+      setActiveDataNames([selectedDataName]);
+    } else if (activeDataNames.length === 1 && activeDataNames.includes(selectedDataName)) {
+      setActiveDataNames(dataKeyNames);
+    } else {
+      setActiveDataNames((prev) =>
+        prev.includes(selectedDataName) ? prev.filter((key) => key !== selectedDataName) : [...prev, selectedDataName]
+      );
+    }
+  };
 
   return (
     <ResponsiveContainer width='100%' height={height}>
@@ -82,6 +98,16 @@ export const LineChart = ({
           width={yAxisWidth}
         />
         <ChartTooltip wrapperStyle={{ zIndex: 10 }} content={<Tooltip chartOptions={chartOptions} />} />
+        {
+          ChartLegend({
+            legend,
+            chartOptions,
+            height,
+            hasData: !!chartData?.length,
+            // @ts-ignore
+            onClick: handleLegendKeyNameClick,
+          })
+        }
         {chartOptions?.map((options, inx) => {
           const color = options.color;
           return (

@@ -5,7 +5,8 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
 import { Panel } from '@shared/ui';
-import { useAppDispatch, useAppSelector, useHover, usePolling } from '@shared/hooks';
+import { resetWidget } from '@entities/widgets/store';
+import { useAppDispatch, useAppSelector, usePolling } from '@shared/hooks';
 import { Chart } from './Chart';
 import { Actions } from './Actions';
 import { ResizableHandle } from './ResizableHandle';
@@ -33,9 +34,6 @@ interface WidgetProps {
   refreshTime?: number;
   watchers?: string[];
   isEditable?: boolean;
-  onEdit?: () => void;
-  onWidthChange?: (value: number) => void;
-  onHeightChange?: (value: number) => void;
   onOrderChange?: (isRight: boolean) => void;
   onDelete?: () => void;
   navigate?: NavigateFunction;
@@ -59,15 +57,13 @@ export const Widget = (props: WidgetProps) => {
     duration = 86400000,
     refreshTime = 10000,
     watchers,
-    isEditable = true,
+    isEditable = false,
     onOrderChange,
-    onEdit,
     onDelete,
     navigate,
   } = props;
 
   const dispatch = useAppDispatch();
-  const [widgetRef, isHover] = useHover<HTMLDivElement | null>();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [isActionsOpen, setIsActionsOpen] = useState(false);
   const [_width, setWidth] = useState(width);
@@ -88,6 +84,10 @@ export const Widget = (props: WidgetProps) => {
     } else if (watchers && watchers.length) {
       dispatch(widgetsThunk.fetchData({ watchers, duration }));
     }
+
+    return () => { 
+      dispatch(resetWidget);
+    }
   }, [dispatch, chartId, watchers, duration]);
 
   const { options, values } = useChartDataTransform(IsEditing ? currentWidgetData : widgetData);
@@ -104,7 +104,6 @@ export const Widget = (props: WidgetProps) => {
         height: showHeader ? _height + 32 : _height,
       }}
       data-order={order}
-      ref={widgetRef}
     >
       <Panel className={styles.panel}>
         <div data-actions={isActionsOpen} className={styles.wrapper}>
@@ -130,17 +129,17 @@ export const Widget = (props: WidgetProps) => {
               )}
             </div>
           )}
-          {!IsEditing && isEditable && (
+          {!IsEditing && (
             <Actions
               className={styles.actions}
               title={name ?? ''}
-              isEdit={!!onEdit}
+              isEdit={isEditable}
               length={length}
               order={order}
               onActionsOpen={(isOpen) => setIsActionsOpen(isOpen)}
               onOrderChange={onOrderChange}
               onDelete={onDelete}
-              onEdit={onEdit || navigateToEdit}
+              onEdit={navigateToEdit}
               onInspect={() => setIsSideBarOpen(true)}
             />
           )}

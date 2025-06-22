@@ -34,11 +34,11 @@ export const Chart = ({
   chartOptions,
   IsEditing,
 }: ChartProps) => {
-  let content = <div></div>;
-
   const [longestTickValue, setLongestTickValue] = useState('');
+  const type = useChartType(widgetType, chartType);
 
   const hasData = useMemo(() => data?.length, [data?.length]);
+  const dataKeyNames = useMemo(() => chartOptions?.map((item) => item.title) || [], [chartOptions]);
 
   const tickFormatter = (val: string) => {
     const formattedTick = String(val);
@@ -47,10 +47,14 @@ export const Chart = ({
     }
     return formattedTick;
   };
-  const dataKeyNames = useMemo(() => chartOptions?.map((item) => item.title) || [], [chartOptions]);
 
-  const type = useChartType(widgetType, chartType);
-
+  const legend = useMemo(
+    () => ({
+      placement: styles.standard.legend,
+    }),
+    [styles.standard.legend]
+  );
+  
   const getYAxisTickLen = useCallback(() => {
     const extender = 10;
     const len = longestTickValue.length * extender;
@@ -63,6 +67,9 @@ export const Chart = ({
       return len;
     }
   }, [longestTickValue, label.y, dataSize]);
+
+
+  let content = <div></div>;
 
   if (type) {
     switch (type) {
@@ -81,6 +88,7 @@ export const Chart = ({
             yAxisWidth={getYAxisTickLen()}
             tickFormatter={tickFormatter}
             IsEditing={IsEditing}
+            legend={legend}
           />
         );
         break;

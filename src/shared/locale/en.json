@@ -48,7 +48,7 @@
   },
   "watchers": {
     "records_count": "Records count",
-    "parsed": "Parsed",
+    "last_parsed": "Last parsed",
     "current_value": "Current value"
   },
   "create_watcher": {
@@ -138,20 +138,20 @@
         }
       },
       "durationOptions": {
-        "5_minutes": "Last 5 minutes",
-        "15_minutes": "Last 15 minutes",
-        "30_minutes": "Last 30 minutes",
-        "1_hour": "Last 1 hour",
-        "6_hours": "Last 6 hours",
-        "12_hours": "Last 12 hours",
-        "24_hours": "Last 24 hours",
-        "7_days": "Last 7 days",
-        "30_days": "Last 30 days",
-        "90_days": "Last 90 days",
-        "6_months": "Last 6 months",
-        "1_year": "Last 1 year",
-        "2_years": "Last 2 years",
-        "5_years": "Last 5 years"
+        "5_minutes": "5 minutes",
+        "15_minutes": "15 minutes",
+        "30_minutes": "30 minutes",
+        "1_hour": "1 hour",
+        "6_hours": "6 hours",
+        "12_hours": "12 hours",
+        "24_hours": "24 hours",
+        "7_days": "7 days",
+        "30_days": "30 days",
+        "90_days": "90 days",
+        "6_months": "6 months",
+        "1_year": "1 year",
+        "2_years": "2 years",
+        "5_years": "5 years"
       }
     }
   }

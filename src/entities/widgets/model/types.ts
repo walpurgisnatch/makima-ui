@@ -64,6 +64,9 @@ export type ChartStyles = {
       max: number;
     };
     noValue?: string;
+    legend: Legend;
+    legendWidth: number;
+    legendValues: Calculation[];
   };
 };
 
@@ -77,6 +80,7 @@ export enum ChartTypes {
 
 export enum Calculation {
   Last = 'last',
+  LastNotNull = 'lastNotNull',
   Min = 'min',
   Max = 'max',
   Average = 'average',
@@ -186,3 +190,10 @@ export type TWidgetSize = {
   width: number;
   height: number;
 };
+
+export interface ILegend {
+  placement: Legend;
+  width?: number;
+  values?: Calculation[];
+  units?: string;
+}

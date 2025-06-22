@@ -11,9 +11,10 @@ import styles from './styles.module.scss';
 
 type TWidgetPanelProps = {
   dashboard?: string;
+  isEdit?: boolean;
 };
 
-export const WidgetsPanel = ({ dashboard }: TWidgetPanelProps) => {
+export const WidgetsPanel = ({ dashboard, isEdit }: TWidgetPanelProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const widgets: IWidget[] = useAppSelector(selectWidgets);
@@ -74,7 +75,7 @@ export const WidgetsPanel = ({ dashboard }: TWidgetPanelProps) => {
           chartStyles={widget.styles}
           duration={widget.duration}
           refreshTime={widget.refresh}
-          isEditable
+          isEditable={isEdit}
           onDelete={() => deleteWidget(widget.id)}
           onOrderChange={(right) => moveWidget(widget.order, right)}
         />

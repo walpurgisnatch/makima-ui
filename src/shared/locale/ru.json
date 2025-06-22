@@ -71,62 +71,87 @@
     }
   },
   "widgets": {
-    "create_widget_title": "Create widget",
+    "create_widget_title": "Создать виджет",
+    "inspect": "Просмотреть",
     "fields": {
-      "name": "Name",
-      "description": "Description",
-      "watchers": "Watchers",
-      "duration": "Duration",
-      "refresh": "Refresh",
+      "name": "Название",
+      "description": "Описание",
+      "watchers": "Наблюдатели",
+      "duration": "Длительность",
+      "refresh": "Обновить",
       "chart_type": {
-        "name": "Chart type",
-        "lint": "Line"
+        "name": "Тип графика",
+        "line": "Линия"
       },
       "widget_type": {
-        "name": "Widget type",
-        "graph": "Graph"
+        "name": "Тип виджета",
+        "graph": "График"
       },
       "standard": {
         "calculation": {
-          "name": "Calculations",
-          "help": "Help"
+          "name": "Вычисления",
+          "help": "Помощь",
+          "options": {
+            "last": "последнее",
+            "max": "максимум",
+            "min": "минимум",
+            "average": "среднее"
+          }
         },
         "scale": {
-          "min": "Min",
-          "max": "Max"
+          "min": "Мин.",
+          "max": "Макс."
         },
         "legend": {
-          "name": "Legend",
+          "name": "Легенда",
           "options": {
-            "no": "no",
-            "top": "top",
-            "bottom": "bottom",
-            "left": "left",
-            "right": "right"
+            "no": "нет",
+            "top": "сверху",
+            "bottom": "снизу",
+            "left": "слева",
+            "right": "справа"
           }
         }
       },
       "styles": {
         "graph": {
+          "stroke": "Обводка",
+          "grid_opacity": "Прозрачность сетки",
           "line": {
-            "name": "name",
-            "solid": "solid",
-            "dash": "dash"
+            "name": "Стиль линии",
+            "solid": "сплошная",
+            "dash": "пунктир"
           },
           "points": {
-            "name": "name",
-            "yes": "yes",
-            "no": "no"
+            "name": "Показывать точки",
+            "yes": "да",
+            "no": "нет"
           },
           "interpolation": {
-            "name": "Interpolation",
-            "linear": "linear",
-            "monotone": "monotone",
-            "step": "step",
-            "step_after": "step after",
-            "step_before": "step before"
+            "name": "Интерполяция",
+            "linear": "линейная",
+            "monotone": "монотонная",
+            "step": "ступенчатая",
+            "step_after": "ступенчатая (после)",
+            "step_before": "ступенчатая (до)"
           }
         }
+      },
+      "durationOptions": {
+        "5_minutes": "5 минут",
+        "15_minutes": "15 минут",
+        "30_minutes": "30 минут",
+        "1_hour": "1 час",
+        "6_hours": "6 часов",
+        "12_hours": "12 часов",
+        "24_hours": "24 часа",
+        "7_days": "7 дней",
+        "30_days": "30 дней",
+        "90_days": "90 дней",
+        "6_months": "6 месяцев",
+        "1_year": "1 год",
+        "2_years": "2 года",
+        "5_years": "5 лет"
       }
     }
   }

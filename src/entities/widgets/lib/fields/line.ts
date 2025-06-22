@@ -4,13 +4,13 @@ import { styleFields } from './styles';
 
 export const LineStandardFields: IField[] = [
   standardFields.chartType,
+  styleFields.interpolation,
   standardFields.min,
   standardFields.max,
   standardFields.legend,
 ];
 
 export const lineStyleFields: IField[] = [
-  styleFields.interpolation,
   styleFields.line,
   styleFields.point,
   styleFields.stroke,

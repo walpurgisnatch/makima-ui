@@ -106,13 +106,13 @@ export const CreateWidget = () => {
                     label='widgets.fields.duration'
                     type='select'
                     props={{ options: durationOptions }}
-                    className={cn(styles.field, 'd-flex flex-column mb-2')}
+                    className={cn(styles.timeField, 'd-flex flex-column mb-2')}
                   />
                   <Field
                     name='refresh'
                     label='widgets.fields.refresh'
                     type={TextType.text}
-                    className={cn(styles.field, 'd-flex flex-column mb-2')}
+                    className={cn(styles.timeField, 'd-flex flex-column mb-2')}
                   />
                 </div>
               </Panel>

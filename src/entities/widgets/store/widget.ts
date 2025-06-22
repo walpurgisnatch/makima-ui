@@ -15,7 +15,11 @@ const initialState: State<IWidget> = {
 export const widgetSlice = createSlice({
   name: 'widget',
   initialState,
-  reducers: {},
+  reducers: {
+    resetWidget: (state) => {
+      state.data = initialState.data;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(widgetsThunk.get.fulfilled, defaultFulfilled);
     builder.addCase(widgetsThunk.get.pending, defaultPending);
@@ -29,5 +33,7 @@ export const widgetSlice = createSlice({
     builder.addCase(widgetsThunk.fetchData.rejected, defaultRejected);
   },
 });
+
+export const { resetWidget } = widgetSlice.actions;
 
 export const widgetReducer = widgetSlice.reducer;

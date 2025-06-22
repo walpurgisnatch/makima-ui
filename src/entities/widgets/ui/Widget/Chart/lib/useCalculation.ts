@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react';
 import _ from 'lodash';
 
 import { Calculation, CalculationValues, IChartDataValue, IChartOptions } from '../../../../model/types';
+import { findLastNonNullByKey } from './utilities';
 
 export const useCalculation = (
   chartData: IChartDataValue[] | undefined,
@@ -16,6 +17,8 @@ export const useCalculation = (
           switch (calculation) {
             case Calculation.Last:
               return { ...acc, [calculation]: _.last(data)?.y[inx] };
+            case Calculation.LastNotNull:
+              return { ...acc, [calculation]: findLastNonNullByKey(data, dataKeyName) };
             case Calculation.Min:
               return {
                 ...acc,
@@ -23,8 +26,15 @@ export const useCalculation = (
                   return _.get(o, dataKeyName);
                 })?.y[inx],
               };
+            case Calculation.Max:
+              return {
+                ...acc,
+                [calculation]: _.maxBy(data, function (o) {
+                  return _.get(o, dataKeyName);
+                })?.y[inx],
+              };
             default:
-              return { ...acc, [calculation]: _.last(data)?.y[inx] };
+              return { ...acc, [calculation]: findLastNonNullByKey(data, dataKeyName) };
           }
         }, {}) || {}
       );

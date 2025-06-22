@@ -32,7 +32,7 @@ export const Actions: React.FC<ActionsProps> = ({
   order = 0,
   length,
   onActionsOpen,
-  // isEdit,
+  isEdit,
   onOrderChange,
   onEdit,
   onInspect,
@@ -105,31 +105,35 @@ export const Actions: React.FC<ActionsProps> = ({
         key: ActionsMenuOption.delete,
       },
     ];
-    // if (!isEdit) {
-    //   return res.filter(
-    //     // @ts-ignore
-    //     (item) => ![ActionsMenuOption.delete].includes(item.key)
-    //   );
-    // }
+    if (!isEdit) {
+      return res.filter(
+        // @ts-ignore
+        (item) => ![ActionsMenuOption.delete].includes(item.key)
+      );
+    }
     return res;
-  }, [t]);
+  }, [t, isEdit]);
 
   return (
     <div className={className}>
-      <Button
-        type='link'
-        icon={<LeftOutlined />}
-        title={t('widgets.chart.left')}
-        disabled={isLeftDisabled}
-        onClick={leftClickHandler}
-      />
-      <Button
-        type='link'
-        icon={<RightOutlined />}
-        title={t('widgets.chart.right')}
-        disabled={isRightDisabled}
-        onClick={rightClickHandler}
-      />
+      {isEdit && (
+        <>
+          <Button
+            type='link'
+            icon={<LeftOutlined />}
+            title={t('widgets.chart.left')}
+            disabled={isLeftDisabled}
+            onClick={leftClickHandler}
+          />
+          <Button
+            type='link'
+            icon={<RightOutlined />}
+            title={t('widgets.chart.right')}
+            disabled={isRightDisabled}
+            onClick={rightClickHandler}
+          />
+        </>
+      )}
 
       <Dropdown
         menu={{ items, onClick: menuSelectHandler }}
