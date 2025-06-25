@@ -49,7 +49,6 @@ export const Field = forwardRef<HTMLInputElement, IField>(
         disabled,
         defaultValue,
         type,
-
         // @ts-ignore
         onChange: (event) => {
           field.onChange(event);

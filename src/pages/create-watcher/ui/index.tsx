@@ -66,7 +66,6 @@ export const CreateWatcher = () => {
   });
 
   const submit = (data: TWatcherFormData) => {
-    console.log(data);
     const result = {
       ...data,
       handlers: data.handlers.map((handler) => {
