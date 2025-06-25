@@ -44,6 +44,7 @@ export const Field = forwardRef<HTMLInputElement, IField>(
 
     const renderFieldByType = (field: ControllerRenderProps<FieldValues, string>) => {
       const generalProps = {
+        ...field,
         ...props.props,
         disabled,
         defaultValue,

@@ -72,6 +72,7 @@
   },
   "widgets": {
     "create_widget_title": "Создать виджет",
+    "edit_widget_title": "Редактирование виджета",
     "inspect": "Просмотреть",
     "fields": {
       "name": "Название",

@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { selectDashboardStatus } from '@entities/dashboards';
 import { IWidget, resetWidgets, selectWidgets, Widget, widgetsThunk } from '@entities/widgets';
@@ -16,7 +15,6 @@ type TWidgetPanelProps = {
 
 export const WidgetsPanel = ({ dashboard, isEdit }: TWidgetPanelProps) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const widgets: IWidget[] = useAppSelector(selectWidgets);
   const loading = isLoading(useAppSelector(selectDashboardStatus));
 
@@ -40,11 +38,11 @@ export const WidgetsPanel = ({ dashboard, isEdit }: TWidgetPanelProps) => {
     const newWidgets = widgets.map((widget) => {
       let newOrder = widget.order;
       if (right) {
-        if (newOrder === order) newOrder++;
-        if (newOrder === order + 1) newOrder--;
+        if (widget.order === order) newOrder++;
+        if (widget.order === order + 1) newOrder--;
       } else {
-        if (newOrder === order) newOrder--;
-        if (newOrder === order - 1) newOrder++;
+        if (widget.order === order) newOrder--;
+        if (widget.order === order - 1) newOrder++;
       }
       return {
         id: widget.id,

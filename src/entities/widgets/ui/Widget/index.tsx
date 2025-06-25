@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { NavigateFunction } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Tooltip } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import cn from 'classnames';
@@ -26,7 +26,7 @@ interface WidgetProps {
   length?: number;
   width?: number;
   height?: number;
-  IsEditing?: boolean;
+  isEditing?: boolean;
   chartType?: ChartTypes[keyof ChartTypes];
   widgetType: WidgetTypes[keyof WidgetTypes];
   chartStyles: ChartStyles;
@@ -36,7 +36,6 @@ interface WidgetProps {
   isEditable?: boolean;
   onOrderChange?: (isRight: boolean) => void;
   onDelete?: () => void;
-  navigate?: NavigateFunction;
 }
 
 export const Widget = (props: WidgetProps) => {
@@ -50,7 +49,7 @@ export const Widget = (props: WidgetProps) => {
     length = 1,
     width = 650,
     height = 450,
-    IsEditing = false,
+    isEditing = false,
     chartType,
     widgetType,
     chartStyles,
@@ -60,9 +59,9 @@ export const Widget = (props: WidgetProps) => {
     isEditable = false,
     onOrderChange,
     onDelete,
-    navigate,
   } = props;
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [isActionsOpen, setIsActionsOpen] = useState(false);
@@ -73,24 +72,24 @@ export const Widget = (props: WidgetProps) => {
   const showHeader = useMemo(() => !!(name?.trim().length || description?.trim().length), [name, description]);
 
   const navigateToEdit = () => {
-    navigate && navigate('/edit');
+    navigate(`./widgets/${id}/edit`);
   };
 
   usePolling(() => chartId && dispatch(widgetsThunk.fetchChartData(chartId)), refreshTime);
 
   useEffect(() => {
-    if (chartId) {
+    if (chartId && !isEditing) {
       dispatch(widgetsThunk.fetchChartData(chartId));
     } else if (watchers && watchers.length) {
       dispatch(widgetsThunk.fetchData({ watchers, duration }));
     }
 
-    return () => { 
+    return () => {
       dispatch(resetWidget);
-    }
-  }, [dispatch, chartId, watchers, duration]);
+    };
+  }, [dispatch, watchers, chartId, duration, isEditing]);
 
-  const { options, values } = useChartDataTransform(IsEditing ? currentWidgetData : widgetData);
+  const { options, values } = useChartDataTransform(!chartId ? currentWidgetData : widgetData);
 
   const onSizeUpdate = (width: number, height: number) => {
     dispatch(widgetsThunk.updateSize({ widget: id, width, height }));
@@ -100,14 +99,14 @@ export const Widget = (props: WidgetProps) => {
     <div
       className={cn(styles.panelWrapper, className)}
       style={{
-        width: IsEditing ? 'auto' : _width,
+        width: isEditing ? 'auto' : _width,
         height: showHeader ? _height + 32 : _height,
       }}
       data-order={order}
     >
       <Panel className={styles.panel}>
         <div data-actions={isActionsOpen} className={styles.wrapper}>
-          {!IsEditing && isEditable && (
+          {!isEditing && isEditable && (
             <ResizableHandle
               className={styles.resizer}
               width={_width}
@@ -129,7 +128,7 @@ export const Widget = (props: WidgetProps) => {
               )}
             </div>
           )}
-          {!IsEditing && (
+          {!isEditing && (
             <Actions
               className={styles.actions}
               title={name ?? ''}
@@ -158,7 +157,7 @@ export const Widget = (props: WidgetProps) => {
               x: '',
               y: '',
             }}
-            IsEditing={IsEditing}
+            isEditing={isEditing}
             isLinksRedirectApplicable={false}
           />
         </div>

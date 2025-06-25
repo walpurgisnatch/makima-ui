@@ -72,6 +72,7 @@
   },
   "widgets": {
     "create_widget_title": "Create widget",
+    "edit_widget_title": "Edit widget",
     "inspect": "Inspect",
     "fields": {
       "name": "Name",

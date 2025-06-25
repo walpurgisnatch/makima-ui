@@ -5,7 +5,7 @@ import { OrderTypes } from '../model';
 type TChartData = {
   watcher: string;
   records: TRecord[];
-}
+};
 
 export const useChartDataTransform = (widgetData: TChartData[]): IChartData => {
   const options: IChartOptions[] = makeOptions(widgetData);
@@ -21,8 +21,8 @@ const makeValues = (data: TChartData[]) => {
   const dataLength = data.length;
   data.forEach((watcher, index) => {
     watcher.records.forEach((record) => {
-      const x = (+record.timestamp - 2208988800) * 1000
-      const y = extractNumber(record.value)
+      const x = (+record.timestamp - 2208988800) * 1000;
+      const y = extractNumber(record.value);
 
       if (!temp[x]) {
         const newArray = Array(dataLength);
@@ -31,12 +31,12 @@ const makeValues = (data: TChartData[]) => {
       } else {
         temp[x][index] = y;
       }
-    })
-  })
+    });
+  });
   for (const [key, value] of Object.entries(temp)) {
-    result.push({ x: +key, y: value })
+    result.push({ x: +key, y: value });
   }
-  return result.sort((a, b) => a.x - b.x)
+  return result.sort((a, b) => a.x - b.x);
 };
 
 const makeOptions = (widgetData: any) => {
@@ -60,8 +60,8 @@ const makeOptions = (widgetData: any) => {
       min: 0,
       title: watcher.watcher,
       suffix: '',
-    }
-  })
+    };
+  });
 
   return options;
 };

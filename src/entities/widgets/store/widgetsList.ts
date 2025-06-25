@@ -22,13 +22,7 @@ export const widgetsListSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(widgetsThunk.select.fulfilled, (state, { payload }) => {
-      const widgets = payload.map((widget: any) => {
-        return {
-          ...widget,
-          styles: JSON.parse(widget.styles),
-        };
-      });
-      state.data = widgets;
+      state.data = payload;
       state.status = LoadingStatuses.Succeeded;
     });
     builder.addCase(widgetsThunk.select.pending, defaultPending);

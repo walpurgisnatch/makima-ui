@@ -18,7 +18,7 @@ interface ChartProps {
   dataXAxisKeyName: string;
   label: { x: string; y: string | string[] };
   isLinksRedirectApplicable: boolean;
-  IsEditing: boolean;
+  isEditing: boolean;
 }
 
 export const Chart = ({
@@ -32,7 +32,7 @@ export const Chart = ({
   dataXAxisKeyName,
   label,
   chartOptions,
-  IsEditing,
+  isEditing,
 }: ChartProps) => {
   const [longestTickValue, setLongestTickValue] = useState('');
   const type = useChartType(widgetType, chartType);
@@ -50,11 +50,11 @@ export const Chart = ({
 
   const legend = useMemo(
     () => ({
-      placement: styles.standard.legend,
+      placement: styles?.standard.legend,
     }),
-    [styles.standard.legend]
+    [styles]
   );
-  
+
   const getYAxisTickLen = useCallback(() => {
     const extender = 10;
     const len = longestTickValue.length * extender;
@@ -67,7 +67,6 @@ export const Chart = ({
       return len;
     }
   }, [longestTickValue, label.y, dataSize]);
-
 
   let content = <div></div>;
 
@@ -87,7 +86,7 @@ export const Chart = ({
             yAxisMax={styles?.standard.scale.max || 'auto'}
             yAxisWidth={getYAxisTickLen()}
             tickFormatter={tickFormatter}
-            IsEditing={IsEditing}
+            isEditing={isEditing}
             legend={legend}
           />
         );

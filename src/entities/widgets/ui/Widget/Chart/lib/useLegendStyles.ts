@@ -42,7 +42,7 @@ export const useLegendStyles = (legend: ILegend | undefined) => {
           minHeight: '14px',
           maxHeight: '25%',
           width: 'calc(100% - 16px)',
-          zIndex: 1
+          zIndex: 1,
         };
         break;
       case LegendType.Bottom:
@@ -55,7 +55,7 @@ export const useLegendStyles = (legend: ILegend | undefined) => {
           minHeight: '14px',
           width: 'calc(100% - 16px)',
           maxHeight: '25%',
-          zIndex: 1
+          zIndex: 1,
         };
         break;
       case LegendType.Left:
@@ -68,7 +68,7 @@ export const useLegendStyles = (legend: ILegend | undefined) => {
           maxWidth: legend?.width ? `${legend?.width}%` : '25%',
           paddingLeft: 0,
           maxHeight: '100%',
-          zIndex: 1
+          zIndex: 1,
         };
         break;
       case LegendType.Right:
@@ -81,7 +81,7 @@ export const useLegendStyles = (legend: ILegend | undefined) => {
           maxWidth: legend?.width ? `${legend?.width}%` : '25%',
           paddingLeft: 0,
           maxHeight: '100%',
-          zIndex: 1
+          zIndex: 1,
         };
         break;
     }

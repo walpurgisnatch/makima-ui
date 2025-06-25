@@ -4,10 +4,10 @@ import { Modal, Space } from 'antd';
 import cn from 'classnames';
 
 import { TDashboard } from '@entities/dashboards/store';
-import { initialValues } from './constants';
 import { useLocale } from '@shared/hooks';
 import { Field } from '@shared/ui';
 import { TextType } from '@shared/types';
+import { initialValues } from './constants';
 
 import styles from './styles.module.scss';
 

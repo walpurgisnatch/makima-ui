@@ -20,6 +20,13 @@ export const widgetsThunk = {
       return error;
     }
   }),
+  update: createAsyncThunk('widgets/put', async ({ id, data }: { id: string; data: IWidget }, { rejectWithValue }) => {
+    try {
+      return await apiBaseQuery(widgetsApi.updateWidget(id, data), rejectWithValue);
+    } catch (error) {
+      return error;
+    }
+  }),
   get: createAsyncThunk('widget/get', async (id: string, { rejectWithValue }) => {
     try {
       return await apiBaseQuery(widgetsApi.getWidget(id), rejectWithValue);

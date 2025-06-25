@@ -10,7 +10,6 @@ import {
   ReferenceLine,
 } from 'recharts';
 
-import useCalculation from '../../lib/useCalculation';
 import { formatDate } from '@shared/lib';
 import { Tooltip } from '../Tooltip';
 import { generateGridData } from '../../lib/utilities';
@@ -28,7 +27,7 @@ interface LineChartProps {
   yAxisMax: number | string;
   yAxisWidth: number;
   tickFormatter: (val: any) => string;
-  IsEditing: boolean;
+  isEditing: boolean;
   height?: number;
   legend?: ILegend;
 }
@@ -44,9 +43,9 @@ export const LineChart = ({
   yAxisMax,
   yAxisWidth,
   tickFormatter,
-  IsEditing,
+  isEditing,
   height = 400,
-  legend
+  legend,
 }: LineChartProps) => {
   const [activeDataNames, setActiveDataNames] = useState<Array<string>>(dataKeyNames);
   const [gridData, setGridData] = useState(generateGridData(duration));
@@ -56,8 +55,8 @@ export const LineChart = ({
   }, [chartData, duration]);
 
   useEffect(() => {
-    IsEditing && setActiveDataNames(dataKeyNames);
-  }, [IsEditing, dataKeyNames]);
+    isEditing && setActiveDataNames(dataKeyNames);
+  }, [isEditing, dataKeyNames]);
 
   const handleLegendKeyNameClick = (selectedDataName: string) => {
     if (activeDataNames.length === dataKeyNames.length) {
@@ -98,16 +97,14 @@ export const LineChart = ({
           width={yAxisWidth}
         />
         <ChartTooltip wrapperStyle={{ zIndex: 10 }} content={<Tooltip chartOptions={chartOptions} />} />
-        {
-          ChartLegend({
-            legend,
-            chartOptions,
-            height,
-            hasData: !!chartData?.length,
-            // @ts-ignore
-            onClick: handleLegendKeyNameClick,
-          })
-        }
+        {ChartLegend({
+          legend,
+          chartOptions,
+          height,
+          hasData: !!chartData?.length,
+          // @ts-ignore
+          onClick: handleLegendKeyNameClick,
+        })}
         {chartOptions?.map((options, inx) => {
           const color = options.color;
           return (

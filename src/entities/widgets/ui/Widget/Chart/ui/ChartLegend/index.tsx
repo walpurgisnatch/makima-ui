@@ -2,12 +2,7 @@ import React, { useMemo } from 'react';
 import { Legend, LegendProps } from 'recharts';
 
 import { LegendContent } from './LegendContent';
-import {
-  CalculationValues,
-  IChartOptions,
-  ILegend,
-  Legend as LegendType,
-} from '@entities/widgets';
+import { CalculationValues, IChartOptions, ILegend, Legend as LegendType } from '@entities/widgets';
 import { useLegendStyles } from '../../lib/useLegendStyles';
 
 interface ChartLegendProps extends LegendProps {
@@ -28,7 +23,10 @@ export const ChartLegend = ({ chartOptions, legend, hasData, onClick }: ChartLeg
     }
   }, [legend?.placement, legend?.width]);
 
-  const wrapperStyle = useMemo(() => ({ ...legendStyles, overflowY: hasData ? 'auto' : 'hidden' }), [legendStyles, hasData]);
+  const wrapperStyle = useMemo(
+    () => ({ ...legendStyles, overflowY: hasData ? 'auto' : 'hidden' }),
+    [legendStyles, hasData]
+  );
 
   if (!legend?.placement) {
     return <></>;
@@ -42,11 +40,7 @@ export const ChartLegend = ({ chartOptions, legend, hasData, onClick }: ChartLeg
       layout={legendSettings?.position}
       verticalAlign={legendSettings?.verticalAlign}
       align={legendSettings?.align}
-      content={
-        <LegendContent
-          chartOptions={chartOptions ?? []}
-        />
-      }
+      content={<LegendContent chartOptions={chartOptions ?? []} />}
       onClick={onClick}
     />
   );
