@@ -19,6 +19,7 @@
     "actions": "Actions",
     "delete": "Delete",
     "edit": "Edit",
+    "empty": "Empty",
     "sentry_types": {
       "general": "general",
       "html": "html",
@@ -32,7 +33,7 @@
   "home": {
     "title": "Home",
     "sentry": "Sentry",
-    "last_parsed": "Parsed"
+    "parsed": "Parsed"
   },
   "dashboards": {
     "title": "Dashboards",
@@ -47,7 +48,7 @@
   },
   "watchers": {
     "records_count": "Records count",
-    "last_parsed": "Parsed",
+    "last_parsed": "Last parsed",
     "current_value": "Current value"
   },
   "create_watcher": {
@@ -67,6 +68,92 @@
       },
       "page": "Page",
       "url": "URL"
+    }
+  },
+  "widgets": {
+    "create_widget_title": "Create widget",
+    "edit_widget_title": "Edit widget",
+    "inspect": "Inspect",
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "watchers": "Watchers",
+      "duration": "Duration",
+      "refresh": "Refresh",
+      "chart_type": {
+        "name": "Chart type",
+        "line": "Line"
+      },
+      "widget_type": {
+        "name": "Widget type",
+        "graph": "Graph"
+      },
+      "standard": {
+        "calculation": {
+          "name": "Calculations",
+          "help": "Help",
+          "options": {
+            "last": "last",
+            "max": "max",
+            "min": "min",
+            "average": "average"
+          }
+        },
+        "scale": {
+          "min": "Min",
+          "max": "Max"
+        },
+        "legend": {
+          "name": "Legend",
+          "options": {
+            "no": "no",
+            "top": "top",
+            "bottom": "bottom",
+            "left": "left",
+            "right": "right"
+          }
+        }
+      },
+      "styles": {
+        "graph": {
+          "stroke": "Stroke",
+          "grid_opacity": "Grid opacity",
+          "line": {
+            "name": "Line style",
+            "solid": "solid",
+            "dash": "dash"
+          },
+          "points": {
+            "name": "Show points",
+            "yes": "yes",
+            "no": "no"
+          },
+          "interpolation": {
+            "name": "Interpolation",
+            "linear": "linear",
+            "monotone": "monotone",
+            "step": "step",
+            "step_after": "step after",
+            "step_before": "step before"
+          }
+        }
+      },
+      "durationOptions": {
+        "5_minutes": "5 minutes",
+        "15_minutes": "15 minutes",
+        "30_minutes": "30 minutes",
+        "1_hour": "1 hour",
+        "6_hours": "6 hours",
+        "12_hours": "12 hours",
+        "24_hours": "24 hours",
+        "7_days": "7 days",
+        "30_days": "30 days",
+        "90_days": "90 days",
+        "6_months": "6 months",
+        "1_year": "1 year",
+        "2_years": "2 years",
+        "5_years": "5 years"
+      }
     }
   }
 }

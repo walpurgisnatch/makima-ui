@@ -1,0 +1,39 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+import { defaultFulfilled, defaultPending, defaultRejected, LoadingStatuses } from '@shared/api';
+import { IWidget, widgetsThunk } from '../model';
+
+import type { State } from '@shared/types';
+
+const initialState: State<IWidget> = {
+  // @ts-ignore
+  data: {},
+  status: LoadingStatuses.Idle,
+  error: null,
+};
+
+export const widgetSlice = createSlice({
+  name: 'widget',
+  initialState,
+  reducers: {
+    resetWidget: (state) => {
+      state.data = initialState.data;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(widgetsThunk.get.fulfilled, defaultFulfilled);
+    builder.addCase(widgetsThunk.get.pending, defaultPending);
+    builder.addCase(widgetsThunk.get.rejected, defaultRejected);
+
+    builder.addCase(widgetsThunk.fetchData.fulfilled, (state, { payload }) => {
+      state.data.data = payload;
+      state.status = LoadingStatuses.Succeeded;
+    });
+    builder.addCase(widgetsThunk.fetchData.pending, defaultPending);
+    builder.addCase(widgetsThunk.fetchData.rejected, defaultRejected);
+  },
+});
+
+export const { resetWidget } = widgetSlice.actions;
+
+export const widgetReducer = widgetSlice.reducer;

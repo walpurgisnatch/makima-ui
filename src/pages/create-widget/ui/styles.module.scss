@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.widgetZone {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 15px;
+}
+
+.controllersZone {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 15px;
+}
+
+.timeSection {
+  display: flex;
+  gap: 15px;
+}
+
+.timeField {
+  width: 100%;
+}

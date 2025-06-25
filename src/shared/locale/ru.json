@@ -19,6 +19,7 @@
     "actions": "Действия",
     "delete": "Удалить",
     "edit": "Редактировать",
+    "empty": "Тут пусто",
     "sentry_types": {
       "general": "стандарный",
       "html": "html",
@@ -67,6 +68,92 @@
       },
       "page": "Страница",
       "url": "URL"
+    }
+  },
+  "widgets": {
+    "create_widget_title": "Создать виджет",
+    "edit_widget_title": "Редактирование виджета",
+    "inspect": "Просмотреть",
+    "fields": {
+      "name": "Название",
+      "description": "Описание",
+      "watchers": "Наблюдатели",
+      "duration": "Длительность",
+      "refresh": "Обновить",
+      "chart_type": {
+        "name": "Тип графика",
+        "line": "Линия"
+      },
+      "widget_type": {
+        "name": "Тип виджета",
+        "graph": "График"
+      },
+      "standard": {
+        "calculation": {
+          "name": "Вычисления",
+          "help": "Помощь",
+          "options": {
+            "last": "последнее",
+            "max": "максимум",
+            "min": "минимум",
+            "average": "среднее"
+          }
+        },
+        "scale": {
+          "min": "Мин.",
+          "max": "Макс."
+        },
+        "legend": {
+          "name": "Легенда",
+          "options": {
+            "no": "нет",
+            "top": "сверху",
+            "bottom": "снизу",
+            "left": "слева",
+            "right": "справа"
+          }
+        }
+      },
+      "styles": {
+        "graph": {
+          "stroke": "Обводка",
+          "grid_opacity": "Прозрачность сетки",
+          "line": {
+            "name": "Стиль линии",
+            "solid": "сплошная",
+            "dash": "пунктир"
+          },
+          "points": {
+            "name": "Показывать точки",
+            "yes": "да",
+            "no": "нет"
+          },
+          "interpolation": {
+            "name": "Интерполяция",
+            "linear": "линейная",
+            "monotone": "монотонная",
+            "step": "ступенчатая",
+            "step_after": "ступенчатая (после)",
+            "step_before": "ступенчатая (до)"
+          }
+        }
+      },
+      "durationOptions": {
+        "5_minutes": "5 минут",
+        "15_minutes": "15 минут",
+        "30_minutes": "30 минут",
+        "1_hour": "1 час",
+        "6_hours": "6 часов",
+        "12_hours": "12 часов",
+        "24_hours": "24 часа",
+        "7_days": "7 дней",
+        "30_days": "30 дней",
+        "90_days": "90 дней",
+        "6_months": "6 месяцев",
+        "1_year": "1 год",
+        "2_years": "2 года",
+        "5_years": "5 лет"
+      }
     }
   }
 }

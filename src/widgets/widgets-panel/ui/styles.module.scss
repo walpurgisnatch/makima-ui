@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.widgetWrapper {
+  padding: 10px;
+
+  @for $i from 1 through 100 {
+    &[data-order='#{$i}'] {
+      order: $i;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
+}

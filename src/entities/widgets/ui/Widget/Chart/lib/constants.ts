@@ -1,0 +1,18 @@
+export const gridScales = [
+  { period: 300000, step: 10000, timeFormatBoundary: 'DD/MM HH:mm:ss', timeFormat: 'HH:mm:ss' },
+  { period: 900000, step: 30000, timeFormatBoundary: 'DD/MM HH:mm:ss', timeFormat: 'HH:mm:ss' },
+  { period: 1800000, step: 60000, timeFormatBoundary: 'DD/MM HH:mm', timeFormat: 'HH:mm' },
+  { period: 3600000, step: 300000, timeFormatBoundary: 'DD/MM HH:mm', timeFormat: 'HH:mm' },
+  { period: 10800000, step: 600000, timeFormatBoundary: 'DD/MM HH:mm', timeFormat: 'HH:mm' },
+  { period: 21600000, step: 900000, timeFormatBoundary: 'DD/MM HH:mm', timeFormat: 'HH:mm' },
+  { period: 43200000, step: 1800000, timeFormatBoundary: 'DD/MM HH:mm', timeFormat: 'HH:mm' },
+  { period: 86400000, step: 3600000, timeFormatBoundary: 'DD/MM HH:00', timeFormat: 'HH:00' },
+  { period: 172800000, step: 7200000, timeFormatBoundary: 'DD/MM HH:00', timeFormat: 'HH:00' },
+  { period: 604800000, step: 28800000, timeFormatBoundary: 'YYYY/DD/MM HH:00', timeFormat: 'DD/MM HH:00' },
+  { period: 2592000000, step: 86400000, timeFormatBoundary: 'YYYY/DD/MM', timeFormat: 'DD/MM' },
+  { period: 7776000000, step: 432000000, timeFormatBoundary: 'YYYY/DD/MM', timeFormat: 'DD/MM' },
+  { period: 16070400000, step: 1296000000, timeFormatBoundary: 'YYYY/DD/MM', timeFormat: 'DD/MM' },
+  { period: 31536000000, step: 2592000000, timeFormatBoundary: 'YYYY-MM', timeFormat: 'YYYY-MM' },
+  { period: 63072000000, step: 5184000000, timeFormatBoundary: 'YYYY-MM', timeFormat: 'YYYY-MM' },
+  { period: 157680000000, step: 15552000000, timeFormatBoundary: 'YYYY-MM', timeFormat: 'YYYY-MM' },
+];

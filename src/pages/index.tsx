@@ -8,6 +8,7 @@ import { WatcherDetails } from './watcher-details';
 import { CreateWatcher } from './create-watcher';
 import { DashboardList } from './dashboard';
 import { DashboardDisplay } from './dashboard/display';
+import { CreateWidget } from './create-widget/ui';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,8 @@ export const router = createBrowserRouter(
 
         <Route path={ROUTES.Dashboards.url} Component={DashboardList} />
         <Route path={'/dashboards/:dashboardName'} Component={DashboardDisplay} id={ROUTE_IDS.dashboard} />
+        <Route path={'/dashboards/:dashboardName/widgets/create'} Component={CreateWidget} />
+        <Route path={'/dashboards/:dashboardName/widgets/:widgetId/edit'} Component={CreateWidget} />
       </Route>
     </Route>
   )

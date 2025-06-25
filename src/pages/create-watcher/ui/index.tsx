@@ -6,7 +6,7 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
 import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
-import { Panel, Field, TextType, HeaderActions } from '@shared/ui';
+import { Panel, Field, HeaderActions } from '@shared/ui';
 import { initialValues } from './constants';
 import { SENTRY_TYPES, URLS } from '@shared/constants';
 import {
@@ -16,8 +16,9 @@ import {
   watchersThunk,
 } from '@entities/watchers';
 import { TWatcherFormData, TFieldData } from '@entities/watchers/store';
-import { useBuildTreeData } from '../../../entities/watchers/lib/useBuildTreeData';
+import { useBuildTreeData } from '@entities/watchers';
 import { GenerateFields } from './GenerateFields';
+import { TextType } from '@shared/types';
 
 import styles from './styles.module.scss';
 
@@ -65,13 +66,15 @@ export const CreateWatcher = () => {
   });
 
   const submit = (data: TWatcherFormData) => {
-    console.log(data);
     const result = {
       ...data,
       handlers: data.handlers.map((handler) => {
-        const predicate = `${handler.predicate.name} ${handler.predicate.args.join(' ')}`.trim();
-        const actions = handler.actions.map((action) => `${action.name} ${action.args.join(' ')}`.trim());
-        return { ...handler, predicate, actions };
+        const predicate = `${handler.predicate.name} ${handler.predicate.args.join(' ')}`.trim() || null;
+        const actions: string[] = [];
+        handler.actions.forEach(
+          (action) => action.name && actions.push(`${action.name} ${action.args.join(' ')}`.trim())
+        );
+        return { ...handler, predicate, actions: actions.length ? actions : null };
       }),
     };
 
@@ -94,22 +97,22 @@ export const CreateWatcher = () => {
             <div className='d-flex flex-column'>
               <Field
                 name='name'
-                label={t('create_watcher.fields.name')}
+                label='create_watcher.fields.name'
                 type={TextType.text}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
               <Field
                 name='type'
-                label={t('create_watcher.fields.type')}
+                label='create_watcher.fields.type'
                 type='select'
-                options={SENTRY_TYPES.map((item) => ({ value: item.value, label: t(item.label) }))}
+                props={{ options: SENTRY_TYPES }}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 
               {type === 'html' && (
                 <Field
                   name='page'
-                  label={t('create_watcher.fields.page')}
+                  label='create_watcher.fields.page'
                   type={TextType.text}
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
@@ -117,7 +120,7 @@ export const CreateWatcher = () => {
               {type === 'api' && (
                 <Field
                   name='url'
-                  label={t('create_watcher.fields.url')}
+                  label='create_watcher.fields.url'
                   type={TextType.text}
                   className={cn(styles.field, 'd-flex flex-column mb-2')}
                 />
@@ -125,7 +128,7 @@ export const CreateWatcher = () => {
 
               <Field
                 name='target'
-                label={t('create_watcher.fields.target')}
+                label='create_watcher.fields.target'
                 type={TextType.text}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
@@ -134,16 +137,20 @@ export const CreateWatcher = () => {
             <div className='d-flex flex-column mx-4'>
               <Field
                 name='interval'
-                label={t('create_watcher.fields.interval')}
+                label='create_watcher.fields.interval'
                 type={TextType.number}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
               <Field
                 name='parser'
-                label={t('create_watcher.fields.parser')}
+                label='create_watcher.fields.parser'
                 type='select'
-                value={parserValues[0]?.name || 'NONE'}
-                options={parserValues.map((parserValue: TFieldData) => ({ value: parserValue.name }))}
+                props={{
+                  options: parserValues.map((parserValue: TFieldData) => ({
+                    value: parserValue.name,
+                    label: parserValue.name,
+                  })),
+                }}
                 className={cn(styles.field, 'd-flex flex-column mb-2')}
               />
 
@@ -156,12 +163,12 @@ export const CreateWatcher = () => {
                         <Field
                           type='checkbox'
                           name={`handlers.${index}.recordp`}
-                          label={t('create_watcher.fields.handlers.recordp')}
+                          label='create_watcher.fields.handlers.recordp'
                         />
                         <Field
                           type='checkbox'
                           name={`handlers.${index}.once`}
-                          label={t('create_watcher.fields.handlers.once')}
+                          label='create_watcher.fields.handlers.once'
                         />
 
                         {handlers.length > 1 && (
@@ -173,10 +180,9 @@ export const CreateWatcher = () => {
                         <Field
                           type='treeSelect'
                           name={`handlers.${index}.predicate.name`}
-                          options={treeDataOfHandlerPredicates}
+                          props={{ options: treeDataOfHandlerPredicates, placeholder: 'Choose predicate' }}
                           className={cn(styles.field, 'd-flex flex-column mb-2')}
-                          placeholder='Choose predicate'
-                          label={t('create_watcher.fields.handlers.predicate')}
+                          label='create_watcher.fields.handlers.predicate'
                         />
                         <Space.Compact>
                           <GenerateFields
@@ -191,10 +197,8 @@ export const CreateWatcher = () => {
                       <Space.Compact direction='vertical'>
                         <Field
                           type='treeSelect'
-                          options={treeDataOfHandlerActions}
-                          multiple
-                          placeholder='Choose actions'
-                          label={t('create_watcher.fields.handlers.actions')}
+                          props={{ options: treeDataOfHandlerActions, multiple: true, placeholder: 'Choose actions' }}
+                          label='create_watcher.fields.handlers.actions'
                           className={cn(styles.field, 'd-flex flex-column mb-2')}
                           name={`handlers.${index}.actions._`}
                           onChange={(selectedActions) => {

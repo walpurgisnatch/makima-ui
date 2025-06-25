@@ -23,7 +23,7 @@ export interface IWatcher {
   target: string;
   parser: string;
   interval: number | string;
-  handlers: { recordp: boolean; once: boolean; predicate: string; actions: string[] }[];
+  handlers: { recordp: boolean; once: boolean; predicate: string | null; actions: string[] | null }[];
   page: string;
   url: string;
 }

@@ -1,14 +1,15 @@
 import React, { forwardRef, useMemo } from 'react';
 import { Controller, ControllerRenderProps, FieldValues, useFormContext } from 'react-hook-form';
-import { Checkbox, DatePicker, Select, Input, Tooltip, TreeSelect, ConfigProvider } from 'antd';
+import { Checkbox, DatePicker, Select, Input, Tooltip, TreeSelect, ConfigProvider, Slider } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
-import { IFieldProps, TextType } from './types';
+import { useLocale } from '@shared/hooks';
+import { IField, TextType } from '@shared/types';
 
 import styles from './styles.module.scss';
 
-export const Field = forwardRef<HTMLInputElement, IFieldProps>(
+export const Field = forwardRef<HTMLInputElement, IField>(
   (
     {
       name,
@@ -17,23 +18,19 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
       defaultValue,
       disabled,
       label,
-      min,
-      minLength,
-      options,
-      pattern,
-      placeholder,
       required = false,
-      step,
       type = TextType.text,
       value,
       description,
-      multiple,
+      rules,
+      icon,
       onChange,
       validate,
       ...props
     },
     ref
   ) => {
+    const { t } = useLocale();
     const {
       control,
       formState: { errors },
@@ -48,14 +45,10 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
     const renderFieldByType = (field: ControllerRenderProps<FieldValues, string>) => {
       const generalProps = {
         ...field,
-        ...props,
+        ...props.props,
         disabled,
         defaultValue,
-        min,
-        placeholder,
-        step,
         type,
-        multiple,
         // @ts-ignore
         onChange: (event) => {
           field.onChange(event);
@@ -74,17 +67,40 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
 
       switch (type) {
         case 'select':
-          if (options) {
-            return <Select {...generalProps} options={options} />;
+          if (generalProps.options) {
+            const _options = generalProps.options.map((option) => ({ ...option, label: t(option.label) }));
+            return (
+              <Select
+                {...generalProps}
+                options={_options}
+                mode={generalProps.multiple ? 'multiple' : undefined}
+                className={className}
+              />
+            );
           } else {
             return <></>;
           }
 
         case 'checkbox':
-          return <Checkbox {...generalProps} checked={generalProps.value} />;
+          return <Checkbox {...generalProps} checked={!!value} />;
 
         case 'date': {
-          return <DatePicker {...generalProps} />;
+          return (
+            <DatePicker
+              {...generalProps}
+              pattern={typeof generalProps.pattern === 'string' ? generalProps.pattern : undefined}
+            />
+          );
+        }
+
+        case 'slider': {
+          return (
+            <Slider
+              {...generalProps}
+              range={false}
+              defaultValue={typeof defaultValue === 'number' ? defaultValue : 0}
+            />
+          );
         }
 
         case 'treeSelect':
@@ -93,13 +109,14 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
               theme={{
                 components: {
                   TreeSelect: {
+                    // @ts-ignore
                     indentSize: 0,
                     titleHeight: 22,
                   },
                 },
               }}
             >
-              <TreeSelect {...generalProps} treeData={options} virtual={false} />
+              <TreeSelect {...generalProps} treeData={generalProps.options} virtual={false} />
             </ConfigProvider>
           );
 
@@ -115,12 +132,8 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
         control={control}
         name={nameField}
         rules={{
-          minLength: minLength && {
-            value: minLength,
-            message: `Значение должно быть не короче ${minLength} символов`,
-          },
-          pattern: pattern && {
-            value: pattern,
+          pattern: rules?.pattern && {
+            value: rules?.pattern,
             message: 'Неправильный формат',
           },
           required: {
@@ -141,7 +154,7 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
           return (
             <label className={cn(className, styles.label, { [styles.empty]: !label })}>
               <span className={cn(styles.text, 'd-flex', { ['mb-2']: type !== 'checkbox' })}>
-                {label}{' '}
+                <span>{icon}</span> {t(label)}{' '}
                 {required && (
                   <span className={styles.error}>
                     <Tooltip title='Поле обязательно для заполнения'>*</Tooltip>
@@ -164,5 +177,3 @@ export const Field = forwardRef<HTMLInputElement, IFieldProps>(
     );
   }
 );
-
-export * from './types';

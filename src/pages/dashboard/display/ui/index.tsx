@@ -1,30 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Button } from 'antd';
+import { CloseCircleOutlined, EditOutlined } from '@ant-design/icons';
 
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
-import { Loader } from '@shared/ui';
-import { isLoading } from '@shared/lib';
-import { dashboardsThunk, selectDashboardStatus } from '@entities/dashboards';
-import { resetDashboards } from '@entities/dashboards/store';
-import { useParams } from 'react-router-dom';
+import { dashboardsThunk, selectDashboard, resetDashboards } from '@entities/dashboards';
+import { useAppDispatch, useAppSelector, useLocale } from '@shared/hooks';
+import { HeaderActions } from '@shared/ui';
+import { WidgetsPanel } from '@widgets';
 
 export const DashboardDisplay = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { t } = useLocale();
   const { dashboardName } = useParams();
-  const loading = isLoading(useAppSelector(selectDashboardStatus));
+  const dashboard = useAppSelector(selectDashboard);
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
-    dashboardName && dispatch(dashboardsThunk.get(dashboardName));
+    if (dashboardName) {
+      dispatch(dashboardsThunk.get(dashboardName));
+    }
 
     return () => {
       dispatch(resetDashboards);
     };
   }, [dashboardName, dispatch]);
 
+  const editMode = () => {
+    setIsEdit(!isEdit);
+  };
+
   return (
     <>
-      <h2>{dashboardName}</h2>
+      <HeaderActions title={dashboard.name}>
+        <Button title={t('general.add')} onClick={() => navigate('./widgets/create')}>
+          {t('general.add')}
+        </Button>
+        {!isEdit ? (
+          <Button title={t('general.edit')} icon={<EditOutlined />} onClick={editMode} />
+        ) : (
+          <Button title={t('general.exit')} icon={<CloseCircleOutlined />} onClick={editMode} />
+        )}
+      </HeaderActions>
 
-      {loading ? <Loader /> : <div></div>}
+      <WidgetsPanel dashboard={dashboardName} isEdit={isEdit} />
     </>
   );
 };

@@ -1,7 +1,13 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React from 'react';
+import cn from 'classnames';
 
 import styles from './styles.module.scss';
 
-export const Panel: FC<PropsWithChildren> = ({ children }) => {
-  return <div className={styles.panel}>{children}</div>;
+type TPanelProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
+export const Panel = ({ children, className }: TPanelProps) => {
+  return <div className={cn(className, styles.panel)}>{children}</div>;
 };

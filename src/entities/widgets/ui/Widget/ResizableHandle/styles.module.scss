@@ -1,0 +1,29 @@
+.resizeBackground {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--color-primary-active);
+  border-radius: 4px;
+  &.resizeBackgroundShow {
+    opacity: 1 !important;
+  }
+
+  .resizerR {
+    width: 5px;
+    cursor: ew-resize;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .resizerB {
+    height: 5px;
+    cursor: ns-resize;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}
