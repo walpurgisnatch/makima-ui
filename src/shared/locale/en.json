@@ -49,7 +49,8 @@
   "watchers": {
     "records_count": "Records count",
     "last_parsed": "Last parsed",
-    "current_value": "Current value"
+    "current_value": "Current value",
+    "interval": "Interval"
   },
   "create_watcher": {
     "title": "Create watcher",
@@ -62,7 +63,7 @@
       "handlers": {
         "name": "Handlers",
         "once": "Once",
-        "recordp": "Record pointer",
+        "recordp": "Create Record",
         "predicate": "Predicate",
         "actions": "Actions"
       },

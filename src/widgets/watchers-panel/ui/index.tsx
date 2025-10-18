@@ -9,13 +9,13 @@ import { usePolling } from '@shared/hooks/usePolling';
 import { COLUMNS } from './constants';
 import { watchersThunk, selectWatchers, selectWatchersStatus } from '@entities/watchers';
 import { isLoading } from '@shared/lib';
-import { resetWatchers } from '@entities/watchers/store';
+import { TWatcher, resetWatchers } from '@entities/watchers/store';
 
 export const WatchersPanel = () => {
   const { t } = useLocale();
   const dispatch = useAppDispatch();
   const loading = isLoading(useAppSelector(selectWatchersStatus));
-  const dataSource = useAppSelector(selectWatchers);
+  const watchers: TWatcher[] = useAppSelector(selectWatchers);
 
   usePolling(() => dispatch(watchersThunk.select()));
 
@@ -42,8 +42,23 @@ export const WatchersPanel = () => {
       <Table
         loading={loading}
         columns={COLUMNS(deleteWatcherHandler)}
-        dataSource={dataSource}
+        dataSource={watchers}
         rowKey={(watcher) => watcher.name}
+        expandable={{
+          expandedRowRender: (watcher) => (
+            <div>
+              <div>{watcher.parser}: {watcher.target}</div>
+              {watcher.handlers.map((handler) => (
+                <div>
+                  { `${handler.predicate.name} - ${handler.predicate.args.join(' ')}` }
+                  {handler.actions.map((action) => (
+                    <div>{ `${action.name} - ${action.args.join(' ')} ` }</div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ),
+        }}
       />
     </Panel>
   );

@@ -82,7 +82,7 @@ export const Field = forwardRef<HTMLInputElement, IField>(
           }
 
         case 'checkbox':
-          return <Checkbox {...generalProps} checked={!!value} />;
+          return <Checkbox {...generalProps} checked={generalProps.value} />;
 
         case 'date': {
           return (

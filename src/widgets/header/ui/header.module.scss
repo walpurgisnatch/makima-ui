@@ -6,9 +6,23 @@
 .logo {
   font-size: 32px;
   font-weight: 700;
+  width: 180px;
+}
+
+.navigation {
+  width: 80%;
+}
+
+.features {
+  width: 10%;
+  justify-content: right;
 }
 
 .link {
-  color: var(--header-color);
+  color: var(--link-color);
   text-decoration: none;
+
+  &:hover {
+    color: var(--link-hover-color);
+  }
 }

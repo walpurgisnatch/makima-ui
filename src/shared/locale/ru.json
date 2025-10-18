@@ -49,7 +49,8 @@
   "watchers": {
     "records_count": "Количество записей",
     "last_parsed": "Получено",
-    "current_value": "Текущее значение"
+    "current_value": "Текущее значение",
+    "interval": "Интервал"
   },
   "create_watcher": {
     "title": "Создать наблюдателя",
@@ -62,7 +63,7 @@
       "handlers": {
         "name": "Обработчики",
         "once": "Единожды",
-        "recordp": "Запись",
+        "recordp": "Сохранять значение",
         "predicate": "Предикат",
         "actions": "Действия"
       },

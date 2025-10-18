@@ -69,15 +69,14 @@ export const CreateWatcher = () => {
     const result = {
       ...data,
       handlers: data.handlers.map((handler) => {
-        const predicate = `${handler.predicate.name} ${handler.predicate.args.join(' ')}`.trim() || null;
-        const actions: string[] = [];
+        const actions: string[][] = [];
+        const predicate = handler.predicate.name && [handler.predicate.name, ...handler.predicate.args.filter(arg => arg)] || null;
         handler.actions.forEach(
-          (action) => action.name && actions.push(`${action.name} ${action.args.join(' ')}`.trim())
+          (action) => action.name && actions.push([action.name, ...action.args.filter(arg => arg)])
         );
         return { ...handler, predicate, actions: actions.length ? actions : null };
       }),
     };
-
     dispatch(watchersThunk.create(result));
     navigate(`/${URLS.Watchers}/${data.name}`);
     reset();

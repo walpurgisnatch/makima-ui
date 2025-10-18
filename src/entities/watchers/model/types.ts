@@ -3,7 +3,11 @@ export type TWatcher = {
   value: string | number;
   parsed: string;
   recordsCount: number;
+  target: string;
+  parser: string;
+  interval: number;
   records: TRecord[];
+  handlers: THandler[];
 };
 
 export type THandler = {
@@ -23,7 +27,7 @@ export interface IWatcher {
   target: string;
   parser: string;
   interval: number | string;
-  handlers: { recordp: boolean; once: boolean; predicate: string | null; actions: string[] | null }[];
+  handlers: { recordp: boolean; once: boolean; predicate: string[] | null; actions: string[][] | null }[];
   page: string;
   url: string;
 }

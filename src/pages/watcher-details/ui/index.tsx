@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useAppDispatch, useAppSelector, useLocale, usePolling } from '@shared/hooks';
-import { selectWatcherRecords, selectWatcher, watchersThunk, selectWatcherStatus } from '@entities/watchers';
-import { RecordsPanel } from '@widgets';
+import { selectWatcherRecords, selectWatcher, watchersThunk, selectWatcherStatus, RecordsPanel } from '@entities/watchers';
 import { Loader, Panel } from '@shared/ui';
 import { isLoading } from '@shared/lib';
 

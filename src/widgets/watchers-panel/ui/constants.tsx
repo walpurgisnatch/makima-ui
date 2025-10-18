@@ -16,7 +16,6 @@ export const COLUMNS = (deleteWatcherHandler: (name: string) => void) => {
       dataIndex: 'name',
       key: 'name',
       title: t('general.name'),
-      width: '25%',
       render: (name: TWatcher['name']) => (
         <Link className={styles.link} to={`/watchers/${name}`}>
           {name}
@@ -36,6 +35,12 @@ export const COLUMNS = (deleteWatcherHandler: (name: string) => void) => {
       render: (text: TWatcher['recordsCount']) => text,
     },
     {
+      dataIndex: 'interval',
+      key: 'interval',
+      title: t('watchers.interval'),
+      render: (text: TWatcher['interval']) => text,
+    },
+    {
       dataIndex: 'parsed',
       key: 'parsed',
       title: t('watchers.last_parsed'),
@@ -43,7 +48,6 @@ export const COLUMNS = (deleteWatcherHandler: (name: string) => void) => {
     },
     {
       key: 'actions',
-      title: t('general.actions'),
       className: styles.actions,
       render: (watcher: TWatcher) => (
         <div>
